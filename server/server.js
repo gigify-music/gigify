@@ -1,6 +1,10 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const authRouter = require('./authRouter.js');
+const router = require('./router.js');
 
 const port = process.env.PORT || 8000;
 
@@ -10,11 +14,17 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../client')));
-
+app.use(session({
+  secret: 'moms spaghetti',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true },
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+require('./passportConfig.js')(passport);
 // ROUTER CONFIGURATION=========================================================
-
-const router = require('./router.js');
-
+app.use('/auth', authRouter);
 app.use('/api', router);
 
 // SERVER CONFIGURATION=========================================================
