@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/moms-spaghetti/gigify#readme",
   "devDependencies": {
-    "body-parser": "^1.17.1",
-    "express": "^4.15.2",
     "morgan": "^1.8.1",
     "redux-devtools": "^3.3.2"
   },
   "dependencies": {
+    "express": "^4.15.2",
+    "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
     "knex": "^0.12.9",
