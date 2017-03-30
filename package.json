@@ -15,5 +15,24 @@
   "bugs": {
     "url": "https://github.com/moms-spaghetti/gigify/issues"
   },
-  "homepage": "https://github.com/moms-spaghetti/gigify#readme"
+  "homepage": "https://github.com/moms-spaghetti/gigify#readme",
+  "devDependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "morgan": "^1.8.1",
+    "redux-devtools": "^3.3.2"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "knex": "^0.12.9",
+    "passport": "^0.3.2",
+    "passport-spotify": "^0.3.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "spotify-web-api-js": "^0.21.2",
+    "spotify-web-api-node": "^2.3.6"
+  }
 }
