@@ -1,8 +1,8 @@
 // const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 
-const appKey = '23731471249b4d0f95d701fab0dd6dd6';
-const appSecret = 'd6f8c8793eb14efab63c184e31762dd9';
+const appKey = process.env.APP_KEY;
+const appSecret = process.env.APP_SECRET;
 
 const signIn = new SpotifyStrategy({
   clientID: appKey,
