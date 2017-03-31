@@ -15,6 +15,7 @@ const app = express();
 
 app.use(bodyParser.json());
 // app.use(express.static(path.join(__dirname, '/../client')));
+app.use(express.static(path.join(__dirname, '/../public')));
 app.use(session({
   secret: 'moms spaghetti',
   resave: false,
@@ -24,7 +25,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 require('./passportConfig.js')(passport);
-app.use(express.static(path.join(__dirname, '/../public')));
+
 // ROUTER CONFIGURATION=========================================================
 app.use('/auth', authRouter);
 app.use('/api', router);
