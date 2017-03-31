@@ -9,7 +9,7 @@ const app = express();
 // MIDDLEWARE===================================================================
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '/../client')));
+app.use(express.static(path.join(__dirname, '/../public')));
 
 // ROUTER CONFIGURATION=========================================================
 
