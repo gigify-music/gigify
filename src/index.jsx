@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import reducer from './reducers';
-import App from './containers/App';
+import App from './components/App';
 import thunk from 'redux-thunk';
 import Routes from './routes/Routes';
 
@@ -15,15 +15,28 @@ const logger = createLogger();
 const store = createStore(
   reducer,
   composeEnhancers(
-      applyMiddleware(logger, thunk);
+      applyMiddleware(logger, thunk),
   ),
 );
 
-store.dispatch()
+// const el = document.getElementById('app');
+//
+// const render = () => ReactDOM.render (
+//   <App
+//     value={store.getState()}
+//     onButtonClick={() => store.dispatch({type: 'SUBMIT_NEW' })}
+//     />,
+//     el
+// )
+//
+// render()
+// store.subscribe(render);
+
+// store.dispatch()
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 );

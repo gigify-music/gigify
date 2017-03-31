@@ -1,33 +1,19 @@
 const path = require('path');
 const srcPath = path.join(__dirname, 'src');
-const buildPath = path.join(__dirname, 'public');
+const buildPath = path.join(__dirname, 'build');
 
 const config = {
   context: srcPath,
-  entry: path.join(__dirname, '/src/index.jsx'),
+  entry: path.resolve(__dirname, 'src/index'),
   output: {
     path: buildPath,
-    firename: 'bundle.js',
+    filename: 'bundle.js',
     publicPath: 'build/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  module: {
-    [
-      {
-        use: [{
-          loader: 'babel-loader',
-          options: { presets: ['airbnb', 'stage-1']},
-        }],
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-      },
-    ],
-  },
-};
-
-module.exports = config;
+//
 //   module: {
 //     loaders: [
 //       {
@@ -41,3 +27,18 @@ module.exports = config;
 //     ]
 //   }
 // };
+  module: {
+    rules: [
+      {
+        use: [{
+          loader: 'babel-loader',
+          options: { presets: ['airbnb', 'stage-1'] },
+        }],
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+      },
+    ],
+  },
+};
+
+module.exports = config;
