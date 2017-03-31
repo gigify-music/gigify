@@ -1,6 +1,6 @@
 const path = require('path');
 const srcPath = path.join(__dirname, 'src');
-const buildPath = path.join(__dirname, 'build');
+const buildPath = path.join(__dirname, 'public');
 
 const config = {
   context: srcPath,
@@ -8,7 +8,7 @@ const config = {
   output: {
     path: buildPath,
     filename: 'bundle.js',
-    publicPath: 'build/',
+    publicPath: 'public/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],

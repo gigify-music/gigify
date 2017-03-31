@@ -4,7 +4,7 @@
   "description": "Playlist generator",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./server/server.js",
+    "start": "nodemon ./server/server.js & webpack -w",
     "build": "webpack src/index.jsx build/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -31,6 +31,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "morgan": "^1.8.1",
+    "nodemon": "^1.11.0",
     "redux-devtools": "^3.3.2",
     "webpack": "^2.3.2"
   },
