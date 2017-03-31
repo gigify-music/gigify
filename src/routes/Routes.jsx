@@ -6,6 +6,7 @@ const Routes = () => (
   <Router>
     <div>
       <Route exact path="/" component={App} />
+      // <Route path="/signin" component={Sigin} />
     </div>
   </Router>
 );
