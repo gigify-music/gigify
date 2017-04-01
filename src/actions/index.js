@@ -1,12 +1,17 @@
 import axios from 'axios';
 import * as types from '../constants/actionTypes';
 
-let nextEntryId = 0;
+let nextEventId = 0;
 
-export const addEntry = value => ({
-  type: types.ADD_ENTRY,
-  id: nextEntryId++,
-  value,
+export const addEvent = value => ({
+  type: types.ADD_EVENT,
+  id: nextEventId++,
+  headliner,
+  supporting,
+  venuename,
+  venuelocation,
+  time,
+  date,
 });
 
 // export const getTestString = () => (dispatch) => {

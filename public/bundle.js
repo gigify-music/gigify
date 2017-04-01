@@ -7912,13 +7912,15 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _AddEntry = __webpack_require__(140);
+var _AddEvent = __webpack_require__(298);
 
-var _AddEntry2 = _interopRequireDefault(_AddEntry);
+var _AddEvent2 = _interopRequireDefault(_AddEvent);
 
-var _DisplayList = __webpack_require__(141);
+var _DisplayEventList = __webpack_require__(299);
 
-var _DisplayList2 = _interopRequireDefault(_DisplayList);
+var _DisplayEventList2 = _interopRequireDefault(_DisplayEventList);
+
+var _reactRouterDom = __webpack_require__(261);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -7941,8 +7943,13 @@ var App = function App() {
   return _react2['default'].createElement(
     'div',
     null,
-    _react2['default'].createElement(_AddEntry2['default'], null),
-    _react2['default'].createElement(_DisplayList2['default'], null)
+    _react2['default'].createElement(_AddEvent2['default'], null),
+    _react2['default'].createElement(_DisplayEventList2['default'], null),
+    _react2['default'].createElement(
+      _reactRouterDom.Link,
+      { to: '/login' },
+      'Login'
+    )
   );
 };
 
@@ -8220,7 +8227,7 @@ module.exports = function bind(fn, thisArg) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addEntry = undefined;
+exports.addEvent = undefined;
 
 var _axios = __webpack_require__(119);
 
@@ -8234,13 +8241,18 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var nextEntryId = 0;
+var nextEventId = 0;
 
-var addEntry = exports.addEntry = function addEntry(value) {
+var addEvent = exports.addEvent = function addEvent(value) {
   return {
-    type: types.ADD_ENTRY,
-    id: nextEntryId++,
-    value: value
+    type: types.ADD_EVENT,
+    id: nextEventId++,
+    headliner: headliner,
+    supporting: supporting,
+    venuename: venuename,
+    venuelocation: venuelocation,
+    time: time,
+    date: date
   };
 };
 
@@ -12052,21 +12064,25 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(38);
 
-var _entries = __webpack_require__(143);
+var _events = __webpack_require__(300);
 
-var _entries2 = _interopRequireDefault(_entries);
+var _events2 = _interopRequireDefault(_events);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var entriesApp = (0, _redux.combineReducers)({
-  entries: _entries2['default']
+var eventsApp = (0, _redux.combineReducers)({
+  events: _events2['default']
 });
 
-exports['default'] = entriesApp;
+exports['default'] = eventsApp;
 
 /***/ }),
 /* 115 */
 /***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _react = __webpack_require__(5);
 
@@ -12078,6 +12094,10 @@ var _App = __webpack_require__(68);
 
 var _App2 = _interopRequireDefault(_App);
 
+var _Login = __webpack_require__(297);
+
+var _Login2 = _interopRequireDefault(_Login);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var Routes = function Routes() {
@@ -12088,11 +12108,12 @@ var Routes = function Routes() {
       'div',
       null,
       _react2['default'].createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _App2['default'] }),
-      '// ',
-      _react2['default'].createElement(_reactRouterDom.Route, { path: '/signin', component: Sigin })
+      _react2['default'].createElement(_reactRouterDom.Route, { path: '/login', component: _Login2['default'] })
     )
   );
 };
+
+exports['default'] = Routes;
 
 /***/ }),
 /* 116 */
@@ -13120,189 +13141,20 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 137 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(5);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Entry = __webpack_require__(138);
-
-var _Entry2 = _interopRequireDefault(_Entry);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var Entries = function Entries(_ref) {
-  var entries = _ref.entries;
-  return _react2['default'].createElement(
-    'ul',
-    null,
-    entries.map(function (entry) {
-      return _react2['default'].createElement(_Entry2['default'], _extends({
-        key: entry.value
-      }, entry));
-    })
-  );
-};
-
-Entries.propTypes = {
-  entries: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-    id: _react.PropTypes.number.isRequired,
-    value: _react.PropTypes.string.isRequired
-  }).isRequired)
-};
-
-exports['default'] = Entries;
-
-/***/ }),
-/* 138 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(5);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var Entry = function Entry(_ref) {
-  var value = _ref.value;
-  return _react2['default'].createElement(
-    'li',
-    null,
-    value
-  );
-};
-
-Entry.propTypes = {
-  value: _react.PropTypes.string.isRequired
-};
-
-exports['default'] = Entry;
-
-/***/ }),
+/* 137 */,
+/* 138 */,
 /* 139 */
 /***/ (function(module, exports) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var DISPLAY_ENTRIES = exports.DISPLAY_ENTRIES = 'DISPLAY_ENTRIES';
-var ADD_ENTRY = exports.ADD_ENTRY = 'ADD_ENTRY';
+// export const DISPLAY_ENTRIES = 'DISPLAY_ENTRIES';
+var ADD_EVENT = exports.ADD_EVENT = 'ADD_EVENT';
 
 /***/ }),
-/* 140 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(5);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(37);
-
-var _actions = __webpack_require__(74);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var AddEntry = function AddEntry(_ref) {
-  var dispatch = _ref.dispatch;
-
-  var input = void 0;
-
-  return _react2['default'].createElement(
-    'div',
-    null,
-    _react2['default'].createElement(
-      'form',
-      {
-        onSubmit: function () {
-          function onSubmit(event) {
-            event.preventDefault();
-            if (!input.value.trim()) {
-              return;
-            }
-            dispatch((0, _actions.addEntry)(input.value));
-            input.value = '';
-          }
-
-          return onSubmit;
-        }()
-      },
-      _react2['default'].createElement('input', {
-        ref: function () {
-          function ref(node) {
-            input = node;
-          }
-
-          return ref;
-        }()
-      }),
-      _react2['default'].createElement(
-        'button',
-        { type: 'submit' },
-        'Submit'
-      )
-    )
-  );
-};
-
-AddEntry = (0, _reactRedux.connect)()(AddEntry);
-
-exports['default'] = AddEntry;
-
-/***/ }),
-/* 141 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactRedux = __webpack_require__(37);
-
-var _actions = __webpack_require__(74);
-
-var _Entries = __webpack_require__(137);
-
-var _Entries2 = _interopRequireDefault(_Entries);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-// const filterEntries
-
-// const getDisplayList = (entries) => {
-//   return entries
-// }
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    entries: state.entries
-  };
-};
-//
-// const mapDispatchToProps = {
-//   onSubmitClick: updateList,
-// };
-
-var DisplayList = (0, _reactRedux.connect)(mapStateToProps)(_Entries2['default']);
-
-exports['default'] = DisplayList;
-
-/***/ }),
+/* 140 */,
+/* 141 */,
 /* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13360,46 +13212,11 @@ var store = (0, _redux.createStore)(_reducers2['default'], composeEnhancers((0, 
 (0, _reactDom.render)(_react2['default'].createElement(
   _reactRedux.Provider,
   { store: store },
-  _react2['default'].createElement(_App2['default'], null)
+  _react2['default'].createElement(_Routes2['default'], null)
 ), document.getElementById('app'));
 
 /***/ }),
-/* 143 */
-/***/ (function(module, exports) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var entry = function entry(state, action) {
-  switch (action.type) {
-    case 'ADD_ENTRY':
-      return {
-        id: action.id,
-        value: action.value
-      };
-    default:
-      return state;
-  }
-};
-
-var entries = function entries() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  switch (action.type) {
-    case 'ADD_ENTRY':
-      return [].concat(_toConsumableArray(state), [entry(undefined, action)]);
-    default:
-      return state;
-  }
-};
-
-exports['default'] = entries;
-
-/***/ }),
+/* 143 */,
 /* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29778,6 +29595,291 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var Event = function Event(_ref) {
+  var headliner = _ref.headliner,
+      supporting = _ref.supporting,
+      venuename = _ref.venuename,
+      venuelocation = _ref.venuelocation,
+      date = _ref.date,
+      time = _ref.time;
+  return _react2["default"].createElement(
+    "li",
+    null,
+    _react2["default"].createElement(
+      "div",
+      { className: "eventItem" },
+      _react2["default"].createElement(
+        "h3",
+        null,
+        headliner
+      ),
+      _react2["default"].createElement(
+        "p",
+        null,
+        supporting
+      ),
+      _react2["default"].createElement(
+        "a",
+        { href: "{venuelocation}" },
+        _react2["default"].createElement(
+          "p",
+          null,
+          venuename
+        )
+      ),
+      _react2["default"].createElement(
+        "p",
+        null,
+        date
+      ),
+      _react2["default"].createElement(
+        "p",
+        null,
+        time
+      )
+    )
+  );
+};
+
+Event.propTypes = {
+  headliner: _react.PropTypes.string.isRequired,
+  supporting: _react.PropTypes.string.isRequired,
+  venuename: _react.PropTypes.string.isRequired,
+  venuelocation: _react.PropTypes.string.isRequired,
+  date: _react.PropTypes.string.isRequired,
+  time: _react.PropTypes.string.isRequired
+};
+
+exports["default"] = Event;
+
+// Headliner, support (all in array), venue name, venue url,
+
+/***/ }),
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Event = __webpack_require__(295);
+
+var _Event2 = _interopRequireDefault(_Event);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var EventList = function EventList(_ref) {
+  var events = _ref.events;
+  return _react2['default'].createElement(
+    'ul',
+    null,
+    events.map(function (event) {
+      return _react2['default'].createElement(_Event2['default'], _extends({
+        key: (event.headliner, event.supporting, event.venuename)
+      }, event));
+    })
+  );
+};
+
+EventList.propTypes = {
+  events: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+    id: _react.PropTypes.number.isRequired,
+    headliner: _react.PropTypes.string.isRequired,
+    supporting: _react.PropTypes.string.isRequired,
+    venuename: _react.PropTypes.string.isRequired,
+    venuelocation: _react.PropTypes.string.isRequired,
+    date: _react.PropTypes.string.isRequired,
+    time: _react.PropTypes.string.isRequired
+  }).isRequired)
+};
+
+exports['default'] = EventList;
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var Login = function Login() {
+  return _react2['default'].createElement(
+    'div',
+    null,
+    _react2['default'].createElement(
+      'h1',
+      null,
+      'LOGIN PAGE'
+    )
+  );
+};
+
+exports['default'] = Login;
+
+/***/ }),
+/* 298 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(37);
+
+var _actions = __webpack_require__(74);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var AddEvent = function AddEvent(_ref) {
+  var dispatch = _ref.dispatch;
+
+  var input = void 0;
+
+  return _react2['default'].createElement(
+    'div',
+    null,
+    _react2['default'].createElement(
+      'form',
+      {
+        onSubmit: function () {
+          function onSubmit(e) {
+            e.preventDefault();
+            if (!input.value.trim()) {
+              return;
+            }
+            dispatch((0, _actions.addEvent)(input.value));
+            input.value = '';
+          }
+
+          return onSubmit;
+        }()
+      },
+      _react2['default'].createElement('input', {
+        ref: function () {
+          function ref(node) {
+            input = node;
+          }
+
+          return ref;
+        }()
+      }),
+      _react2['default'].createElement(
+        'button',
+        { type: 'submit' },
+        'Submit'
+      )
+    )
+  );
+};
+
+AddEvent = (0, _reactRedux.connect)()(AddEvent);
+
+exports['default'] = AddEvent;
+
+/***/ }),
+/* 299 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(37);
+
+var _EventList = __webpack_require__(296);
+
+var _EventList2 = _interopRequireDefault(_EventList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+// const filterEntries
+
+// const getDisplayList = (entries) => {
+//   return entries
+// }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    events: state.events
+  };
+};
+//
+// const mapDispatchToProps = {
+//   onSubmitClick: updateList,
+// };
+
+// import { updateList } from '../actions';
+var DisplayEventList = (0, _reactRedux.connect)(mapStateToProps)(_EventList2['default']);
+
+exports['default'] = DisplayEventList;
+
+/***/ }),
+/* 300 */
+/***/ (function(module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var event = function event(state, action) {
+  switch (action.type) {
+    case 'ADD_EVENT':
+      return {
+        id: action.id,
+        value: action.value
+      };
+    default:
+      return state;
+  }
+};
+
+var events = function events() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'ADD_EVENT':
+      return [].concat(_toConsumableArray(state), [event(undefined, action)]);
+    default:
+      return state;
+  }
+};
+
+exports['default'] = events;
 
 /***/ })
 /******/ ]);

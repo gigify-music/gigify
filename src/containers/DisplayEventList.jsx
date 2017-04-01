@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { updateList } from '../actions';
-import Entries from '../components/Entries';
+// import { updateList } from '../actions';
+import EventList from '../components/EventList';
 
 // const filterEntries
 
@@ -9,16 +9,16 @@ import Entries from '../components/Entries';
 // }
 
 const mapStateToProps = state => ({
-  entries: state.entries,
+  events: state.events,
 });
 //
 // const mapDispatchToProps = {
 //   onSubmitClick: updateList,
 // };
 
-const DisplayList = connect(
+const DisplayEventList = connect(
   mapStateToProps,
   // mapDispatchToProps,
-)(Entries);
+)(EventList);
 
-export default DisplayList;
+export default DisplayEventList;
