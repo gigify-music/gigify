@@ -4,9 +4,10 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import reducer from './reducers';
-import App from './components/App';
+import App from './containers/App';
 import thunk from 'redux-thunk';
 import Routes from './routes/Routes';
+// import requestService from './utils/request-service';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -19,24 +20,11 @@ const store = createStore(
   ),
 );
 
-// const el = document.getElementById('app');
-//
-// const render = () => ReactDOM.render (
-//   <App
-//     value={store.getState()}
-//     onButtonClick={() => store.dispatch({type: 'SUBMIT_NEW' })}
-//     />,
-//     el
-// )
-//
-// render()
-// store.subscribe(render);
-
-// store.dispatch()
-
 render(
   <Provider store={store}>
     <Routes />
   </Provider>,
   document.getElementById('app'),
 );
+
+store.dispatch({ type: 'GET_EVENTS_DATA' });

@@ -1,34 +1,42 @@
 import React, { PropTypes } from 'react';
 
 const Event = ({
-  headliner,
-  supporting,
-  venuename,
-  venuelocation,
+  onClick,
+  performers,
+  venueName,
+  venueUrl,
   date,
   time,
  }) => (
-   <li>
-     <div className="eventItem">
-       <h3>{headliner}</h3>
-       <p>{supporting}</p>
-       <a href="{venuelocation}"><p>{venuename}</p></a>
-       <p>{date}</p>
-       <p>{time}</p>
+   <li onClick={onClick}>
+
+     <div className="event-list-item">
+       <div className="event-checkbox" />
+       <div className="event-musicians-container">
+         <div className="event-musicians">
+           <label className="headliner">{performers}</label>
+           <label className="supporting">The Flaming Lips, Spoon</label>
+         </div>
+       </div>
+       <div className="event-info-container">
+         <div className="event-info">
+           <label className="date">{date}</label>
+           <label className="time">{time}</label>
+           <label className="location"><a href={venueUrl}><p>{venueName}</p></a></label>
+         </div>
+       </div>
      </div>
+
    </li>
 );
 
 Event.propTypes = {
-  headliner: PropTypes.string.isRequired,
-  supporting: PropTypes.string.isRequired,
-  venuename: PropTypes.string.isRequired,
-  venuelocation: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  performers: PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  venueName: PropTypes.string.isRequired,
+  venueUrl: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
 };
 
 export default Event;
-
-
-// Headliner, support (all in array), venue name, venue url,

@@ -30,9 +30,9 @@ require('./passportConfig.js')(passport);
 app.use('/auth', authRouter);
 app.use('/api', router);
 
-app.get('*', (request, response) => {
-  response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-});
+// app.get('*', (request, response) => {
+//   response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+// });
 
 // SERVER CONFIGURATION=========================================================
 
