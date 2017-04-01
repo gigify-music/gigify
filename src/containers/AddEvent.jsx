@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addEntry } from '../actions';
+import { addEvent } from '../actions';
 
 
-let AddEntry = ({ dispatch }) => {
+let AddEvent = ({ dispatch }) => {
   let input;
 
   return (
     <div>
       <form
-        onSubmit={(event) => {
-          event.preventDefault();
+        onSubmit={(e) => {
+          e.preventDefault();
           if (!input.value.trim()) {
             return;
           }
-          dispatch(addEntry(input.value));
+          dispatch(addEvent(input.value));
           input.value = '';
         }}
       >
@@ -29,6 +29,6 @@ let AddEntry = ({ dispatch }) => {
   );
 };
 
-AddEntry = connect()(AddEntry);
+AddEvent = connect()(AddEvent);
 
-export default AddEntry;
+export default AddEvent;

@@ -1,2 +1,2 @@
-export const DISPLAY_ENTRIES = 'DISPLAY_ENTRIES';
-export const ADD_ENTRY = 'ADD_ENTRY';
+// export const DISPLAY_ENTRIES = 'DISPLAY_ENTRIES';
+export const ADD_EVENT = 'ADD_EVENT';
