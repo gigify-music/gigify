@@ -37,8 +37,7 @@ module.exports = {
           events.push(event);
         }
       });
-      console.log(festivals);
-      res.end();
+      res.send(events);
     });
   },
 };
