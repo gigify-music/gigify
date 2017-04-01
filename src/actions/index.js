@@ -1,21 +1,19 @@
 import axios from 'axios';
 import * as types from '../constants/actionTypes';
 
-let nextEventId = 0;
+export function getEvents() {
+  return dispatch => axios.get('/api/events')
+    .then(({ data }) => {
+      console.log('GET EVENTS RESULTS', data);
+      return dispatch({
+        type: types.GET_EVENTS_DATA_RECEIVED,
+        payload: data,
+      });
+    });
+}
 
-export const addEvent = value => ({
-  type: types.ADD_EVENT,
-  id: nextEventId++,
-  headliner,
-  supporting,
-  venuename,
-  venuelocation,
-  time,
-  date,
+
+export const selectEvent = id => ({
+  type: 'SELECT_EVENT',
+  id,
 });
-
-// export const getTestString = () => (dispatch) => {
-//   shop.getEntries((products) => {
-//     dispatch(receiveProducts(products));
-//   });
-// };
