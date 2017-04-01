@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import entries from './entries';
+import events from './events';
 
 
-const entriesApp = combineReducers({
-  entries,
+const eventsApp = combineReducers({
+  events,
 });
 
-export default entriesApp;
+export default eventsApp;

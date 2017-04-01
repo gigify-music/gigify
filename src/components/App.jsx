@@ -1,6 +1,7 @@
 import React from 'react';
-import AddEntry from '../containers/AddEntry';
-import DisplayList from '../containers/DisplayList';
+import AddEvent from '../containers/AddEvent';
+import DisplayEventList from '../containers/DisplayEventList';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 
 // class App extends Component {
@@ -20,8 +21,9 @@ import DisplayList from '../containers/DisplayList';
 
 const App = () => (
   <div>
-    <AddEntry />
-    <DisplayList />
+    <AddEvent />
+    <DisplayEventList />
+    <Link to="/login">Login</Link>
   </div>
 );
 

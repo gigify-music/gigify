@@ -36,7 +36,7 @@ const store = createStore(
 
 render(
   <Provider store={store}>
-    <App />
+    <Routes />
   </Provider>,
   document.getElementById('app'),
 );
