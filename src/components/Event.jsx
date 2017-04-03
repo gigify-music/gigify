@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 
 const Event = ({
-  onClick,
+  selectEvent,
   performers,
   venueName,
   venueUrl,
   date,
   time,
  }) => (
-   <li onClick={selectEvent(performers)}>
+   <li onClick={selectEvent.bind(this, performers)}>
 
      <div className="event-list-item">
        <div className="event-checkbox" />
@@ -34,7 +34,7 @@ const Event = ({
 );
 
 Event.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  selectEvent: PropTypes.func.isRequired,
   performers: PropTypes.arrayOf(React.PropTypes.string).isRequired,
   venueName: PropTypes.string.isRequired,
   venueUrl: PropTypes.string.isRequired,
