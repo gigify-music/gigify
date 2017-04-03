@@ -1,34 +1,60 @@
 import React, { PropTypes, Component } from 'react';
+import axios from 'axios';
 import Event from './Event';
 
 class EventList extends Component {
-  constructor({ listings, onPlaylistClick }) {
-    super({ listings, onPlaylistClick });
+  constructor(props) {
+    super(props);
     this.state = {
       selected: [],
     };
     this.selectEvent = this.selectEvent.bind(this);
   }
 
-  selectEvent(eventArtists) {
-    console.log('SELECTED ARTISTS', eventArtists);
+  selectEvent(performers) {
+    console.log('SELECTED ARTISTS', performers);
+
     const temp = this.state.selected.slice();
-    temp.push(eventArtists);
+    performers.forEach(performer => temp.push(performer));
+    const unique = [...new Set(temp)];
     this.setState({
-      selected: temp,
+      selected: unique,
     });
+    console.log('NEW STATE', this.state.selected);
+  }
+
+  generatePlaylist() {
+    axios.post('/api/artists', {
+      selected: this.state.selected,
+    })
+    .then(res =>
+      console.log('RESPONSE PLAYLIST', res),
+    )
+    .catch(err =>
+      console.errror(err),
+    );
   }
 
   render() {
     return (
       <div className="event-page-container">
+        <button onClick={this.generatePlaylist}>Generate Playlist of Selected</button>
         <div className="event-list-container">
+
           <ul>
-            {listings.map((event, i) =>
+            <label>Selected performers:</label>
+            {this.state.selected.map(performer =>
+              <li>
+                {performer}
+              </li>)}
+          </ul>
+
+          <ul>
+            {this.props.listings.map((event, i) =>
               <Event
                 key={i}
                 {...event}
-                onClick={() => this.selectEvent(eventArtists)}
+                selectEvent={this.selectEvent}
               />,
         )}
           </ul>
@@ -40,7 +66,6 @@ class EventList extends Component {
 
 
 EventList.propTypes = {
-  // onPlaylistClick: PropTypes.func.isRequired,
   listings: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     performers: PropTypes.array.isRequired,

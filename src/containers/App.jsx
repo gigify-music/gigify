@@ -27,8 +27,8 @@ onGenerateClick = () => {
   this.props.getEvents()
 }
 
-// onEventClick = () => {
-//   this.props.
+// onPlaylistClick = () => {
+//   console.log('GENERATING PLAYLIST');
 // }
 
   render() {
@@ -36,7 +36,7 @@ onGenerateClick = () => {
     return (
       <div>
         <GenerateList onGenerateClick={this.onGenerateClick} />
-        <EventList listings={this.props.listings} onPlaylistClick={this.onPlaylistClick} />
+        <EventList listings={this.props.listings} />
       </div>
     );
   }
