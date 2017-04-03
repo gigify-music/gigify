@@ -9,6 +9,7 @@ class EventList extends Component {
       selected: [],
     };
     this.selectEvent = this.selectEvent.bind(this);
+    this.generatePlaylist = this.generatePlaylist.bind(this);
   }
 
   selectEvent(performers) {
