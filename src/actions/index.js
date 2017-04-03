@@ -13,7 +13,7 @@ export function getEvents() {
 }
 
 
-export const selectEvent = id => ({
-  type: 'SELECT_EVENT',
-  id,
-});
+// export const selectEvent = id => ({
+//   type: 'SELECT_EVENT',
+//   id,
+// });

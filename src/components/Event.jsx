@@ -1,21 +1,24 @@
 import React, { PropTypes } from 'react';
 
 const Event = ({
-  onClick,
+  selectEvent,
   performers,
   venueName,
   venueUrl,
   date,
   time,
  }) => (
-   <li onClick={onClick}>
+   <li onClick={selectEvent.bind(this, performers)}>
 
      <div className="event-list-item">
        <div className="event-checkbox" />
        <div className="event-musicians-container">
          <div className="event-musicians">
-           <label className="headliner">{performers}</label>
-           <label className="supporting">The Flaming Lips, Spoon</label>
+           <label className="headliner">{performers[0]}</label>
+           <label className="supporting">{
+               performers.length === 1 ? 'Supporting Acts TBD' : performers.slice(1).join(', ',
+               )}
+           </label>
          </div>
        </div>
        <div className="event-info-container">
@@ -31,7 +34,7 @@ const Event = ({
 );
 
 Event.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  selectEvent: PropTypes.func.isRequired,
   performers: PropTypes.arrayOf(React.PropTypes.string).isRequired,
   venueName: PropTypes.string.isRequired,
   venueUrl: PropTypes.string.isRequired,
