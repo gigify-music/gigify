@@ -1,25 +1,46 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Event from './Event';
 
-const EventList = ({ listings, onEventClick, loading }) => (
-  <div className="event-page-container">
-    <div className="event-list-container">
-      <ul>
-        {loading ? 'Loading...' : ''}
-        {listings.map((event, i) =>
-          <Event
-            key={i}
-            {...event}
-            onClick={() => onEventClick(event.id)}
-          />,
-    )}
-      </ul>
-    </div>
-  </div>
-);
+class EventList extends Component {
+  constructor({ listings, onPlaylistClick }) {
+    super({ listings, onPlaylistClick });
+    this.state = {
+      selected: [],
+    };
+    this.selectEvent = this.selectEvent.bind(this);
+  }
+
+  selectEvent(eventArtists) {
+    console.log('SELECTED ARTISTS', eventArtists);
+    const temp = this.state.selected.slice();
+    temp.push(eventArtists);
+    this.setState({
+      selected: temp,
+    });
+  }
+
+  render() {
+    return (
+      <div className="event-page-container">
+        <div className="event-list-container">
+          <ul>
+            {listings.map((event, i) =>
+              <Event
+                key={i}
+                {...event}
+                onClick={() => this.selectEvent(eventArtists)}
+              />,
+        )}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+}
+
 
 EventList.propTypes = {
-  onEventClick: PropTypes.func.isRequired,
+  // onPlaylistClick: PropTypes.func.isRequired,
   listings: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     performers: PropTypes.array.isRequired,
@@ -31,3 +52,5 @@ EventList.propTypes = {
 };
 
 export default EventList;
+
+            // {loading ? 'Loading...' : ''}
