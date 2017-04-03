@@ -36,7 +36,7 @@ onGenerateClick = () => {
     return (
       <div>
         <GenerateList onGenerateClick={this.onGenerateClick} />
-        <EventList listings={this.props.listings} onEventClick={this.onEventClick} />
+        <EventList listings={this.props.listings} onPlaylistClick={this.onPlaylistClick} />
       </div>
     );
   }
