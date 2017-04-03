@@ -1,0 +1,123 @@
+{
+  "reason": {
+    "trackedArtist": [
+      {
+        "onTourUntil": "2017-04-04",
+        "uri": "http://www.songkick.com/artists/6916604-tony-molina?utm_source=44667&utm_medium=partner",
+        "id": 6916604,
+        "identifier": [
+          {
+            "href": "http://api.songkick.com/api/3.0/artists/mbid:4b64c8e3-5ced-496b-ab49-0edfd58cb759.json",
+            "eventsHref": "http://api.songkick.com/api/3.0/artists/mbid:4b64c8e3-5ced-496b-ab49-0edfd58cb759/calendar.json",
+            "mbid": "4b64c8e3-5ced-496b-ab49-0edfd58cb759",
+            "setlistsHref": "http://api.songkick.com/api/3.0/artists/mbid:4b64c8e3-5ced-496b-ab49-0edfd58cb759/setlists.json"
+          }
+        ],
+        "displayName": "Tony Molina"
+      }
+    ]
+  },
+  "event": {
+    "venue": {
+      "displayName": "Saint Vitus",
+      "lat": 40.736769,
+      "metroArea": {
+        "displayName": "New York",
+        "country": {
+          "displayName": "US"
+        },
+        "uri": "http://www.songkick.com/metro_areas/7644-us-new-york?utm_source=44667&utm_medium=partner",
+        "id": 7644,
+        "state": {
+          "displayName": "NY"
+        }
+      },
+      "lng": -73.954998,
+      "uri": "http://www.songkick.com/venues/1364966-saint-vitus?utm_source=44667&utm_medium=partner",
+      "id": 1364966
+    },
+    "displayName": "Tony Molina, Dark Blue, + Special Guest TBA, and Uniform (DE) at Saint Vitus (March 31, 2017)",
+    "type": "Concert",
+    "status": "ok",
+    "popularity": 0.0007,
+    "start": {
+      "time": "19:30:00",
+      "datetime": "2017-03-31T19:30:00-0400",
+      "date": "2017-03-31"
+    },
+    "performance": [
+      {
+        "displayName": "Tony Molina",
+        "artist": {
+          "displayName": "Tony Molina",
+          "uri": "http://www.songkick.com/artists/6916604-tony-molina?utm_source=44667&utm_medium=partner",
+          "id": 6916604,
+          "identifier": [
+            {
+              "href": "http://api.songkick.com/api/3.0/artists/mbid:4b64c8e3-5ced-496b-ab49-0edfd58cb759.json",
+              "mbid": "4b64c8e3-5ced-496b-ab49-0edfd58cb759"
+            }
+          ]
+        },
+        "billing": "headline",
+        "billingIndex": 1,
+        "id": 56445564
+      },
+      {
+        "displayName": "Dark Blue",
+        "artist": {
+          "displayName": "Dark Blue",
+          "uri": "http://www.songkick.com/artists/7493294-dark-blue?utm_source=44667&utm_medium=partner",
+          "id": 7493294,
+          "identifier": [
+            {
+              "href": "http://api.songkick.com/api/3.0/artists/mbid:0d9a60a2-7995-485b-a958-408858281b54.json",
+              "mbid": "0d9a60a2-7995-485b-a958-408858281b54"
+            }
+          ]
+        },
+        "billing": "headline",
+        "billingIndex": 2,
+        "id": 56445569
+      },
+      {
+        "displayName": "+ Special Guest TBA",
+        "artist": {
+          "displayName": "+ Special Guest TBA",
+          "uri": "http://www.songkick.com/artists/8309718-special-guest-tba?utm_source=44667&utm_medium=partner",
+          "id": 8309718,
+          "identifier": []
+        },
+        "billing": "headline",
+        "billingIndex": 3,
+        "id": 56445574
+      },
+      {
+        "displayName": "Uniform (DE)",
+        "artist": {
+          "displayName": "Uniform (DE)",
+          "uri": "http://www.songkick.com/artists/8419833-uniform-de?utm_source=44667&utm_medium=partner",
+          "id": 8419833,
+          "identifier": [
+            {
+              "href": "http://api.songkick.com/api/3.0/artists/mbid:4a78f1b7-8021-43f8-8c5d-4be35acecce1.json",
+              "mbid": "4a78f1b7-8021-43f8-8c5d-4be35acecce1"
+            }
+          ]
+        },
+        "billing": "headline",
+        "billingIndex": 4,
+        "id": 56684669
+      }
+    ],
+    "location": {
+      "city": "Brooklyn, NY, US",
+      "lat": 40.736769,
+      "lng": -73.954998
+    },
+    "ageRestriction": null,
+    "uri": "http://www.songkick.com/concerts/29106244-tony-molina-at-saint-vitus?utm_source=44667&utm_medium=partner",
+    "id": 29106244
+  },
+  "createdAt": "2017-01-25T07:06:25+0000"
+},

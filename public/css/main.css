@@ -1,0 +1,66 @@
+.event-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.event-list-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 70%;
+  background-color: gray;
+}
+
+.event-list-item {
+  display: flex;
+  flex-direction: row;
+  height: 20%;
+  width: 90%;
+  background-color: white;
+  margin-top: 3%;
+}
+
+.event-checkbox {
+  width: 20%;
+  background-color: green;
+}
+
+.event-musicians-container {
+  display: flex;
+  height: 100%;
+  width: 60%;
+}
+
+.event-musicians {
+  align-content: flex-start;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: left;
+  padding: 1%;
+  background-color: yellow;
+}
+
+.headliner {
+  font-size: 40px;
+}
+
+.supporting {
+  font-size: 15px;
+}
+
+.event-info-container {
+  display: flex;
+  height: 100%;
+}
+
+.event-info {
+  display: flex;
+  align-content: flex-start;
+  flex-direction: column;
+  justify-content: right;
+}
