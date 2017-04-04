@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import ToggleDisplay from 'react-toggle-display';
 import EventList from '../components/EventList';
-import GenerateList from '../components/GenerateList';
 import { getEvents } from '../actions';
 import Splash from '../components/Splash';
-import ToggleDisplay from 'react-toggle-display';
+import Playlist from '../components/Playlist';
 
 
 class Home extends Component {
@@ -23,12 +22,22 @@ class Home extends Component {
         this.setState({ showEventList: true });
       });
   }
+  renderPlaylist(playListID) {
+    console.log('AH! REAL MONSTERS');
+    this.setState({ showPlaylist: true });
+  }
   render() {
     return (
       <div>
         <Splash onGenerateClick={() => this.onGenerateClick()} />
         <ToggleDisplay show={this.state.showEventList}>
-          <EventList listings={this.props.listings} />
+          <EventList
+            renderPlaylist={playListID => this.renderPlaylist(playListID)}
+            listings={this.props.listings}
+          />
+        </ToggleDisplay>
+        <ToggleDisplay show={this.state.showPlaylist}>
+          <Playlist />
         </ToggleDisplay>
       </div>
     );
