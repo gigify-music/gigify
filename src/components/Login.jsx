@@ -12,7 +12,8 @@ class Login extends React.Component {
           <label className="page-title"> Gigify </label>
           <label className="page-subheader"> Create playlists based off of your
           upcoming songkick gigs </label>
-        <button className="btn btn-lg spotify-auth-button" type="button" onClick={this.handleAuth.bind(this)}>
+          <button className="btn btn-lg spotify-auth-button" type="button"
+          onClick={ this.handleAuth.bind(this) }>
             <i className="fa fa-spotify fa-3x spotify-icon" aria-hidden="true" />
            Connect with Spotify </button>
         </div>

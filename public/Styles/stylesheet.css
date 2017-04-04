@@ -130,5 +130,21 @@
     border: 0;
     background: transparent;
   }
-    width: 75px
+/*     width: 75px */
+
+.carousel {
+  margin:0 auto;
+  width: 100vw;
+  height: 60vh;
+  color: #333;
+  background: #419be0;
+}
+
+.carousel-image {
+  height: 60vh;
+  width: 100vw;
+}
+
+.slick-dots {
+  top: 0 !important;
 }
