@@ -1,61 +1,72 @@
 import React, { PropTypes, Component } from 'react';
 import axios from 'axios';
+// import { connect } from 'react-redux';
+// import { toggleActive } from '../actions';
 import Event from './Event';
 
 class EventList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: [],
+      selected: {},
     };
-    this.selectEvent = this.selectEvent.bind(this);
+    this.toggleEvent = this.toggleEvent.bind(this);
     this.generatePlaylist = this.generatePlaylist.bind(this);
   }
 
-  selectEvent(performers) {
-    console.log('SELECTED ARTISTS', performers);
+  toggleEvent(performers, id) {
+    console.log('SELECTED ARTISTS', performers, id);
 
-    const temp = this.state.selected.slice();
-    performers.forEach(performer => temp.push(performer));
-    const unique = [...new Set(temp)];
-    this.setState({
-      selected: unique,
-    });
+    // this.props.toggleActive(id);
+
+    const selected = this.state.selected;
+    if (selected[id]) {
+      delete selected[id];
+    } else {
+      selected[id] = performers;
+      this.setState({
+        selected,
+      });
+    }
     console.log('NEW STATE', this.state.selected);
   }
 
   generatePlaylist() {
+    const selected = Object.values(this.state.selected);
+    const flatten = [].concat(...selected);
+    const unique = [...new Set(flatten)];
     axios.post('/api/artists', {
-      selected: this.state.selected,
+      selected: unique,
     })
     .then(res =>
       console.log('RESPONSE PLAYLIST', res),
     )
     .catch(err =>
-      console.errror(err),
+      console.error(err),
     );
   }
 
   render() {
+    const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
+    console.log('SELECTED PERFORMERS', selectedPerformers);
+
     return (
       <div className="event-page-container">
         <button onClick={this.generatePlaylist}>Generate Playlist of Selected</button>
+        <ul className="list-group">
+          <label>Selected performers:</label>
+          {selectedPerformers.map(performer =>
+            <li className="list-group-item">
+              {performer}
+            </li>)}
+        </ul>
         <div className="event-list-container">
-
-          <ul>
-            <label>Selected performers:</label>
-            {this.state.selected.map(performer =>
-              <li>
-                {performer}
-              </li>)}
-          </ul>
-
           <ul>
             {this.props.listings.map((event, i) =>
               <Event
                 key={i}
                 {...event}
-                selectEvent={this.selectEvent}
+                toggleEvent={this.toggleEvent}
               />,
         )}
           </ul>
@@ -69,6 +80,7 @@ class EventList extends Component {
 EventList.propTypes = {
   listings: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
+    // active: PropTypes.bool.isRequired,
     performers: PropTypes.array.isRequired,
     venueName: PropTypes.string.isRequired,
     venueUrl: PropTypes.string.isRequired,
@@ -76,6 +88,10 @@ EventList.propTypes = {
     time: PropTypes.string.isRequired,
   }).isRequired),
 };
+
+// const mapStatetoProps = ({ events }) => ({
+//   activeEvents: events.active,
+// });
 
 export default EventList;
 
