@@ -40,14 +40,23 @@ class Splash extends React.Component {
             <div><img className="carousel-image" src="https://static.pexels.com/photos/37337/cat-silhouette-cats-silhouette-cat-s-eyes.jpg" alt="Sad Face" /></div>
             <div><img className="carousel-image" src="https://photogenicfelines.files.wordpress.com/2010/10/imgp7340_1-1.jpg" alt="Sad Face" /></div>
           </Slider>
+          <button
+            className="btn btn-lg"
+            onClick={this.props.onGenerateClick}
+          >
+            Generate Events
+          </button>
         </div>
 
-        <form class="form-inline">
-            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Enter Songkik USername" />
+        <form className="form-inline">
+          <input
+            type="text"
+            className="form-control mb-2 mr-sm-2 mb-sm-0"
+            id="inlineFormInput" placeholder="Enter Songkik USername"
+          />
 
 
-
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-primary">Submit</button>
         </form>
       </div>
     );

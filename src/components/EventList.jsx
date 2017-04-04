@@ -38,9 +38,10 @@ class EventList extends Component {
     axios.post('/api/artists', {
       selected: unique,
     })
-    .then(res =>
-      console.log('RESPONSE PLAYLIST', res),
-    )
+    .then((res) => {
+      console.log('RESPONSE PLAYLIST', res);
+      this.props.renderPlaylist(res);
+    })
     .catch(err =>
       console.error(err),
     );
@@ -51,10 +52,10 @@ class EventList extends Component {
     console.log('SELECTED PERFORMERS', selectedPerformers);
 
     return (
-      <div className="event-page-container">
+      <div id="event-page" className="event-page-container">
         <button onClick={this.generatePlaylist}>Generate Playlist of Selected</button>
         <ul className="list-group">
-          <label>Selected performers:</label>
+          <text>Selected performers:</text>
           {selectedPerformers.map(performer =>
             <li className="list-group-item">
               {performer}
@@ -87,6 +88,7 @@ EventList.propTypes = {
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
   }).isRequired),
+  renderPlaylist: PropTypes.func.isRequired,
 };
 
 // const mapStatetoProps = ({ events }) => ({
