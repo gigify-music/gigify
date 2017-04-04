@@ -18,7 +18,7 @@ import Slider from 'react-slick';
 //   }
 // });
 
-class HomePage extends React.Component {
+class Splash extends React.Component {
   render() {
     const settings = {
       dots: true,
@@ -41,9 +41,17 @@ class HomePage extends React.Component {
             <div><img className="carousel-image" src="https://photogenicfelines.files.wordpress.com/2010/10/imgp7340_1-1.jpg" alt="Sad Face" /></div>
           </Slider>
         </div>
+
+        <form class="form-inline">
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Enter Songkik USername" />
+
+
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
     );
   }
 }
 
-export default HomePage;
+export default Splash;

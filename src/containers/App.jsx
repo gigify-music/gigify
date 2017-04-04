@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import EventList from '../components/EventList';
 import GenerateList from '../components/GenerateList';
 import { getEvents } from '../actions';
-import HomePage from '../components/HomePage';
+import Splash from '../components/Splash';
 
 
 class App extends Component {
@@ -17,7 +17,7 @@ onGenerateClick = () => {
     console.log('RENDER LIST', this.props.listings);
     return (
       <div>
-        <Link to={`/HomePage`}>HOME</Link>
+        <Link to={`/Splash`}>HOME</Link>
         <GenerateList onGenerateClick={this.onGenerateClick} />
         <EventList listings={this.props.listings} />
       </div>

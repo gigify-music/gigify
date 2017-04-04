@@ -148,3 +148,29 @@
 .slick-dots {
   top: 0 !important;
 }
+
+.slick-dots li button:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "•";
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    line-height: 20px;
+    text-align: center;
+    color: #17567d;
+    opacity: .40
+}
+
+.slick-dots li.slick-active button:before {
+    color: #fff;
+    opacity: .75
+}
+
+.form-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
