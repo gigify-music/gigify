@@ -1,24 +1,31 @@
 import React from 'react';
 import Slider from 'react-slick';
-// import { React_Boostrap_Carousel } from 'react-boostrap-carousel';
-// import '../../node_modules/react-boostrap-carousel/css/bootstrap.min.css';
-// import '../../node_modules/react-boostrap-carousel/css/react-boostrap-carousel.css';
-
-// var SampleNextArrow = React.createClass({
-//   render: function() {
-//     return <div {...this.props} style={{display: 'block', background: 'red'}}></div>;
-//   }
-// });
-//
-// var SamplePrevArrow = React.createClass({
-//   render: function() {
-//     return (
-//       <div {...this.props} style={{display: 'block', background: 'red'}}></div>
-//     );
-//   }
-// });
+import axios from 'axios';
 
 class Splash extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { username: '' };
+
+    this.handleUsername = this.handleUsername.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleUsername(username) {
+    this.setState({ username: username.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    axios.get(`/api/events/${this.state.username}`)
+    .then(function (response) {
+      console.log(response, "RESPONSE HERE");
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   render() {
     const settings = {
       dots: true,
@@ -33,7 +40,7 @@ class Splash extends React.Component {
     };
     return (
       <div className="home-page-container">
-        <div className="carouse">
+        <div className="carousel">
           <Slider {...settings}>
             <div><img className="carousel-image" src="http://placekitten.com/g/450/300" alt="Sad Face" /></div>
             <div><img className="carousel-image" src="http://www.petsworld.in/blog/wp-content/uploads/2014/09/cute-kittens.jpg" alt="Sad Face" /></div>
@@ -41,14 +48,42 @@ class Splash extends React.Component {
             <div><img className="carousel-image" src="https://photogenicfelines.files.wordpress.com/2010/10/imgp7340_1-1.jpg" alt="Sad Face" /></div>
           </Slider>
         </div>
-
-        <form class="form-inline">
-            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Enter Songkik USername" />
-
-
-
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <div id="songkik-input">
+          <form className="form-inline" onSubmit={this.handleSubmit}>
+            <span className="sr-only">Songkik Username</span>
+            <div className="input-group mb-2 mr-sm-2 mb-sm-0">
+              <div className="input-group-addon">@</div>
+              <input
+                type="text" className="form-control"
+                id="inlineFormInputGroup" placeholder="Songkik Username"
+                value={this.state.username} onChange={this.handleUsername.bind(this)} />
+            </div>
+            <button
+              type="submit" className="btn btn-primary"
+              onClick={this.handleSubmit.bind(this)}
+            >
+            Submit
+            </button>
+          </form>
+          <span className="or-label"> OR </span>
+          <div className="genre-buttons">
+            <button type="button" className="btn btn-success btn-circle btn-lg">
+              Pop
+            </button>
+            <button type="button" className="btn btn-success btn-circle btn-lg">
+              Rock
+            </button>
+            <button type="button" className="btn btn-success btn-circle btn-lg">
+              Hip<br />Hop
+            </button>
+            <button type="button" className="btn btn-success btn-circle btn-lg">
+              Indie
+            </button>
+            <button type="button" className="btn btn-success btn-circle btn-lg">
+              Rap
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
