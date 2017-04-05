@@ -4,8 +4,7 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 const appKey = process.env.APP_KEY;
 const appSecret = process.env.APP_SECRET;
 const session = require('express-session');
-
-let access;
+const { spotifyApi } = require('./controller')
 
 const signIn = new SpotifyStrategy({
   clientID: appKey,
@@ -13,7 +12,8 @@ const signIn = new SpotifyStrategy({
   callbackURL: 'http://localhost:8000/auth/callback',
 }, (accessToken, refreshToken, profile, done) => {
     // asynchronous verification, for effect...
-  access = accessToken;
+  spotifyApi.setAccessToken(accessToken);
+
   process.nextTick(() => {
     (done(null, profile));
   });
@@ -22,7 +22,6 @@ const signIn = new SpotifyStrategy({
 
 module.exports = (passport) => {
   passport.serializeUser((user, done) => {
-    passport.accessToken = access;
     done(null, user);
   });
 

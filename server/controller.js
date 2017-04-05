@@ -1,7 +1,7 @@
+const passport = require('passport');
 const axios = require('axios');
 const moment = require('moment');
 const session = require('express-session');
-const passport = require('passport');
 const SpotifyWebApi = require('spotify-web-api-node');
 
 const spotifyApi = new SpotifyWebApi({
@@ -9,8 +9,6 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: process.env.APP_SECRET,
   redirectUri: 'http://localhost:8000/auth/callback',
 });
-
-spotifyApi.setAccessToken(passport.accessToken);
 
 const getArtistIDList = (artistList) => {
   return artistList.map((artist) => {
@@ -31,7 +29,7 @@ const getTopTracks = (artistIDList) => {
         const tracklist = {};
         tracklist[artist] = [];
         tracks.forEach(((track) => {
-          tracklist[artist].push(track.id);
+          tracklist[artist].push('spotify:track:' + track.id);
         }));
         // console.log('THE TRACKLIST: ', tracklist);
         return tracklist;
@@ -40,49 +38,47 @@ const getTopTracks = (artistIDList) => {
   });
 };
 
+let userID;
+
 module.exports = {
   createPlaylist: (req, res) => {
-    const artists = ['The National', 'New Order', 'Kanye West', 'Porches'];
-    Promise.all(getArtistIDList(artists))
+    Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
       .then((tracksArray) => {
         Promise.all(tracksArray)
           .then((results) => {
             const merged = Object.assign(...results);
-            console.log('THE TRACKS OBJ: ', merged);
             return merged;
+          })
+          .then((merged) => {
+            spotifyApi.getMe()
+              .then((data) => {
+                userID = data.body.id;
+                return userID
+              })
+              .then((user) => {
+                spotifyApi.createPlaylist(user, 'Gigify Playlist', { public: false })
+                .then((data) => {
+                  console.log('Created playlist!');
+                  return [user, data.body.id];
+                })
+                .then((playlistInfo) => {
+                  for (artist in merged) {
+                    spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], merged[artist])
+                    .then((data) => {
+                      console.log('ADDED SONGS TO PLAYLIST');
+                      res.send(playlistInfo[1]);
+                      return data;
+                    })
+                    .catch(err => console.error(err));
+                  }
+                });
+              });
           });
       });
-
-    // .then((response) => {
-    //   artistIDList = response;
-    //   console.log(artistIDList);
-    // });
-
     res.end();
   },
-  // createPlaylist: (req, res) => {
-  //   const artists = ['The National', 'New Order', 'Kanye West', 'Porches'];
-  //
-  //   const artistIDList = [];
-  //   artists.forEach((artist) => {
-  //     const query = artist.split(' ').join('%20');
-  //     axios.get(`https://api.spotify.com/v1/search?q=${query}&type=artist&limit=1`, { headers: { Authorization: `Bearer ${passport.accessToken}` } })
-  //       .then((response) => {
-  //         artistIDList.push(response.data.artists.items[0].id);
-  //       });
-    // });
-    // .then(() => {
-    //   console.log(artistIDList);
-    //   artistIDList.forEach((artistID) => {
-    //     axios.get(`https://api.spotify.com/v1/artists/${artistID}/top-tracks?country=US`)
-    //       .then((response) => {
-    //         console.log(response.data.tracks[0].name);
-    //       });
-    //   });
-    // });
   goHome: (req, res) => {
-    console.log('BEING CALLED');
     res.redirect('/home');
   },
   getEvents: (req, res) => {
@@ -123,4 +119,5 @@ module.exports = {
       res.send(events);
     });
   },
+  spotifyApi,
 };
