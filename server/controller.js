@@ -2,6 +2,10 @@ const axios = require('axios');
 const moment = require('moment');
 
 module.exports = {
+  goHome: (req, res) => {
+    console.log('BEING CALLED');
+    res.redirect('/home');
+  },
   getEvents: (req, res) => {
     axios.get(`http://api.songkick.com/api/3.0/users/jp-marra/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
     .then((results) => {
