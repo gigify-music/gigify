@@ -1,9 +1,84 @@
+const passport = require('passport');
 const axios = require('axios');
 const moment = require('moment');
+const session = require('express-session');
+const SpotifyWebApi = require('spotify-web-api-node');
+
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.APP_KEY,
+  clientSecret: process.env.APP_SECRET,
+  redirectUri: 'http://localhost:8000/auth/callback',
+});
+
+const getArtistIDList = (artistList) => {
+  return artistList.map((artist) => {
+    return spotifyApi.searchArtists(artist)
+      .then((response) => {
+        // console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
+        return response.body.artists.items[0].id;
+      })
+
+      .catch(err => console.error(err));
+  });
+};
+const getTopTracks = (artistIDList) => {
+  return artistIDList.map((artist) => {
+    return spotifyApi.getArtistTopTracks(artist, 'US')
+      .then((data) => {
+        const tracks = data.body.tracks;
+        const tracklist = {};
+        tracklist[artist] = [];
+        tracks.forEach(((track) => {
+          tracklist[artist].push('spotify:track:' + track.id);
+        }));
+        // console.log('THE TRACKLIST: ', tracklist);
+        return tracklist;
+      })
+      .catch(err => console.error(err));
+  });
+};
+
+let userID;
 
 module.exports = {
+  createPlaylist: (req, res) => {
+    Promise.all(getArtistIDList(req.body.selected))
+      .then(artistIDList => getTopTracks(artistIDList))
+      .then((tracksArray) => {
+        Promise.all(tracksArray)
+          .then((results) => {
+            const merged = Object.assign(...results);
+            return merged;
+          })
+          .then((merged) => {
+            spotifyApi.getMe()
+              .then((data) => {
+                userID = data.body.id;
+                return userID
+              })
+              .then((user) => {
+                spotifyApi.createPlaylist(user, 'Gigify Playlist', { public: false })
+                .then((data) => {
+                  console.log('Created playlist!');
+                  return [user, data.body.id];
+                })
+                .then((playlistInfo) => {
+                  for (artist in merged) {
+                    spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], merged[artist])
+                    .then((data) => {
+                      console.log('ADDED SONGS TO PLAYLIST');
+                      res.send(playlistInfo[1]);
+                      return data;
+                    })
+                    .catch(err => console.error(err));
+                  }
+                });
+              });
+          });
+      });
+    res.end();
+  },
   goHome: (req, res) => {
-    console.log('BEING CALLED');
     res.redirect('/home');
   },
   getEvents: (req, res) => {
@@ -45,4 +120,5 @@ module.exports = {
       res.send(events);
     });
   },
+  spotifyApi,
 };
