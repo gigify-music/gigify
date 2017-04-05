@@ -132,6 +132,14 @@
   }
 /*     width: 75px */
 
+.home-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
 .carousel {
   margin:0 auto;
   width: 100vw;
@@ -150,7 +158,7 @@
 }
 
 .slick-dots li button:before {
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     left: 0;
     content: "•";
@@ -168,9 +176,56 @@
     opacity: .75
 }
 
-.form-inline {
+.slick-dots.slick-thumb {
+  height: 20px;
+  width: 100vw;
+}
+
+#songkik-input {
+  width: 60vw;
+  height: 22vh;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 1px 1px 10px #B8BFBF;
+  top: -80px;
+  top: -10vh;
 }
+
+.or-label {
+  margin: 1.5%;
+}
+
+.genre-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 50vw;
+  justify-content: space-between;
+  align-content: flex-start;
+}
+
+.btn-circle.btn-lg {
+  box-shadow: 1px 1px 10px #B8BFBF;
+  width: 60px;
+  height: 60px;
+  padding: 10px 10px 10px 10px;
+  font-size: 16px;
+  line-height: 1.33;
+  border-radius: 30px;
+  background-color: #3a8884;
+}
+
+/*.home-page-container {
+  align-items: center;
+  justify-content: center;
+}*/
+
+/*.form-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}*/

@@ -7,7 +7,8 @@ module.exports = {
     res.redirect('/home');
   },
   getEvents: (req, res) => {
-    axios.get(`http://api.songkick.com/api/3.0/users/jp-marra/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
+    console.log(req.params, 'hellioooo');
+    axios.get(`http://api.songkick.com/api/3.0/users/${req.params.username}/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
     .then((results) => {
       const eventList = results.data.resultsPage.results.calendarEntry;
       const events = [];
