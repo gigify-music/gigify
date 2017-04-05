@@ -7,9 +7,6 @@ app.get('/events', Controller.getEvents);
 
 app.get('/home', Controller.goHome);
 
-app.post('/artists', (req, res) => {
-  console.log('REQ BOD', req.body);
-  res.send('butts');
-});
+app.post('/artists', Controller.createPlaylist);
 
 module.exports = app;
