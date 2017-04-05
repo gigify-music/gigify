@@ -64,19 +64,19 @@ module.exports = {
                 })
                 .then((playlistInfo) => {
                   for (artist in merged) {
+                     console.log(merged[artist]);
                     spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], merged[artist])
                     .then((data) => {
                       console.log('ADDED SONGS TO PLAYLIST');
-                      res.send(playlistInfo[1]);
-                      return data;
                     })
                     .catch(err => console.error(err));
                   }
-                });
+                  res.send(playlistInfo[1])
+                })
+                .catch(err => console.error(err));
               });
           });
       });
-    res.end();
   },
   goHome: (req, res) => {
     res.redirect('/home');
