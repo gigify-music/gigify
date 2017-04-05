@@ -16,12 +16,12 @@ class Home extends Component {
     this.state = {
       showEventList: false,
       showPlaylist: false,
+      playlistId: '',
       username: '',
     };
   }
 
   handleUsername(username) {
-    console.log('PROPS CONS', this.props);
     this.setState({ username: username.target.value });
   }
 
@@ -38,19 +38,19 @@ class Home extends Component {
     e.preventDefault();
     axios.get(`/api/events/${this.state.username}`)
     .then(function (response) {
-      console.log(response, 'RESPONSE HERE');
       console.log('PROPS', this.props);
       that.props.getEvents(response);
       that.setState({ showEventList: true });
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
     });
   }
 
-  renderPlaylist(playListID) {
-    console.log('AH! REAL MONSTERS');
-    this.setState({ showPlaylist: true });
+  renderPlaylist(playlistId) {
+    console.log('AH! REAL MONSTERS', playlistId);
+    this.setState({ showPlaylist: true,
+      playlistId });
   }
   render() {
     const settings = {
@@ -123,7 +123,7 @@ class Home extends Component {
           />
         </ToggleDisplay>
         <ToggleDisplay show={this.state.showPlaylist}>
-          <Playlist />
+          <Playlist playlistId={this.state.playlistId} />
         </ToggleDisplay>
       </div>
     );
