@@ -16,24 +16,42 @@ const getArtistIDList = (artistList) => {
   return artistList.map((artist) => {
     return spotifyApi.searchArtists(artist)
       .then((response) => {
-        console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
+        // console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
         return response.body.artists.items[0].id;
       })
 
       .catch(err => console.error(err));
   });
 };
-
-// const buildTopTracksObj = (artistIDList) => {
-//
-// }
+const getTopTracks = (artistIDList) => {
+  return artistIDList.map((artist) => {
+    return spotifyApi.getArtistTopTracks(artist, 'US')
+      .then((data) => {
+        const tracks = data.body.tracks;
+        const tracklist = {};
+        tracklist[artist] = [];
+        tracks.forEach(((track) => {
+          tracklist[artist].push(track.id);
+        }));
+        // console.log('THE TRACKLIST: ', tracklist);
+        return tracklist;
+      })
+      .catch(err => console.error(err));
+  });
+};
 
 module.exports = {
   createPlaylist: (req, res) => {
     const artists = ['The National', 'New Order', 'Kanye West', 'Porches'];
     Promise.all(getArtistIDList(artists))
-      .then((artistIDList) => {
-        console.log(artistIDList);
+      .then(artistIDList => getTopTracks(artistIDList))
+      .then((tracksArray) => {
+        Promise.all(tracksArray)
+          .then((results) => {
+            const merged = Object.assign(...results);
+            console.log('THE TRACKS OBJ: ', merged);
+            return merged;
+          });
       });
 
     // .then((response) => {
