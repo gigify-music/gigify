@@ -6,27 +6,22 @@ class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = { username: '' };
+    this.user = '';
 
     this.handleUsername = this.handleUsername.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleUsername(username) {
     this.setState({ username: username.target.value });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    axios.get(`/api/events/${this.state.username}`)
-    .then(function (response) {
-      console.log(response, "RESPONSE HERE");
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  handleSubmit = () => {
+    return this.props.onGenerateClick(this.state.username)
   }
 
   render() {
+    const username = this.state.username
     const settings = {
       dots: true,
       dotsClass: 'slick-dots slick-thumb',
@@ -49,7 +44,7 @@ class Splash extends React.Component {
           </Slider>
         </div>
         <div id="songkik-input">
-          <form className="form-inline" onSubmit={this.handleSubmit}>
+          <form className="form-inline">
             <span className="sr-only">Songkik Username</span>
             <div className="input-group mb-2 mr-sm-2 mb-sm-0">
               <div className="input-group-addon">@</div>
@@ -89,4 +84,4 @@ class Splash extends React.Component {
   }
 }
 
-export default Splash;
+export default Splash
