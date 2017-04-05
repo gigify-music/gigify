@@ -2,19 +2,58 @@ const axios = require('axios');
 const moment = require('moment');
 const session = require('express-session');
 const passport = require('passport');
+const SpotifyWebApi = require('spotify-web-api-node');
+
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.APP_KEY,
+  clientSecret: process.env.APP_SECRET,
+  redirectUri: 'http://localhost:8000/auth/callback',
+});
+
+spotifyApi.setAccessToken(passport.accessToken);
+
+const getArtistIDList = (artistList) => {
+  return artistList.map((artist) => {
+    return spotifyApi.searchArtists(artist)
+      .then((response) => {
+        console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
+        return response.body.artists.items[0].id;
+      })
+
+      .catch(err => console.error(err));
+  });
+};
+
+// const buildTopTracksObj = (artistIDList) => {
+//
+// }
 
 module.exports = {
   createPlaylist: (req, res) => {
     const artists = ['The National', 'New Order', 'Kanye West', 'Porches'];
+    Promise.all(getArtistIDList(artists))
+      .then((artistIDList) => {
+        console.log(artistIDList);
+      });
 
-    const artistIDList = [];
-    artists.forEach((artist) => {
-      const query = artist.split(' ').join('%20');
-      axios.get(`https://api.spotify.com/v1/search?q=${query}&type=artist&limit=1`, { headers: { Authorization: `Bearer ${passport.accessToken}` } })
-        .then((response) => {
-          artistIDList.push(response.data.artists.items[0].id);
-        });
-    });
+    // .then((response) => {
+    //   artistIDList = response;
+    //   console.log(artistIDList);
+    // });
+
+    res.end();
+  },
+  // createPlaylist: (req, res) => {
+  //   const artists = ['The National', 'New Order', 'Kanye West', 'Porches'];
+  //
+  //   const artistIDList = [];
+  //   artists.forEach((artist) => {
+  //     const query = artist.split(' ').join('%20');
+  //     axios.get(`https://api.spotify.com/v1/search?q=${query}&type=artist&limit=1`, { headers: { Authorization: `Bearer ${passport.accessToken}` } })
+  //       .then((response) => {
+  //         artistIDList.push(response.data.artists.items[0].id);
+  //       });
+    // });
     // .then(() => {
     //   console.log(artistIDList);
     //   artistIDList.forEach((artistID) => {
@@ -24,8 +63,6 @@ module.exports = {
     //       });
     //   });
     // });
-    res.end();
-  },
   goHome: (req, res) => {
     console.log('BEING CALLED');
     res.redirect('/home');
