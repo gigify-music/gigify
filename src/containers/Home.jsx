@@ -15,8 +15,8 @@ class Home extends Component {
       showPlaylist: false,
     };
   }
-  onGenerateClick() {
-    console.log('SUP INTERNET?');
+  onGenerateClick(username) {
+    console.log('USERNAME', username);
     this.props.getEvents()
       .then(() => {
         this.setState({ showEventList: true });
@@ -29,7 +29,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Splash onGenerateClick={() => this.onGenerateClick()} />
+        <Splash onGenerateClick={username => this.onGenerateClick(username)} />
         <ToggleDisplay show={this.state.showEventList}>
           <EventList
             renderPlaylist={playListID => this.renderPlaylist(playListID)}
