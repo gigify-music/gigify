@@ -155,7 +155,7 @@ class Home extends Component {
           />
         </ToggleDisplay>
         <ToggleDisplay id="playlist-toggle" show={this.state.showPlaylist}>
-          <Playlist id="playlist" sweetScroll={this.sweetScroll} playlistId={this.state.playlistId} />
+          <Playlist id="playlist" showPlaylist={this.state.showPlaylist} playlistId={this.state.playlistId} />
         </ToggleDisplay>
       </div>
     );

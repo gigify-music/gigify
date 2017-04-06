@@ -11,9 +11,15 @@ class Playlist extends React.Component {
     this.sweetScroll = new SweetScroll();
     console.log("COMPONENT MOUNTED");
   }
-  componentDidUpdate() {
-    console.log("PLAYLIST DID UPDATE");
-    this.sweetScroll.toElement(document.getElementById('playlist-scroll'));
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps);
+    if (!prevProps.showPlaylist) {
+      this.sweetScroll.toElement(document.getElementById('playlist-scroll'));
+    }
+
+    if (prevProps.playlistId !== this.props.playlistId) {
+      this.sweetScroll.toElement(document.getElementById('playlist-scroll'));
+    }
   }
   render() {
     return (
