@@ -58,6 +58,14 @@ const getTopTracks = (artistIDList) => {
 let userID;
 
 module.exports = {
+  getSpotlightOnePlaylist: (req, res) => {
+    console.log('GETTING FIRST SPOTLIGHT REQUEST');
+    res.send('FIRST FESTIVAL RESPONSE');
+  },
+  getSpotlightTwoPlaylist: (req, res) => {
+    console.log('GETTING SECOND SPOTLIGHT REQUEST');
+    res.send('SECOND FESTIVAL RESPONSE');
+  },
   createPlaylist: (req, res) => {
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))

@@ -35,15 +35,17 @@ class Home extends Component {
   handleFirst() {
     axios.get('/api/festival1')
     .then((results) => {
-      this.renderPlaylist(results);
-    });
+      console.log(results.data);
+    })
+    .catch(err => console.error(err));
   }
 
-  handeSecond() {
+  handleSecond() {
     axios.get('/api/festival2')
     .then((results) => {
-      this.renderPlaylist(results);
-    });
+      console.log(results.data);
+    })
+    .catch(err => console.error(err));
   }
 
   handleSubmit(e) {
