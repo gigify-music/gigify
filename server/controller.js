@@ -14,6 +14,8 @@ const getArtistIDList = (artistList) => {
   return artistList.map((artist) => {
     return spotifyApi.searchArtists(artist)
       .then((response) => {
+        //ADD THIS ARTIST IN DATABSE BY ADDING THE ASSOCIATED ARTIST NAME IN ARTISTNAMES
+        // ADD TO DB [artist, response.body.artists.items[0].id]
         // console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
         return response.body.artists.items[0].id;
       })
