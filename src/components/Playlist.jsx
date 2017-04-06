@@ -14,6 +14,7 @@ class Playlist extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     console.log(prevProps);
     if (!prevProps.showPlaylist) {
+      console.log(document.getElementById('playlist-scroll'))
       this.sweetScroll.toElement(document.getElementById('playlist-scroll'));
     }
 
@@ -23,12 +24,12 @@ class Playlist extends React.Component {
   }
   render() {
     return (
-      <div className="playlist-container">
+      <div className="vignette playlist-container">
         <div id="playlist-scroll" className="playlist-view">
           <h1>A preview of your new playlist:</h1>
           <iframe
             src={`https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark`}
-            width="500" height="600" frameBorder="0" allowTransparency="true"
+            width="700" height="600" frameBorder="0" allowTransparency="true"
           />
         </div>
       </div>
