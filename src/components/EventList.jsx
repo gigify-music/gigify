@@ -18,32 +18,42 @@ class EventList extends Component {
   }
 
   toggleEvent(performers, id) {
-    // this.props.toggleActive(id);
-
-    console.log('SELECTED STATE', this.state.selected);
+    console.log('SELECTED PERFORMERS', performers, id);
+    console.log('STATE AT START', this.state.selected);
+    console.log('SELECTED STATE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     const selected = this.state.selected;
 
     if (selected[id]) {
       delete selected[id];
+      this.setState({
+        selected,
+      });
+      console.log('AFTER DELETE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
+      return;
     }
 
-    const items = Object.values(this.state.selected);
-    const flatten = [].concat(...items);
-    const unique = [...new Set(flatten)];
+    const unique = [...new Set([].concat(...(Object.values(this.state.selected))))];
     console.log('NUMBER SELECTED', unique.length);
 
     if (unique.length > 5) {
       this.setState({
         displayWarning: true,
       });
+      console.log('WARNING TRIGGERED HERE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
+    } else if (selected[id]) {
+      delete selected[id];
+      this.setState({
+        selected,
+      });
+      console.log('AFTER DELETE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     } else {
       selected[id] = performers;
       this.setState({
         displayWarning: false,
         selected,
       });
+      console.log('ADDED TO STATE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     }
-    console.log('NEW STATE', this.state.selected);
   }
 
   generatePlaylist() {
@@ -71,8 +81,9 @@ class EventList extends Component {
         <div className="event-list-sidebar">
           <button onClick={this.generatePlaylist}>Generate Playlist of Selected</button>
           <ToggleDisplay show={this.state.displayWarning}>
-            <div className="selectionWarning">
-              HERE IS A WARNING
+            <div className="selectionWarning animated slideInLeft">
+              <h3>You've reached the maximum playlist length.</h3>
+              <h4>Either deselect an event or press submit to generate your playlist.</h4>
             </div>
           </ToggleDisplay>
         </div>
