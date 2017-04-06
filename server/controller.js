@@ -19,19 +19,19 @@ const getArtistIDList = (artistList) => {
         //ADD THIS ARTIST IN DATABSE BY ADDING THE ASSOCIATED ARTIST NAME IN ARTISTNAMES
         // ADD TO DB [artist, response.body.artists.items[0].id]
         // console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
-        pool.connect()
-          .then((client) => {
-            client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
-              .then((res) => {
-                client.release();
-              })
-              .catch((err) => {
-                console.error('error running query', err);
-              });
-          })
-          .catch((err) => {
-            console.error('error fetching client from pool', err);
-          });
+        // pool.connect()
+        //   .then((client) => {
+        //     client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
+        //       .then((res) => {
+        //         client.release();
+        //       })
+        //       .catch((err) => {
+        //         console.error('error running query', err);
+        //       });
+        //   })
+        //   .catch((err) => {
+        //     console.error('error fetching client from pool', err);
+        //   });
         return response.body.artists.items[0].id;
       })
 
