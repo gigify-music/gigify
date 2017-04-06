@@ -1,9 +1,90 @@
+const passport = require('passport');
 const axios = require('axios');
 const moment = require('moment');
+const session = require('express-session');
+const SpotifyWebApi = require('spotify-web-api-node');
+
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.APP_KEY,
+  clientSecret: process.env.APP_SECRET,
+  redirectUri: 'http://localhost:8000/auth/callback',
+});
+
+const getArtistIDList = (artistList) => {
+  return artistList.map((artist) => {
+    return spotifyApi.searchArtists(artist)
+      .then((response) => {
+        //ADD THIS ARTIST IN DATABSE BY ADDING THE ASSOCIATED ARTIST NAME IN ARTISTNAMES
+        // ADD TO DB [artist, response.body.artists.items[0].id]
+        // console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
+        return response.body.artists.items[0].id;
+      })
+
+      .catch(err => console.error(err));
+  });
+};
+const getTopTracks = (artistIDList) => {
+  return artistIDList.map((artist) => {
+    return spotifyApi.getArtistTopTracks(artist, 'US')
+      .then((data) => {
+        const tracks = data.body.tracks;
+        const tracklist = {};
+        tracklist[artist] = [];
+        tracks.forEach(((track) => {
+          tracklist[artist].push('spotify:track:' + track.id);
+        }));
+        // console.log('THE TRACKLIST: ', tracklist);
+        return tracklist;
+      })
+      .catch(err => console.error(err));
+  });
+};
+
+let userID;
 
 module.exports = {
+  createPlaylist: (req, res) => {
+    Promise.all(getArtistIDList(req.body.selected))
+      .then(artistIDList => getTopTracks(artistIDList))
+      .then((tracksArray) => {
+        Promise.all(tracksArray)
+          .then((results) => {
+            const merged = Object.assign(...results);
+            return merged;
+          })
+          .then((merged) => {
+            spotifyApi.getMe()
+              .then((data) => {
+                userID = data.body.id;
+                return userID
+              })
+              .then((user) => {
+                spotifyApi.createPlaylist(user, 'Gigify Playlist', { public: false })
+                .then((data) => {
+                  console.log('Created playlist!');
+                  return [user, data.body.id];
+                })
+                .then((playlistInfo) => {
+                  for (artist in merged) {
+                    spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], merged[artist])
+                    .then((data) => {
+                      console.log('ADDED SONGS TO PLAYLIST');
+                    })
+                    .catch(err => console.error(err));
+                  }
+                  res.send(playlistInfo)
+                })
+                .catch(err => console.error(err));
+              });
+          });
+      });
+  },
+  goHome: (req, res) => {
+    res.redirect('/home');
+  },
   getEvents: (req, res) => {
-    axios.get(`http://api.songkick.com/api/3.0/users/jp-marra/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
+    console.log(req.params, 'USERNAME ******');
+    axios.get(`http://api.songkick.com/api/3.0/users/${req.params.username}/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
     .then((results) => {
       const eventList = results.data.resultsPage.results.calendarEntry;
       const events = [];
@@ -37,7 +118,9 @@ module.exports = {
           events.push(event);
         }
       });
+      // console.log(events, "EVENTS")
       res.send(events);
     });
   },
+  spotifyApi,
 };
