@@ -149,10 +149,11 @@
 }
 
 .carousel-image {
+  position: relative;
   height: 60vh;
   width: 100vw;
+  z-index: 1;
 }
-
 .slick-dots {
   top: 0 !important;
 }

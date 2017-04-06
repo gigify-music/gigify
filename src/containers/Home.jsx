@@ -32,6 +32,19 @@ class Home extends Component {
   //       this.setState({ showEventList: true });
   //     });
   // }
+  handleFirst() {
+    axios.get('/api/festival1')
+    .then((results) => {
+      this.renderPlaylist(results);
+    });
+  }
+
+  handeSecond() {
+    axios.get('/api/festival2')
+    .then((results) => {
+      this.renderPlaylist(results);
+    });
+  }
 
   handleSubmit(e) {
     const that = this;
@@ -70,10 +83,8 @@ class Home extends Component {
           <div className="home-page-container">
             <div className="carousel">
               <Slider {...settings}>
-                <div><img className="carousel-image" src="http://placekitten.com/g/450/300" alt="Sad Face" /></div>
-                <div><img className="carousel-image" src="http://www.petsworld.in/blog/wp-content/uploads/2014/09/cute-kittens.jpg" alt="Sad Face" /></div>
-                <div><img className="carousel-image" src="https://static.pexels.com/photos/37337/cat-silhouette-cats-silhouette-cat-s-eyes.jpg" alt="Sad Face" /></div>
-                <div><img className="carousel-image" src="https://photogenicfelines.files.wordpress.com/2010/10/imgp7340_1-1.jpg" alt="Sad Face" /></div>
+                <a onClick={() => this.handleFirst()}><img className="carousel-image" src="/assets/panorama.png" alt="Sad Face" /></a>
+                <a onClick={() => this.handleSecond()}><img className="carousel-image" src="/assets/govball.png" alt="Sad Face" /></a>
               </Slider>
             </div>
             <div id="songkik-input">
@@ -84,12 +95,12 @@ class Home extends Component {
                   <input
                     type="text" className="form-control"
                     id="inlineFormInputGroup" placeholder="Songkik Username"
-                    value={this.state.username} onChange={this.handleUsername.bind(this)}
+                    value={this.state.username} onChange={() => this.handleUsername()}
                   />
                 </div>
                 <button
                   type="submit" className="btn btn-primary"
-                  onClick={this.handleSubmit.bind(this)}
+                  onClick={() => handleSubmit()}
                 >
                 Submit
                 </button>
