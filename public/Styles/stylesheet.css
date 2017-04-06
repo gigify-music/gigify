@@ -146,13 +146,15 @@
   height: 60vh;
   color: #333;
   background: #419be0;
+  box-shadow: 0 0 10px #B8BFBF;
 }
 
 .carousel-image {
+  position: relative;
   height: 60vh;
   width: 100vw;
+  z-index: 1;
 }
-
 .slick-dots {
   top: 0 !important;
 }
@@ -181,7 +183,7 @@
   width: 100vw;
 }
 
-#songkik-input {
+#songkick-input {
   width: 60vw;
   height: 22vh;
   background: #ffffff;
