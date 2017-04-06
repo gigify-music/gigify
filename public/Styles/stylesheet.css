@@ -219,6 +219,24 @@
   background-color: #3a8884;
 }
 
+.playlist-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.playlist-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 70%;
+  align-items: center;
+  justify-content: center;
+  background-color: gray;
+}
+
 /*.home-page-container {
   align-items: center;
   justify-content: center;
