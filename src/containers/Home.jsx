@@ -16,7 +16,7 @@ class Home extends Component {
     this.state = {
       showEventList: false,
       showPlaylist: false,
-      playlistId: '',
+      playlistId: [],
       username: '',
     };
   }

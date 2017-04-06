@@ -64,14 +64,13 @@ module.exports = {
                 })
                 .then((playlistInfo) => {
                   for (artist in merged) {
-                     console.log(merged[artist]);
                     spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], merged[artist])
                     .then((data) => {
                       console.log('ADDED SONGS TO PLAYLIST');
                     })
                     .catch(err => console.error(err));
                   }
-                  res.send(playlistInfo[1])
+                  res.send(playlistInfo)
                 })
                 .catch(err => console.error(err));
               });
