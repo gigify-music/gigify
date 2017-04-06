@@ -12,6 +12,7 @@ const signIn = new SpotifyStrategy({
   callbackURL: 'http://localhost:8000/auth/callback',
 }, (accessToken, refreshToken, profile, done) => {
     // asynchronous verification, for effect...
+    //ADD USERS TO DATABASE VIA THE PROFILE OBJECT RECIEVED IN THIS FUNCTION
   spotifyApi.setAccessToken(accessToken);
 
   process.nextTick(() => {
