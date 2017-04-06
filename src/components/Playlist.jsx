@@ -1,9 +1,7 @@
 import React from 'react';
 
-
 const Playlist = ({ playlistId }) => (
   <div className="playlist-container">
-    <h1>{playlistId}</h1>
     <div className="playlist-view">
       <h1>A preview of your new playlist:</h1>
       <iframe

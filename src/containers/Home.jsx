@@ -48,9 +48,9 @@ class Home extends Component {
   }
 
   renderPlaylist(playlistId) {
-    console.log('AH! REAL MONSTERS', playlistId);
+    console.log('AH! REAL MONSTERS', playlistId.data);
     this.setState({ showPlaylist: true,
-      playlistId });
+      playlistId: playlistId.data });
   }
   render() {
     const settings = {
@@ -118,7 +118,7 @@ class Home extends Component {
         </div>
         <ToggleDisplay show={this.state.showEventList}>
           <EventList
-            renderPlaylist={playListID => this.renderPlaylist(playListID)}
+            renderPlaylist={playlistId => this.renderPlaylist(playlistId)}
             listings={this.props.listings}
           />
         </ToggleDisplay>
