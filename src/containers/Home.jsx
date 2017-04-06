@@ -147,14 +147,15 @@ class Home extends Component {
           </div>
 
         </div>
-        <ToggleDisplay show={this.state.showEventList}>
+        <ToggleDisplay id="event-list-toggle" show={this.state.showEventList}>
           <EventList
+            id="event-list"
             renderPlaylist={playlistId => this.renderPlaylist(playlistId)}
             listings={this.props.listings}
           />
         </ToggleDisplay>
-        <ToggleDisplay show={this.state.showPlaylist}>
-          <Playlist playlistId={this.state.playlistId} />
+        <ToggleDisplay id="playlist-toggle" show={this.state.showPlaylist}>
+          <Playlist id="playlist" showPlaylist={this.state.showPlaylist} playlistId={this.state.playlistId} />
         </ToggleDisplay>
       </div>
     );
