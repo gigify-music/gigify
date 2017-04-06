@@ -33,19 +33,17 @@ class Home extends Component {
   //     });
   // }
   handleFirst() {
-    axios.get('/api/festival1')
-    .then((results) => {
-      console.log(results.data);
-    })
-    .catch(err => console.error(err));
+    const panoramaPlaylist = {
+      data: ['panoramanyc', '3Tx6bcrYcvmAA9sblNLPrH'],
+    };
+    this.renderPlaylist(panoramaPlaylist);
   }
 
   handleSecond() {
-    axios.get('/api/festival2')
-    .then((results) => {
-      console.log(results.data);
-    })
-    .catch(err => console.error(err));
+    const govballPlaylist = {
+      data: [1265233623, '5lRkpBlgVkBEmVNYSp9BmB'],
+    };
+    this.renderPlaylist(govballPlaylist);
   }
 
   handleSubmit(e) {
@@ -85,24 +83,44 @@ class Home extends Component {
           <div className="home-page-container">
             <div className="carousel">
               <Slider {...settings}>
-                <a onClick={() => this.handleFirst()}><img className="carousel-image" src="/assets/panorama.png" alt="Sad Face" /></a>
-                <a onClick={() => this.handleSecond()}><img className="carousel-image" src="/assets/govball.png" alt="Sad Face" /></a>
+                <div id="home-carousel">
+                  <img
+                    className="carousel-image"
+                    src="/assets/gigifycarouselimg.png"
+                    alt="Sad Face"
+                  />
+                  </div>
+                <a onClick={() => this.handleFirst()}>
+                  <img
+                    className="carousel-image"
+                    src="/assets/panorama.png"
+                    alt="Sad Face"
+                  />
+
+                  </a>
+                <a onClick={() => this.handleSecond()}>
+                  <img
+                    className="carousel-image"
+                    src="/assets/govball.png"
+                    alt="Sad Face"
+                  />
+                </a>
               </Slider>
             </div>
-            <div id="songkik-input">
+            <div id="songkick-input">
               <form className="form-inline">
-                <span className="sr-only">Songkik Username</span>
+                <span className="sr-only">songkick Username</span>
                 <div className="input-group mb-2 mr-sm-2 mb-sm-0">
                   <div className="input-group-addon">@</div>
                   <input
                     type="text" className="form-control"
-                    id="inlineFormInputGroup" placeholder="Songkik Username"
-                    value={this.state.username} onChange={() => this.handleUsername()}
+                    id="inlineFormInputGroup" placeholder="songkick Username"
+                    value={this.state.username} onChange={this.handleUsername.bind(this)}
                   />
                 </div>
                 <button
                   type="submit" className="btn btn-primary"
-                  onClick={() => handleSubmit()}
+                  onClick={this.handleSubmit.bind(this)}
                 >
                 Submit
                 </button>
