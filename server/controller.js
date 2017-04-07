@@ -40,7 +40,13 @@ const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getAr
         tracks.forEach(((track) => {
           tracklist[artist].push(`spotify:track:${track.id}`);
         }));
-        console.log('THE TRACKLIST: ', tracklist);
+        const artistCount = artistIDList.length;
+        const allTracks = tracklist[Object.keys(tracklist)[0]];
+        const sizing = Math.floor(30 / artistCount);
+
+        if (allTracks.length > sizing) {
+          tracklist[Object.keys(tracklist)[0]].splice(sizing);
+        }
         return tracklist;
       })
       .catch(err => console.error(err)));
@@ -64,6 +70,7 @@ module.exports = {
         Promise.all(tracksArray)
           .then((results) => {
             const merged = Object.assign(...results);
+            console.log('MERGED', merged);
             return merged;
           })
           .then((merged) => {
@@ -79,13 +86,16 @@ module.exports = {
                   return [user, data.body.id];
                 })
                 .then((playlistInfo) => {
+                  let tracksToAdd = [];
                   for (artist in merged) {
-                    spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], merged[artist])
+                    tracksToAdd = tracksToAdd.concat(merged[artist]);
+                  }
+                  spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], tracksToAdd)
                     .then((data) => {
                       console.log('ADDED SONGS TO PLAYLIST');
                     })
                     .catch(err => console.error(err));
-                  }
+
                   res.send(playlistInfo);
                 })
                 .catch(err => console.error(err));
