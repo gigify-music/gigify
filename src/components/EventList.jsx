@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import axios from 'axios';
+import SweetScroll from 'sweet-scroll';
 import ToggleDisplay from 'react-toggle-display';
 import Event from './Event';
 
@@ -16,8 +17,6 @@ class EventList extends Component {
   }
 
   toggleEvent(performers, id) {
-    console.log('SELECTED PERFORMERS', performers, id);
-    console.log('SELECTED STATE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
 
     const selected = this.state.selected;
 
@@ -27,7 +26,6 @@ class EventList extends Component {
         selected,
       });
       [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 5 ? this.setState({ displayWarning: false }) : console.log('OK');
-      console.log('AFTER DELETE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
       return;
     }
 
@@ -65,6 +63,15 @@ class EventList extends Component {
       console.error(err),
     );
   }
+  componentDidMount() {
+    this.sweetScroll = new SweetScroll();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.showEventList) {
+      console.log("SHOULD SCROLL");
+      this.sweetScroll.toElement(document.getElementById('events'));
+    }
+  }
 
   render() {
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
@@ -89,7 +96,7 @@ class EventList extends Component {
         </ul>
 
 
-        <div className="event-list-container">
+        <div id="events" className="event-list-container">
           <ul>
             {this.props.listings.map((event, i) =>
               <Event
