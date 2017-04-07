@@ -23,7 +23,6 @@ const getArtistIDList = (artistList) => {
             } else {
               return spotifyApi.searchArtists(artist)
                       .then((response) => {
-                        console.log("Making call @@@@@@");
                          return pool.connect()
                              .then((client) => {
                                 client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
@@ -31,17 +30,17 @@ const getArtistIDList = (artistList) => {
                                    client.release();
                                  })
                                  .catch((err) => {
-                                   console.error('error running query', err);
+                                   console.error('Querey Error: ', err);
                                  });
                              }).then(() => {
                                return response.body.artists.items[0].id;
                              })
                              .catch((err) => {
-                               console.error('error fetching client from pool', err);
+                               console.error('Client Error: ', err);
                              });
                         // return response.body.artists.items[0].id;
                       })
-                      .catch(err => console.error('error making spotify API call in getArtistIDList ',err));
+                      .catch(err => console.error('Spotify API Error: ',err));
             }
             // client.release();
           })
@@ -77,11 +76,11 @@ let userID;
 
 module.exports = {
   getSpotlightOnePlaylist: (req, res) => {
-    console.log('GETTING FIRST SPOTLIGHT REQUEST');
+    //console.log('GETTING FIRST SPOTLIGHT REQUEST');
     res.send('FIRST FESTIVAL RESPONSE');
   },
   getSpotlightTwoPlaylist: (req, res) => {
-    console.log('GETTING SECOND SPOTLIGHT REQUEST');
+    //console.log('GETTING SECOND SPOTLIGHT REQUEST');
     res.send('SECOND FESTIVAL RESPONSE');
   },
   createPlaylist: (req, res) => {
@@ -92,7 +91,6 @@ module.exports = {
         Promise.all(tracksArray)
           .then((results) => {
             const merged = Object.assign(...results);
-            console.log('MERGED', merged);
             return merged;
           })
           .then((merged) => {
@@ -104,7 +102,7 @@ module.exports = {
               .then((user) => {
                 spotifyApi.createPlaylist(user, 'Gigify Playlist', { public: false })
                 .then((data) => {
-                  console.log('Created playlist!');
+                  //console.log('Created playlist!');
                   return [user, data.body.id];
                 })
                 .then((playlistInfo) => {
@@ -114,7 +112,7 @@ module.exports = {
                   }
                   spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], tracksToAdd)
                     .then((data) => {
-                      console.log('ADDED SONGS TO PLAYLIST');
+                      //console.log('ADDED SONGS TO PLAYLIST');
                     })
                     .catch(err => console.error(err));
 
@@ -129,7 +127,7 @@ module.exports = {
     res.redirect('/home');
   },
   getEvents: (req, res) => {
-    console.log(req.params, 'USERNAME ******');
+    //console.log(req.params, 'USERNAME ******');
     axios.get(`http://api.songkick.com/api/3.0/users/${req.params.username}/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
     .then((results) => {
       const eventList = results.data.resultsPage.results.calendarEntry;
