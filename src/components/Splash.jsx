@@ -43,14 +43,14 @@ class Splash extends React.Component {
             <div><img className="carousel-image" src="https://photogenicfelines.files.wordpress.com/2010/10/imgp7340_1-1.jpg" alt="Sad Face" /></div>
           </Slider>
         </div>
-        <div id="songkik-input">
+        <div id="songkick-input">
           <form className="form-inline">
-            <span className="sr-only">Songkik Username</span>
+            <span className="sr-only">songkick Username</span>
             <div className="input-group mb-2 mr-sm-2 mb-sm-0">
               <div className="input-group-addon">@</div>
               <input
                 type="text" className="form-control"
-                id="inlineFormInputGroup" placeholder="Songkik Username"
+                id="inlineFormInputGroup" placeholder="songkick Username"
                 value={this.state.username} onChange={this.handleUsername.bind(this)} />
             </div>
             <button

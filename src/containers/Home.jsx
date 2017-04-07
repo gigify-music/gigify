@@ -32,6 +32,19 @@ class Home extends Component {
   //       this.setState({ showEventList: true });
   //     });
   // }
+  handleFirst() {
+    const panoramaPlaylist = {
+      data: ['panoramanyc', '3Tx6bcrYcvmAA9sblNLPrH'],
+    };
+    this.renderPlaylist(panoramaPlaylist);
+  }
+
+  handleSecond() {
+    const govballPlaylist = {
+      data: [1265233623, '5lRkpBlgVkBEmVNYSp9BmB'],
+    };
+    this.renderPlaylist(govballPlaylist);
+  }
 
   handleSubmit(e) {
     const that = this;
@@ -70,20 +83,38 @@ class Home extends Component {
           <div className="home-page-container">
             <div className="carousel">
               <Slider {...settings}>
-                <div><img className="carousel-image" src="http://placekitten.com/g/450/300" alt="Sad Face" /></div>
-                <div><img className="carousel-image" src="http://www.petsworld.in/blog/wp-content/uploads/2014/09/cute-kittens.jpg" alt="Sad Face" /></div>
-                <div><img className="carousel-image" src="https://static.pexels.com/photos/37337/cat-silhouette-cats-silhouette-cat-s-eyes.jpg" alt="Sad Face" /></div>
-                <div><img className="carousel-image" src="https://photogenicfelines.files.wordpress.com/2010/10/imgp7340_1-1.jpg" alt="Sad Face" /></div>
+                <div id="home-carousel">
+                  <img
+                    className="carousel-image"
+                    src="/assets/gigifycarouselimg.png"
+                    alt="Sad Face"
+                  />
+                  </div>
+                <a onClick={() => this.handleFirst()}>
+                  <img
+                    className="carousel-image"
+                    src="/assets/panorama.png"
+                    alt="Sad Face"
+                  />
+
+                  </a>
+                <a onClick={() => this.handleSecond()}>
+                  <img
+                    className="carousel-image"
+                    src="/assets/govball.png"
+                    alt="Sad Face"
+                  />
+                </a>
               </Slider>
             </div>
-            <div id="songkik-input">
+            <div id="songkick-input">
               <form className="form-inline">
-                <span className="sr-only">Songkik Username</span>
+                <span className="sr-only">songkick Username</span>
                 <div className="input-group mb-2 mr-sm-2 mb-sm-0">
                   <div className="input-group-addon">@</div>
                   <input
                     type="text" className="form-control"
-                    id="inlineFormInputGroup" placeholder="Songkik Username"
+                    id="inlineFormInputGroup" placeholder="songkick Username"
                     value={this.state.username} onChange={this.handleUsername.bind(this)}
                   />
                 </div>
@@ -116,14 +147,15 @@ class Home extends Component {
           </div>
 
         </div>
-        <ToggleDisplay show={this.state.showEventList}>
+        <ToggleDisplay id="event-list-toggle" show={this.state.showEventList}>
           <EventList
+            id="event-list"
             renderPlaylist={playlistId => this.renderPlaylist(playlistId)}
             listings={this.props.listings}
           />
         </ToggleDisplay>
-        <ToggleDisplay show={this.state.showPlaylist}>
-          <Playlist playlistId={this.state.playlistId} />
+        <ToggleDisplay id="playlist-toggle" show={this.state.showPlaylist}>
+          <Playlist id="playlist" showPlaylist={this.state.showPlaylist} playlistId={this.state.playlistId} />
         </ToggleDisplay>
       </div>
     );
