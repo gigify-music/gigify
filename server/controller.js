@@ -12,11 +12,9 @@ const spotifyApi = new SpotifyWebApi({
   redirectUri: 'http://localhost:8000/auth/callback',
 });
 
-const getArtistIDList = (artistList) => {
-  return artistList.map((artist) => {
-    return spotifyApi.searchArtists(artist)
-      .then((response) => {
-        //ADD THIS ARTIST IN DATABSE BY ADDING THE ASSOCIATED ARTIST NAME IN ARTISTNAMES
+const getArtistIDList = artistList => artistList.map(artist => spotifyApi.searchArtists(artist)
+      .then(response =>
+        // ADD THIS ARTIST IN DATABSE BY ADDING THE ASSOCIATED ARTIST NAME IN ARTISTNAMES
         // ADD TO DB [artist, response.body.artists.items[0].id]
         // console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
         // pool.connect()
@@ -32,33 +30,34 @@ const getArtistIDList = (artistList) => {
         //   .catch((err) => {
         //     console.error('error fetching client from pool', err);
         //   });
-        return response.body.artists.items[0].id;
-      })
-
-      .catch(err => console.error(err));
-  });
-};
-const getTopTracks = (artistIDList) => {
-  return artistIDList.map((artist) => {
-    return spotifyApi.getArtistTopTracks(artist, 'US')
+         response.body.artists.items[0].id)
+      .catch(err => console.error(err)));
+const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getArtistTopTracks(artist, 'US')
       .then((data) => {
         const tracks = data.body.tracks;
         const tracklist = {};
         tracklist[artist] = [];
         tracks.forEach(((track) => {
-          tracklist[artist].push('spotify:track:' + track.id);
+          tracklist[artist].push(`spotify:track:${track.id}`);
         }));
-        // console.log('THE TRACKLIST: ', tracklist);
+        console.log('THE TRACKLIST: ', tracklist);
         return tracklist;
       })
-      .catch(err => console.error(err));
-  });
-};
+      .catch(err => console.error(err)));
 
 let userID;
 
 module.exports = {
+  getSpotlightOnePlaylist: (req, res) => {
+    console.log('GETTING FIRST SPOTLIGHT REQUEST');
+    res.send('FIRST FESTIVAL RESPONSE');
+  },
+  getSpotlightTwoPlaylist: (req, res) => {
+    console.log('GETTING SECOND SPOTLIGHT REQUEST');
+    res.send('SECOND FESTIVAL RESPONSE');
+  },
   createPlaylist: (req, res) => {
+    // console.log('SELECTED', req.body.selected);
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
       .then((tracksArray) => {
@@ -71,7 +70,7 @@ module.exports = {
             spotifyApi.getMe()
               .then((data) => {
                 userID = data.body.id;
-                return userID
+                return userID;
               })
               .then((user) => {
                 spotifyApi.createPlaylist(user, 'Gigify Playlist', { public: false })
@@ -87,7 +86,7 @@ module.exports = {
                     })
                     .catch(err => console.error(err));
                   }
-                  res.send(playlistInfo)
+                  res.send(playlistInfo);
                 })
                 .catch(err => console.error(err));
               });
@@ -98,6 +97,7 @@ module.exports = {
     res.redirect('/home');
   },
   getEvents: (req, res) => {
+    console.log(req.params, 'USERNAME ******');
     axios.get(`http://api.songkick.com/api/3.0/users/${req.params.username}/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
     .then((results) => {
       const eventList = results.data.resultsPage.results.calendarEntry;
