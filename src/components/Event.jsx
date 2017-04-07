@@ -11,7 +11,6 @@ class Event extends Component {
   }
 
   toggleActive() {
-    console.log('TOGGLING ACTIVE');
     this.setState({ active: !this.state.active });
   }
 

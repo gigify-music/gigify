@@ -11,7 +11,6 @@ const config = {
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 };
 const pool = new pg.Pool(config);
-console.log(process.env, 'CONTROLLER ENVVVVV DATABSE');
 pool.on('error', function (err, client) {
   // if an error is encountered by a client while it sits idle in the pool
   // the pool itself will emit an error event with both the error and
@@ -23,7 +22,6 @@ pool.on('error', function (err, client) {
 })
 //export the query method for passing queries to the pool
 module.exports.query = function (text, values, callback) {
-  console.log('query:', text, values);
   return pool.query(text, values, callback);
 };
 // the pool also supports checking out a client for

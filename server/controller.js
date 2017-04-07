@@ -58,14 +58,6 @@ const getTopTracks = (artistIDList) => {
 let userID;
 
 module.exports = {
-  getSpotlightOnePlaylist: (req, res) => {
-    console.log('GETTING FIRST SPOTLIGHT REQUEST');
-    res.send('FIRST FESTIVAL RESPONSE');
-  },
-  getSpotlightTwoPlaylist: (req, res) => {
-    console.log('GETTING SECOND SPOTLIGHT REQUEST');
-    res.send('SECOND FESTIVAL RESPONSE');
-  },
   createPlaylist: (req, res) => {
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
@@ -106,7 +98,6 @@ module.exports = {
     res.redirect('/home');
   },
   getEvents: (req, res) => {
-    console.log(req.params, 'USERNAME ******');
     axios.get(`http://api.songkick.com/api/3.0/users/${req.params.username}/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
     .then((results) => {
       const eventList = results.data.resultsPage.results.calendarEntry;

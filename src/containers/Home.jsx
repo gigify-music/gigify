@@ -51,7 +51,6 @@ class Home extends Component {
     e.preventDefault();
     axios.get(`/api/events/${this.state.username}`)
     .then(function (response) {
-      console.log('PROPS', this.props);
       that.props.getEvents(response);
       that.setState({ showEventList: true });
     })
@@ -61,7 +60,6 @@ class Home extends Component {
   }
 
   renderPlaylist(playlistId) {
-    console.log('AH! REAL MONSTERS', playlistId.data);
     this.setState({ showPlaylist: true,
       playlistId: playlistId.data });
   }
@@ -163,7 +161,6 @@ class Home extends Component {
 }
 
 const mapStatetoProps = ({ events }) => {
-  console.log('EVENT MAPPING', events);
   return {
     listings: events.eventListings,
   };

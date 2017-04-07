@@ -9,8 +9,4 @@ app.get('/home', Controller.goHome);
 
 app.post('/artists', Controller.createPlaylist);
 
-app.get('/festival1', Controller.getSpotlightOnePlaylist);
-
-app.get('/festival2', Controller.getSpotlightTwoPlaylist);
-
 module.exports = app;
