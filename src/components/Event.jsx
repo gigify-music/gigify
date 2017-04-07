@@ -8,10 +8,14 @@ class Event extends Component {
       checked: 'glyphicon glyphicon-check checkBox animated fadeIn',
       unchecked: 'glyphicon glyphicon-unchecked checkBox',
     };
+    this.onToggleClick = this.onToggleClick.bind(this);
   }
 
-  toggleActive() {
-    this.setState({ active: !this.state.active });
+  onToggleClick() {
+    this.setState({
+      active: !this.state.active,
+    });
+    this.props.toggleEvent(this.props.performers, this.props.id);
   }
 
   render() {
@@ -20,8 +24,9 @@ class Event extends Component {
         <div className="event-list-item well well-lg">
           <div className="event-checkbox">
             <button
+              disabled={this.props.locked && !this.state.active}
               className={this.state.active ? this.state.checked : this.state.unchecked}
-              onClick={this.props.toggleEvent.bind(this, this.props.performers, this.props.id)}
+              onClick={this.onToggleClick}
             />
           </div>
           <div className="event-musicians-container">
@@ -49,6 +54,7 @@ class Event extends Component {
 }
 
 Event.propTypes = {
+  locked: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
   toggleEvent: PropTypes.func.isRequired,
   performers: PropTypes.arrayOf(React.PropTypes.string).isRequired,
