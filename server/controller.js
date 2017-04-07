@@ -12,26 +12,48 @@ const spotifyApi = new SpotifyWebApi({
   redirectUri: 'http://localhost:8000/auth/callback',
 });
 
-const getArtistIDList = artistList => artistList.map(artist => spotifyApi.searchArtists(artist)
-      .then(response =>
-        // ADD THIS ARTIST IN DATABSE BY ADDING THE ASSOCIATED ARTIST NAME IN ARTISTNAMES
-        // ADD TO DB [artist, response.body.artists.items[0].id]
-        // console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
-        // pool.connect()
-        //   .then((client) => {
-        //     client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
-        //       .then((res) => {
-        //         client.release();
-        //       })
-        //       .catch((err) => {
-        //         console.error('error running query', err);
-        //       });
-        //   })
-        //   .catch((err) => {
-        //     console.error('error fetching client from pool', err);
-        //   });
-         response.body.artists.items[0].id)
-      .catch(err => console.error(err)));
+const getArtistIDList = (artistList) => {
+  return artistList.map((artist) => {
+    return pool.connect()
+      .then((client) => {
+        return client.query(`select spotify_id from artists where artist_name = '${artist}'`)
+          .then((res) => {
+            if (res.rows[0]) {
+              return res.rows[0].spotify_id
+            } else {
+              return spotifyApi.searchArtists(artist)
+                      .then((response) => {
+                        console.log("Making call @@@@@@");
+                         return pool.connect()
+                             .then((client) => {
+                                client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
+                                 .then((res) => {
+                                   client.release();
+                                 })
+                                 .catch((err) => {
+                                   console.error('error running query', err);
+                                 });
+                             }).then(() => {
+                               return response.body.artists.items[0].id;
+                             })
+                             .catch((err) => {
+                               console.error('error fetching client from pool', err);
+                             });
+                        // return response.body.artists.items[0].id;
+                      })
+                      .catch(err => console.error('error making spotify API call in getArtistIDList ',err));
+            }
+            // client.release();
+          })
+          .catch((err) => {
+            console.error('error running query', err);
+          });
+      })
+      .catch((err) => {
+        console.error('error fetching client from pool', err);
+      });
+  });
+};
 const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getArtistTopTracks(artist, 'US')
       .then((data) => {
         const tracks = data.body.tracks;
