@@ -8,5 +8,10 @@ auth.get('/signin', passport.authenticate('signIn', { scope: ['user-read-email',
 
 auth.get('/callback', passport.authenticate('signIn', { failureRedirect: '/', successRedirect: '/api/home' }));
 
+auth.get('/logout', (req, res) => {
+  req.logOut();
+  console.log('SESSSION?', req.session);
+  res.redirect('/login');
+});
 
 module.exports = auth;
