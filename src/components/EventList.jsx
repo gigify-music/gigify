@@ -30,7 +30,6 @@ class EventList extends Component {
       console.log('AFTER DELETE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
       return;
     }
-
     selected[id] = performers;
     this.setState({
       selected,
