@@ -25,6 +25,15 @@ class Home extends Component {
     this.setState({ username: username.target.value });
   }
 
+  handleLogout() {
+    axios.get('/auth/logout')
+        .then((res) => {
+          if (res.data === 'logout') {
+            window.location = '/login';
+          }
+        })
+        .catch(err => console.error(err));
+  }
   // onGenerateClick = (username) => {
   //   console.log('Called+++++++++')
   //   this.props.getEvents(username)
@@ -50,7 +59,7 @@ class Home extends Component {
     const that = this;
     e.preventDefault();
     axios.get(`/api/events/${this.state.username}`)
-    .then(function (response) {
+    .then((response) => {
       that.props.getEvents(response);
       that.setState({ showEventList: true });
     })
@@ -77,6 +86,9 @@ class Home extends Component {
     };
     return (
       <div>
+        <div className="logout-container">
+          <button className="logout-btn" onClick={this.handleLogout}>Logout</button>
+        </div>
         <div>
           <div className="home-page-container">
             <div className="carousel">
@@ -87,7 +99,7 @@ class Home extends Component {
                     src="/assets/gigifycarouselimg.png"
                     alt="Sad Face"
                   />
-                  </div>
+                </div>
                 <a onClick={() => this.handleFirst()}>
                   <img
                     className="carousel-image"
@@ -95,7 +107,7 @@ class Home extends Component {
                     alt="Sad Face"
                   />
 
-                  </a>
+                </a>
                 <a onClick={() => this.handleSecond()}>
                   <img
                     className="carousel-image"
@@ -161,11 +173,9 @@ class Home extends Component {
   }
 }
 
-const mapStatetoProps = ({ events }) => {
-  return {
-    listings: events.eventListings,
-  };
-};
+const mapStatetoProps = ({ events }) => ({
+  listings: events.eventListings,
+});
 
 export default connect(mapStatetoProps, { getEvents })(Home);
 
