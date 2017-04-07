@@ -15,8 +15,6 @@ class EventList extends Component {
   }
 
   toggleEvent(performers, id) {
-    console.log('SELECTED ARTISTS', performers, id);
-
     // this.props.toggleActive(id);
 
     const selected = this.state.selected;
@@ -28,7 +26,6 @@ class EventList extends Component {
         selected,
       });
     }
-    console.log('NEW STATE', this.state.selected);
   }
 
   generatePlaylist() {
@@ -39,7 +36,6 @@ class EventList extends Component {
       selected: unique,
     })
     .then((res) => {
-      console.log('RESPONSE PLAYLIST', res);
       this.props.renderPlaylist(res);
     })
     .catch(err =>
@@ -49,7 +45,6 @@ class EventList extends Component {
 
   render() {
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
-    console.log('SELECTED PERFORMERS', selectedPerformers);
 
     return (
       <div id="event-page" className="event-page-container">
