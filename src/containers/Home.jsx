@@ -28,7 +28,9 @@ class Home extends Component {
   handleLogout() {
     axios.get('/auth/logout')
       .then((res) => {
-        console.log('LOGGED OUT');
+        if (res.data === 'logout') {
+          window.location = '/login';
+        }
       })
       .catch(err => console.error(err));
   }
@@ -85,6 +87,9 @@ class Home extends Component {
     };
     return (
       <div>
+        <div className="logout-container">
+          <button className="logout-btn" onClick={this.handleLogout}>Logout</button>
+        </div>
         <div>
           <div className="home-page-container">
             <div className="carousel">
@@ -112,7 +117,7 @@ class Home extends Component {
                   />
                 </a>
               </Slider>
-              <button onClick={this.handleLogout}>LOGOUT</button>
+
             </div>
             <div id="songkick-input">
               <form className="form-inline">
