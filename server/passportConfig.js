@@ -1,4 +1,3 @@
-// const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 
 const appKey = process.env.APP_KEY;
@@ -14,16 +13,23 @@ const signIn = new SpotifyStrategy({
 }, (accessToken, refreshToken, profile, done) => {
     // asynchronous verification, for effect...
     // ADD USERS TO DATABASE VIA THE PROFILE OBJECT RECIEVED IN THIS FUNCTION
-  return pool.connect()
+ pool.connect()
   .then((client) => {
-    return client.query('INSERT into users (spotify_id, display_name, email) VALUES ($1, $2, $3)', [profile.id, profile.displayName, profile._json.email])
-    .then(() => {
-      spotifyApi.setAccessToken(accessToken);
-      process.nextTick(() => {
-        (done(null, profile));
-      });
+    client.query('INSERT into users (spotify_id, display_name, email) VALUES ($1, $2, $3)', [profile.id, profile.displayName, profile._json.email])
+.then(() => {
+  client.release();
+  })
+.catch((err) => {
+  console.error('User Insertion Error: ', err.detail);
+});
+})
+.catch((err)=>{
+  console.error('Pool Error: ', err);
+})
+    spotifyApi.setAccessToken(accessToken);
+    process.nextTick(() => {
+      (done(null, profile));
     });
-  });
 });
 
 module.exports = (passport) => {
