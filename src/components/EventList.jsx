@@ -1,8 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import axios from 'axios';
 import ToggleDisplay from 'react-toggle-display';
-// import { connect } from 'react-redux';
-// import { toggleActive } from '../actions';
 import Event from './Event';
 
 
@@ -19,7 +17,6 @@ class EventList extends Component {
 
   toggleEvent(performers, id) {
     console.log('SELECTED PERFORMERS', performers, id);
-    console.log('STATE AT START', this.state.selected);
     console.log('SELECTED STATE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     const selected = this.state.selected;
 
@@ -28,32 +25,28 @@ class EventList extends Component {
       this.setState({
         selected,
       });
+      [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 5 ? this.setState({ displayWarning: false }) : console.log('OK');
       console.log('AFTER DELETE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
       return;
     }
-
+    selected[id] = performers;
+    this.setState({
+      selected,
+    });
+    console.log('ADDED TO STATE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     const unique = [...new Set([].concat(...(Object.values(this.state.selected))))];
-    console.log('NUMBER SELECTED', unique.length);
 
     if (unique.length > 5) {
+      console.log('WARNING TRIGGERED HERE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
       this.setState({
         displayWarning: true,
       });
-      console.log('WARNING TRIGGERED HERE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
-    } else if (selected[id]) {
-      delete selected[id];
-      this.setState({
-        selected,
-      });
-      console.log('AFTER DELETE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     } else {
-      selected[id] = performers;
       this.setState({
         displayWarning: false,
-        selected,
       });
-      console.log('ADDED TO STATE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     }
+    console.log('NUMBER SELECTED', unique.length);
   }
 
   generatePlaylist() {
@@ -64,7 +57,7 @@ class EventList extends Component {
       selected: unique,
     })
     .then((res) => {
-      console.log('RESPONSE PLAYLIST', res);
+      // console.log('RESPONSE PLAYLIST', res);
       this.props.renderPlaylist(res);
     })
     .catch(err =>
@@ -103,6 +96,7 @@ class EventList extends Component {
                 key={i}
                 {...event}
                 toggleEvent={this.toggleEvent}
+                locked={this.state.displayWarning}
               />,
         )}
           </ul>
@@ -127,9 +121,19 @@ EventList.propTypes = {
 };
 
 // const mapStatetoProps = ({ events }) => ({
-//   activeEvents: events.active,
+//   lockedEvents: events.locked,
 // });
 
+// export default connect(mapStatetoProps, { lockEvents })(EventList);
+
 export default EventList;
+
+// else if (selected[id]) {
+//   delete selected[id];
+//   this.setState({
+//     selected,
+//   });
+//   console.log('AFTER DELETE PASSED UNIQUE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
+// }
 
             // {loading ? 'Loading...' : ''}

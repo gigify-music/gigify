@@ -15,7 +15,6 @@ class Event extends Component {
     this.setState({
       active: !this.state.active,
     });
-
     this.props.toggleEvent(this.props.performers, this.props.id);
   }
 
@@ -25,6 +24,7 @@ class Event extends Component {
         <div className="event-list-item well well-lg">
           <div className="event-checkbox">
             <button
+              disabled={this.props.locked && !this.state.active}
               className={this.state.active ? this.state.checked : this.state.unchecked}
               onClick={this.onToggleClick}
             />
@@ -54,6 +54,7 @@ class Event extends Component {
 }
 
 Event.propTypes = {
+  locked: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
   toggleEvent: PropTypes.func.isRequired,
   performers: PropTypes.arrayOf(React.PropTypes.string).isRequired,
