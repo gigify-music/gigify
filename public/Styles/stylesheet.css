@@ -258,6 +258,30 @@ body:before {
   box-shadow: inset 1px 1px 150px #474747;
 }
 
+.logout-container {
+  width: 100%;
+  float: right;
+  position: fixed;
+  background: rgba(255,255,255,.3);
+  z-index: 100;
+}
+
+.logout-btn {
+  border-radius: 10px;
+  color: #2AB759;
+  border-width: 3px;
+  border-color: #2AB759;
+  background: rgba(0,0,0,.8);
+  float: right;
+  margin: 20px;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 8px;
+  font-weight: bold;
+  box-shadow: 2px 2px 30px #000;
+}
+
 /*.home-page-container {
   align-items: center;
   justify-content: center;
