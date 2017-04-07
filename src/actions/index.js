@@ -10,9 +10,9 @@ export function getEvents({ data }) {
   };
 }
 
-// export function lockEvents() {
+// export function toggleActive(id) {
 //   return ({
-//     type: types.TOGGLE_LOCKED,
+//     type: types.TOGGLE_ACTIVE,
 //     payload: id,
 //   });
 // }

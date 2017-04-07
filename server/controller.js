@@ -12,9 +12,11 @@ const spotifyApi = new SpotifyWebApi({
   redirectUri: 'http://localhost:8000/auth/callback',
 });
 
-const getArtistIDList = artistList => artistList.map(artist => spotifyApi.searchArtists(artist)
-      .then(response =>
-        // ADD THIS ARTIST IN DATABSE BY ADDING THE ASSOCIATED ARTIST NAME IN ARTISTNAMES
+const getArtistIDList = (artistList) => {
+  return artistList.map((artist) => {
+    return spotifyApi.searchArtists(artist)
+      .then((response) => {
+        //ADD THIS ARTIST IN DATABSE BY ADDING THE ASSOCIATED ARTIST NAME IN ARTISTNAMES
         // ADD TO DB [artist, response.body.artists.items[0].id]
         // console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
         // pool.connect()
@@ -33,19 +35,25 @@ const getArtistIDList = artistList => artistList.map(artist => spotifyApi.search
         return response.body.artists.items[0].id;
       })
 
-      .catch(err => console.error(err)));
-const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getArtistTopTracks(artist, 'US')
+      .catch(err => console.error(err));
+  });
+};
+const getTopTracks = (artistIDList) => {
+  return artistIDList.map((artist) => {
+    return spotifyApi.getArtistTopTracks(artist, 'US')
       .then((data) => {
         const tracks = data.body.tracks;
         const tracklist = {};
         tracklist[artist] = [];
         tracks.forEach(((track) => {
-          tracklist[artist].push(`spotify:track:${track.id}`);
+          tracklist[artist].push('spotify:track:' + track.id);
         }));
         // console.log('THE TRACKLIST: ', tracklist);
         return tracklist;
       })
-      .catch(err => console.error(err)));
+      .catch(err => console.error(err));
+  });
+};
 
 let userID;
 
@@ -59,7 +67,6 @@ module.exports = {
     res.send('SECOND FESTIVAL RESPONSE');
   },
   createPlaylist: (req, res) => {
-    console.log('SELECTED', req.body.selected);
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
       .then((tracksArray) => {
@@ -72,7 +79,7 @@ module.exports = {
             spotifyApi.getMe()
               .then((data) => {
                 userID = data.body.id;
-                return userID;
+                return userID
               })
               .then((user) => {
                 spotifyApi.createPlaylist(user, 'Gigify Playlist', { public: false })
@@ -88,7 +95,7 @@ module.exports = {
                     })
                     .catch(err => console.error(err));
                   }
-                  res.send(playlistInfo);
+                  res.send(playlistInfo)
                 })
                 .catch(err => console.error(err));
               });
