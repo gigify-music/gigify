@@ -90,68 +90,70 @@ class Home extends Component {
           <button className="logout-btn" onClick={this.handleLogout}>Logout</button>
         </div>
         <div>
-          <div className="home-page-container">
-            <div className="carousel">
-              <Slider {...settings}>
-                <div id="home-carousel">
-                  <img
-                    className="carousel-image"
-                    src="/assets/gigifycarouselimg.png"
-                    alt="Sad Face"
-                  />
-                </div>
-                <a onClick={() => this.handleFirst()}>
-                  <img
-                    className="carousel-image"
-                    src="/assets/panorama.png"
-                    alt="Sad Face"
-                  />
+          <div id="particles-js">
+            <div className="home-page-container">
+              <div className="carousel">
+                <Slider {...settings}>
+                  <div id="home-carousel">
+                    <img
+                      className="carousel-image"
+                      src="/assets/gigifycarouselimg.png"
+                      alt="Sad Face"
+                    />
+                  </div>
+                  <a onClick={() => this.handleFirst()}>
+                    <img
+                      className="carousel-image"
+                      src="/assets/panorama.png"
+                      alt="Sad Face"
+                    />
 
-                </a>
-                <a onClick={() => this.handleSecond()}>
-                  <img
-                    className="carousel-image"
-                    src="/assets/govball.png"
-                    alt="Sad Face"
-                  />
-                </a>
-              </Slider>
-            </div>
-            <div id="songkick-input">
-              <form className="form-inline">
-                <span className="sr-only">songkick Username</span>
-                <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-                  <div className="input-group-addon">@</div>
-                  <input
-                    type="text" className="form-control"
-                    id="inlineFormInputGroup" placeholder="songkick Username"
-                    value={this.state.username} onChange={this.handleUsername.bind(this)}
-                  />
+                  </a>
+                  <a onClick={() => this.handleSecond()}>
+                    <img
+                      className="carousel-image"
+                      src="/assets/govball.png"
+                      alt="Sad Face"
+                    />
+                  </a>
+                </Slider>
+              </div>
+              <div id="songkick-input">
+                <form className="form-inline">
+                  <span className="sr-only">songkick Username</span>
+                  <div className="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div className="input-group-addon">@</div>
+                    <input
+                      type="text" className="form-control"
+                      id="inlineFormInputGroup" placeholder="songkick Username"
+                      value={this.state.username} onChange={this.handleUsername.bind(this)}
+                    />
+                  </div>
+                  <button
+                    type="submit" className="btn btn-primary"
+                    onClick={this.handleSubmit.bind(this)}
+                  >
+                  Submit
+                  </button>
+                </form>
+                <span className="or-label"> OR </span>
+                <div className="genre-buttons">
+                  <button type="button" className="btn btn-success btn-circle btn-lg">
+                    Pop
+                  </button>
+                  <button type="button" className="btn btn-success btn-circle btn-lg">
+                    Rock
+                  </button>
+                  <button type="button" className="btn btn-success btn-circle btn-lg">
+                    Hip<br />Hop
+                  </button>
+                  <button type="button" className="btn btn-success btn-circle btn-lg">
+                    Indie
+                  </button>
+                  <button type="button" className="btn btn-success btn-circle btn-lg">
+                    Rap
+                  </button>
                 </div>
-                <button
-                  type="submit" className="btn btn-primary"
-                  onClick={this.handleSubmit.bind(this)}
-                >
-                Submit
-                </button>
-              </form>
-              <span className="or-label"> OR </span>
-              <div className="genre-buttons">
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Pop
-                </button>
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Rock
-                </button>
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Hip<br />Hop
-                </button>
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Indie
-                </button>
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Rap
-                </button>
               </div>
             </div>
           </div>
