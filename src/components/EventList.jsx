@@ -17,7 +17,6 @@ class EventList extends Component {
   }
 
   toggleEvent(performers, id) {
-
     const selected = this.state.selected;
 
     if (selected[id]) {
@@ -26,9 +25,9 @@ class EventList extends Component {
         selected,
       });
       [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 5 ? this.setState({ displayWarning: false }) : console.log('OK');
+      console.log('AFTER DELETE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
       return;
     }
-
     selected[id] = performers;
     this.setState({
       selected,
@@ -94,7 +93,6 @@ class EventList extends Component {
               {performer}
             </li>)}
         </ul>
-
 
         <div id="events" className="event-list-container">
           <ul>
