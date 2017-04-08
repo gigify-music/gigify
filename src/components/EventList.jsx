@@ -49,6 +49,7 @@ class EventList extends Component {
   }
 
   generatePlaylist() {
+    console.log("CALLING GENERATE PLAYLIST");
     const selected = Object.values(this.state.selected);
     const flatten = [].concat(...selected);
     const unique = [...new Set(flatten)];
@@ -56,6 +57,7 @@ class EventList extends Component {
       selected: unique,
     })
     .then((res) => {
+      console.log("RESPONSE FROM SERVER FROM /ARTISTS: ", res);
       this.props.renderPlaylist(res);
     })
     .catch(err =>
@@ -78,7 +80,7 @@ class EventList extends Component {
     return (
       <div id="event-page" className="event-page-container">
         <div className="event-list-sidebar">
-          <button onClick={this.generatePlaylist}>Generate Playlist of Selected</button>
+          <button data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Generate Playlist of Selected</button>
           <ToggleDisplay show={this.state.displayWarning}>
             <div className="selectionWarning animated slideInLeft">
               <h3>You've reached the maximum playlist length.</h3>
@@ -105,6 +107,22 @@ class EventList extends Component {
               />,
         )}
           </ul>
+        </div>
+        <div className="modal fade playlist" id="playlistModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 className="modal-title" id="myModalLabel">This playlist has been added to your Spotify account!</h4>
+              </div>
+              <div className="modal-body">
+                <iframe
+                  src={`https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark`}
+                  width="100%" height="600" frameBorder="0" allowTransparency="true"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

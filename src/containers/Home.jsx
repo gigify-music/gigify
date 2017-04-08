@@ -69,6 +69,7 @@ class Home extends Component {
   }
 
   renderPlaylist(playlistId) {
+    console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
     this.setState({ showPlaylist: true,
       playlistId: playlistId.data });
   }
@@ -162,13 +163,11 @@ class Home extends Component {
         <ToggleDisplay id="event-list-toggle" show={this.state.showEventList}>
           <EventList
             id="event-list"
+            playlistId={this.state.playlistId}
             showEventList={this.state.showEventList}
             renderPlaylist={playlistId => this.renderPlaylist(playlistId)}
             listings={this.props.listings}
           />
-        </ToggleDisplay>
-        <ToggleDisplay id="playlist-toggle" show={this.state.showPlaylist}>
-          <Playlist id="playlist" showPlaylist={this.state.showPlaylist} playlistId={this.state.playlistId} />
         </ToggleDisplay>
       </div>
     );
@@ -185,3 +184,7 @@ export default connect(mapStatetoProps, { getEvents })(Home);
 /* <div>
   <EventList listings={this.props.listings} />
 </div>*/
+
+/*<ToggleDisplay id="playlist-toggle" show={this.state.showPlaylist}>
+  <Playlist id="playlist" showPlaylist={this.state.showPlaylist} playlistId={this.state.playlistId} />
+</ToggleDisplay>*/
