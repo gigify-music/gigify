@@ -21,15 +21,15 @@ class Event extends Component {
   render() {
     return (
       <li className="noBullets">
-        <div className="event-list-item">
-          <div className="event-checkbox">
+        <div className="row event-list-item">
+          <div className="col-sm-2 event-checkbox">
             <button
               disabled={this.props.locked && !this.state.active}
               className={this.state.active ? this.state.checked : this.state.unchecked}
               onClick={this.onToggleClick}
             />
           </div>
-          <div className="event-musicians-container">
+          <div className="col-sm-7 event-musicians-container">
             <div className="event-musicians">
               <label className="headliner">{this.props.performers[0]}</label>
               <label className="supporting">{
@@ -38,7 +38,7 @@ class Event extends Component {
               </label>
             </div>
           </div>
-          <div className="event-info-container">
+          <div className="event-info-container col-sm-3">
             <div className="event-info">
               <label className="date">{this.props.date}</label>
               <label className="time">{this.props.time}</label>

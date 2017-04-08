@@ -1,3 +1,7 @@
+body {
+  font-family: 'Poppins', sans-serif !important;
+}
+
 body:before {
   content: "";
   position: fixed;
@@ -12,7 +16,6 @@ body:before {
 
   z-index: 100;
 }
-
 .page-container {
   display: flex;
   flex-direction: column;
@@ -106,14 +109,13 @@ button.btn.btn-lg.spotify-auth-button {
 }
 
 .event-list-item {
-  border: 1px solid #8A2CCE;
+  border: 1px solid #1DB954;
   display: flex;
   flex-direction: row;
   height: 20%;
   width: 100%;
   background-color: white;
   margin-top: 3%;
-  padding: 19px;
 }
 
 .event-list-item:hover {
@@ -121,7 +123,6 @@ button.btn.btn-lg.spotify-auth-button {
 }
 
 .event-checkbox {
-  width: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,8 +131,7 @@ button.btn.btn-lg.spotify-auth-button {
 
 .event-musicians-container {
   display: flex;
-  height: 100%;
-  width: 60%;
+    padding: 19px;
 }
 
 .event-musicians {
@@ -158,10 +158,11 @@ button.btn.btn-lg.spotify-auth-button {
 
 .event-info-container {
   display: flex;
-  height: 100%;
+  background-color: #1DB954;
 }
 
 .event-info {
+  color: #ffffff;
   display: flex;
   align-content: flex-start;
   flex-direction: column;
