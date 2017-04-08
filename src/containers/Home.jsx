@@ -123,78 +123,74 @@ class Home extends Component {
 
     return (
       <div>
-        <div className="logout-container">
-          <button className="logout-btn" onClick={this.handleLogout}>Logout</button>
-        </div>
-        <div>
-          <div id="particles-js">
-            <div className="home-page-container">
-              <div className="carousel">
-                <Slider {...settings}>
-                  <div id="home-carousel">
-                    <img
-                      className="carousel-image"
-                      src="/assets/gigifycarouselimg.png"
-                      alt="Sad Face"
-                    />
+        <div className="home-page-container">
+          <div className="carousel">
+            <Slider {...settings}>
+              <div id="particles-js" className="top-page-container">
+                <div className="top-content-container">
+                  <label className="page-title"> Gigify </label>
+                  <label className="page-subheader"> Create Spotify playlists from your
+                upcoming songkick gigs </label>
+                  <div className="row logos">
+                    <img src="./assets/Spotify_Icon_RGB_Green.png" className="spotify-logo" alt="Spotify Logo" />
+                    <img src="./assets/sk-badge-pink.png" className="songkick-logo" alt="Songkick Logo" />
                   </div>
-                  <a onClick={() => this.handleFirst()}>
-                    <img
-                      className="carousel-image"
-                      src="/assets/panorama.png"
-                      alt="Sad Face"
-                    />
-
-                  </a>
-                  <a onClick={() => this.handleSecond()}>
-                    <img
-                      className="carousel-image"
-                      src="/assets/govball.png"
-                      alt="Sad Face"
-                    />
-                  </a>
-                </Slider>
-              </div>
-              <div id="songkick-input">
-                <form className="form-inline">
-                  <span className="sr-only">songkick Username</span>
-                  <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div className="input-group-addon">@</div>
-                    <input
-                      type="text" className="form-control"
-                      id="inlineFormInputGroup" placeholder="songkick Username"
-                      value={this.state.username} onChange={this.handleUsername.bind(this)}
-                    />
-                  </div>
-                  <button
-                    type="submit" className="btn btn-primary"
-                    onClick={this.handleSubmit.bind(this)}
-                  >
-                  Submit
-                  </button>
-                </form>
-                <span className="or-label"> OR </span>
-                <div className="genre-buttons">
-                  <button type="button" className="btn btn-success btn-circle btn-lg">
-                    Pop
-                  </button>
-                  <button type="button" className="btn btn-success btn-circle btn-lg">
-                    Rock
-                  </button>
-                  <button type="button" className="btn btn-success btn-circle btn-lg">
-                    Hip<br />Hop
-                  </button>
-                  <button type="button" className="btn btn-success btn-circle btn-lg">
-                    Indie
-                  </button>
-                  <button type="button" className="btn btn-success btn-circle btn-lg">
-                    Rap
-                  </button>
                 </div>
               </div>
+              <a onClick={() => this.handleFirst()}>
+                <img
+                  className="carousel-image"
+                  src="/assets/panorama.png"
+                  alt="Sad Face"
+                />
+
+              </a>
+              <a onClick={() => this.handleSecond()}>
+                <img
+                  className="carousel-image"
+                  src="/assets/govball.png"
+                  alt="Sad Face"
+                />
+              </a>
+            </Slider>
+          </div>
+          <div id="songkick-input">
+            <form className="form-inline">
+              <span className="sr-only">songkick Username</span>
+              <div className="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div className="input-group-addon">@</div>
+                <input
+                  type="text" className="form-control"
+                  id="inlineFormInputGroup" placeholder="songkick Username"
+                  value={this.state.username} onChange={this.handleUsername.bind(this)}
+                />
+              </div>
+              <button
+                type="submit" className="btn btn-primary"
+                onClick={this.handleSubmit.bind(this)}
+              >
+              Submit
+              </button>
+            </form>
+            <span className="or-label"> OR </span>
+            <div className="genre-buttons">
+              <button type="button" className="btn btn-success btn-circle btn-lg">
+                Pop
+              </button>
+              <button type="button" className="btn btn-success btn-circle btn-lg">
+                Rock
+              </button>
+              <button type="button" className="btn btn-success btn-circle btn-lg">
+                Hip<br />Hop
+              </button>
+              <button type="button" className="btn btn-success btn-circle btn-lg">
+                Indie
+              </button>
+              <button type="button" className="btn btn-success btn-circle btn-lg">
+                Rap
+              </button>
             </div>
           </div>
-
         </div>
         <ToggleDisplay id="event-list-toggle" show={this.state.showEventList}>
           <EventList
