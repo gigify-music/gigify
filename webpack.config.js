@@ -1,6 +1,9 @@
 const path = require('path');
 const srcPath = path.join(__dirname, 'src');
 const buildPath = path.join(__dirname, 'public');
+const cssPath = path.join(__dirname, 'public/Styles');
+
+console.log('CSS PATH', cssPath);
 
 const config = {
   context: srcPath,
@@ -37,8 +40,22 @@ const config = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
       },
-    ],
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: 'style-loader',
+        }, {
+          loader: 'css-loader',
+        }, {
+          loader: 'sass-loader',
+        }],
+      }],
   },
 };
 
 module.exports = config;
+
+// ,
+// options: {
+//   includePaths: [cssPath],
+// },
