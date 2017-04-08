@@ -1,7 +1,6 @@
 import React from 'react';
 import requests from '../utils/requests';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Particles from 'react-particles-js';
 
 class Login extends React.Component {
   handleAuth() {
