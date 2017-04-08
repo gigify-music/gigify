@@ -7,6 +7,8 @@ app.get('/events/:username', Controller.getEvents);
 
 app.get('/home', Controller.goHome);
 
+app.get('/checksession', Controller.checkSession);
+
 app.post('/artists', Controller.createPlaylist);
 
 module.exports = app;
