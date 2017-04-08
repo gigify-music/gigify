@@ -51,10 +51,10 @@ class Home extends Component {
 
   componentWillMount(){
     console.log("BEFORE MOUNT")
-    axios.get(`/api/checksession`).then((data) => {
+    axios.get('/api/checksession').then((data) => {
       console.log(data, "RESP CHECK SESSION")
       if(data.data === 'logged'){
-        this.setState({authenticated : true});
+        this.setState({ authenticated: true });
         // window.location = '/auth/signin';
       }
       else {
@@ -62,7 +62,7 @@ class Home extends Component {
         // this.setState({authenticated : true});
       }
     }).catch((err) => {
-      this.setState({authenticated : false});
+      this.setState({ authenticated: false });
       window.location = '/auth/signin';
     });
   }
@@ -77,13 +77,24 @@ class Home extends Component {
   handleSubmit(e) {
     const that = this;
     e.preventDefault();
-    axios.get(`/api/events/${this.state.username}`)
-    .then((response) => {
-      that.props.getEvents(response);
-      that.setState({ showEventList: true });
+    axios.get('/api/checksession')
+    .then((data) => {
+      console.log(data, "on submit songkik username");
+      if (data.data === 'logged') {
+        axios.get(`/api/events/${this.state.username}`)
+        .then((response) => {
+          that.props.getEvents(response);
+          that.setState({ showEventList: true });
+        })
+        .catch((error) => {
+          console.log(error, 'error in get api/events on submit');
+        });
+      } else {
+        window.location = '/auth/signin';
+      }
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((err) => {
+      console.log(err, 'error in auth check on submit');
     });
   }
 
