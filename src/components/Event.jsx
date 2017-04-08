@@ -21,7 +21,7 @@ class Event extends Component {
   render() {
     return (
       <li className="noBullets">
-        <div className="event-list-item well well-lg">
+        <div className="event-list-item">
           <div className="event-checkbox">
             <button
               disabled={this.props.locked && !this.state.active}

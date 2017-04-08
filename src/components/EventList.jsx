@@ -69,7 +69,7 @@ class EventList extends Component {
     this.sweetScroll = new SweetScroll();
   }
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.showEventList) {
+    if (!prevProps.showEventList) {
       console.log("SHOULD SCROLL");
       this.sweetScroll.toElement(document.getElementById('events'));
     }
@@ -80,25 +80,24 @@ class EventList extends Component {
 
     return (
       <div id="event-page" className="event-page-container">
-        <div className="event-list-sidebar">
-          <button data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Generate Playlist of Selected</button>
+        <div className="col-sm-2 event-list-sidebar">
+          <button className="btn btn-success btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
           <ToggleDisplay show={this.state.displayWarning}>
             <div className="selectionWarning animated slideInLeft">
               <h3>You've reached the maximum playlist length.</h3>
               <h4>Either deselect an event or press submit to generate your playlist.</h4>
             </div>
           </ToggleDisplay>
+          <ul className="list-group">
+            <text>Selected performers:</text>
+            {selectedPerformers.map(performer =>
+              <li className="list-group-item">
+                {performer}
+              </li>)}
+          </ul>
         </div>
-        <ul className="list-group">
-          <text>Selected performers:</text>
-          {selectedPerformers.map(performer =>
-            <li className="list-group-item">
-              {performer}
-            </li>)}
-        </ul>
 
-
-        <div id="events" className="event-list-container">
+        <div id="events" className="col-sm-10 event-list-container">
           <ul>
             {this.props.listings.map((event, i) =>
               <Event
