@@ -23,10 +23,10 @@ const getArtistIDList = (artistList) => {
             } else {
               return spotifyApi.searchArtists(artist)
                       .then((response) => {
-                         return pool.connect()
+                        return pool.connect()
                              .then((client) => {
-                                client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
-                                 .then((res) => {
+                               client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
+                                 .then((resp) => {
                                    client.release();
                                  })
                                  .catch((err) => {
@@ -40,7 +40,7 @@ const getArtistIDList = (artistList) => {
                              });
                         // return response.body.artists.items[0].id;
                       })
-                      .catch(err => console.error('Spotify API Error: ',err));
+                      .catch(err => console.error('Spotify API Error: ', err));
             }
             // client.release();
           })
@@ -127,8 +127,15 @@ module.exports = {
   goHome: (req, res) => {
     res.redirect('/home');
   },
+  checkSession: (req, res) => {
+    spotifyApi.getMe()
+    .then(() => {
+      res.send('logged');
+    }).catch(() => {
+      res.send('notlogged');
+    });
+  },
   getEvents: (req, res) => {
-    //console.log(req.params, 'USERNAME ******');
     axios.get(`http://api.songkick.com/api/3.0/users/${req.params.username}/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
     .then((results) => {
       const eventList = results.data.resultsPage.results.calendarEntry;

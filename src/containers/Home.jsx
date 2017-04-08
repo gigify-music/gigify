@@ -18,6 +18,7 @@ class Home extends Component {
       showPlaylist: false,
       playlistId: [],
       username: '',
+      authenticated: false,
     };
   }
 
@@ -46,6 +47,24 @@ class Home extends Component {
       data: ['panoramanyc', '3Tx6bcrYcvmAA9sblNLPrH'],
     };
     this.renderPlaylist(panoramaPlaylist);
+  }
+
+  componentWillMount(){
+    console.log("BEFORE MOUNT")
+    axios.get(`/api/checksession`).then((data) => {
+      console.log(data, "RESP CHECK SESSION")
+      if(data.data === 'logged'){
+        this.setState({authenticated : true});
+        // window.location = '/auth/signin';
+      }
+      else {
+        window.location = '/auth/signin';
+        // this.setState({authenticated : true});
+      }
+    }).catch((err) => {
+      this.setState({authenticated : false});
+      window.location = '/auth/signin';
+    });
   }
 
   handleSecond() {
@@ -85,6 +104,12 @@ class Home extends Component {
       autoplay: true,
       autoplaySpeed: 6000,
     };
+
+    if (this.state.authenticated === false) {
+      return (<div />);   //Empty page while authorization is checked before
+                          //redirect to login
+    }
+
     return (
       <div>
         <div className="logout-container">
