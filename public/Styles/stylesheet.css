@@ -269,27 +269,18 @@ button.btn.btn-lg.spotify-auth-button {
   background-color: #3a8884;
 }
 
-.playlist-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #1DB954;
-  box-shadow: 1px 1px 10px black;
+.modal-body {
+  padding: 0 !important;
+  background-color: #232323;
 }
 
-.playlist-view {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 70%;
-  align-items: center;
-  justify-content: center;
+.modal-title {
+  color: #ffffff;
+  text-align: center;
 }
-
-.vignette {
-  box-shadow: inset 1px 1px 150px #474747;
+.modal-header {
+  background-color: #232323;
+  border-bottom: none !important;
 }
 
 .logout-container {
