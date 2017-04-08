@@ -14,59 +14,77 @@ const spotifyApi = new SpotifyWebApi({
 
 const getArtistIDList = (artistList) => {
   return artistList.map((artist) => {
-    return spotifyApi.searchArtists(artist)
-      .then((response) => {
-        //ADD THIS ARTIST IN DATABSE BY ADDING THE ASSOCIATED ARTIST NAME IN ARTISTNAMES
-        // ADD TO DB [artist, response.body.artists.items[0].id]
-        // console.log(response.body.artists.items[0].name, response.body.artists.items[0].id);
-        // pool.connect()
-        //   .then((client) => {
-        //     client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
-        //       .then((res) => {
-        //         client.release();
-        //       })
-        //       .catch((err) => {
-        //         console.error('error running query', err);
-        //       });
-        //   })
-        //   .catch((err) => {
-        //     console.error('error fetching client from pool', err);
-        //   });
-        return response.body.artists.items[0].id;
+    return pool.connect()
+      .then((client) => {
+        return client.query(`select spotify_id from artists where artist_name = '${artist}'`)
+          .then((res) => {
+            if (res.rows[0]) {
+              return res.rows[0].spotify_id
+            } else {
+              return spotifyApi.searchArtists(artist)
+                      .then((response) => {
+                         return pool.connect()
+                             .then((client) => {
+                                client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
+                                 .then((res) => {
+                                   client.release();
+                                 })
+                                 .catch((err) => {
+                                   console.error('Querey Error: ', err);
+                                 });
+                             }).then(() => {
+                               return response.body.artists.items[0].id;
+                             })
+                             .catch((err) => {
+                               console.error('Client Error: ', err);
+                             });
+                        // return response.body.artists.items[0].id;
+                      })
+                      .catch(err => console.error('Spotify API Error: ',err));
+            }
+            // client.release();
+          })
+          .catch((err) => {
+            console.error('error running query', err);
+          });
       })
-
-      .catch(err => console.error(err));
+      .catch((err) => {
+        console.error('error fetching client from pool', err);
+      });
   });
 };
-const getTopTracks = (artistIDList) => {
-  return artistIDList.map((artist) => {
-    return spotifyApi.getArtistTopTracks(artist, 'US')
+const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getArtistTopTracks(artist, 'US')
       .then((data) => {
         const tracks = data.body.tracks;
         const tracklist = {};
         tracklist[artist] = [];
         tracks.forEach(((track) => {
-          tracklist[artist].push('spotify:track:' + track.id);
+          tracklist[artist].push(`spotify:track:${track.id}`);
         }));
-        // console.log('THE TRACKLIST: ', tracklist);
+        const artistCount = artistIDList.length;
+        const allTracks = tracklist[Object.keys(tracklist)[0]];
+        const sizing = Math.floor(30 / artistCount);
+
+        if (allTracks.length > sizing) {
+          tracklist[Object.keys(tracklist)[0]].splice(sizing);
+        }
         return tracklist;
       })
-      .catch(err => console.error(err));
-  });
-};
+      .catch(err => console.error(err)));
 
 let userID;
 
 module.exports = {
   getSpotlightOnePlaylist: (req, res) => {
-    console.log('GETTING FIRST SPOTLIGHT REQUEST');
+    //console.log('GETTING FIRST SPOTLIGHT REQUEST');
     res.send('FIRST FESTIVAL RESPONSE');
   },
   getSpotlightTwoPlaylist: (req, res) => {
-    console.log('GETTING SECOND SPOTLIGHT REQUEST');
+    //console.log('GETTING SECOND SPOTLIGHT REQUEST');
     res.send('SECOND FESTIVAL RESPONSE');
   },
   createPlaylist: (req, res) => {
+    // console.log('SELECTED', req.body.selected);
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
       .then((tracksArray) => {
@@ -79,23 +97,26 @@ module.exports = {
             spotifyApi.getMe()
               .then((data) => {
                 userID = data.body.id;
-                return userID
+                return userID;
               })
               .then((user) => {
                 spotifyApi.createPlaylist(user, 'Gigify Playlist', { public: false })
                 .then((data) => {
-                  console.log('Created playlist!');
+                  //console.log('Created playlist!');
                   return [user, data.body.id];
                 })
                 .then((playlistInfo) => {
+                  let tracksToAdd = [];
                   for (artist in merged) {
-                    spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], merged[artist])
+                    tracksToAdd = tracksToAdd.concat(merged[artist]);
+                  }
+                  spotifyApi.addTracksToPlaylist(playlistInfo[0], playlistInfo[1], tracksToAdd)
                     .then((data) => {
-                      console.log('ADDED SONGS TO PLAYLIST');
+                      //console.log('ADDED SONGS TO PLAYLIST');
                     })
                     .catch(err => console.error(err));
-                  }
-                  res.send(playlistInfo)
+
+                  res.send(playlistInfo);
                 })
                 .catch(err => console.error(err));
               });
@@ -106,7 +127,7 @@ module.exports = {
     res.redirect('/home');
   },
   getEvents: (req, res) => {
-    console.log(req.params, 'USERNAME ******');
+    //console.log(req.params, 'USERNAME ******');
     axios.get(`http://api.songkick.com/api/3.0/users/${req.params.username}/calendar.json?reason=tracked_artist&apikey=${process.env.SONGKICK_KEY}`)
     .then((results) => {
       const eventList = results.data.resultsPage.results.calendarEntry;
