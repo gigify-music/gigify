@@ -1,5 +1,5 @@
 body {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 body:before {
@@ -94,7 +94,8 @@ body:before {
 }
 
 .headliner {
-  font-size: 40px;
+  font: 40px 'Poppins', sans-serif;
+  font-weight: bolder;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -102,6 +103,7 @@ body:before {
 
 .supporting {
   font-size: 15px;
+  font-style: italic;
 }
 
 .event-info-container {
@@ -111,12 +113,41 @@ body:before {
 
 .event-info {
   color: #ffffff;
+  width: 100%;
+  font-size: 13px;
   display: flex;
+  text-align: right;
   align-content: flex-start;
   flex-direction: column;
-  justify-content: right;
+  margin-top: 5%;
 }
 
+.date {
+  font-size: 20px;
+}
+.location {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.venue {
+    color: #8A2CCE;
+}
+
+.info-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+.ticket-btn {
+  background-color: #8A2CCE;
+  color: #ffffff;
+  height: auto;
+  margin: 10px;
+}
 .glyphicon {
     font-size: 50px;
 }
