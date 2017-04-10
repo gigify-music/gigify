@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import axios from 'axios';
+import SweetScroll from 'sweet-scroll';
 import ToggleDisplay from 'react-toggle-display';
 import Event from './Event';
 
@@ -16,8 +17,6 @@ class EventList extends Component {
   }
 
   toggleEvent(performers, id) {
-    console.log('SELECTED PERFORMERS', performers, id);
-    console.log('SELECTED STATE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     const selected = this.state.selected;
 
     if (selected[id]) {
@@ -50,6 +49,7 @@ class EventList extends Component {
   }
 
   generatePlaylist() {
+    console.log("CALLING GENERATE PLAYLIST");
     const selected = Object.values(this.state.selected);
     const flatten = [].concat(...selected);
     const unique = [...new Set(flatten)];
@@ -57,39 +57,46 @@ class EventList extends Component {
       selected: unique,
     })
     .then((res) => {
-      // console.log('RESPONSE PLAYLIST', res);
+      console.log("RESPONSE FROM SERVER FROM /ARTISTS: ", res);
       this.props.renderPlaylist(res);
     })
     .catch(err =>
       console.error(err),
     );
   }
+  componentDidMount() {
+    this.sweetScroll = new SweetScroll();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevProps.showEventList) {
+      console.log("SHOULD SCROLL");
+      this.sweetScroll.toElement(document.getElementById('events'));
+    }
+  }
 
   render() {
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
-    console.log('SELECTED PERFORMERS', selectedPerformers);
 
     return (
       <div id="event-page" className="event-page-container">
-        <div className="event-list-sidebar">
-          <button onClick={this.generatePlaylist}>Generate Playlist of Selected</button>
+        <div className="col-sm-2 event-list-sidebar">
+          <button className="btn btn-success btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
           <ToggleDisplay show={this.state.displayWarning}>
             <div className="selectionWarning animated slideInLeft">
               <h3>You've reached the maximum playlist length.</h3>
               <h4>Either deselect an event or press submit to generate your playlist.</h4>
             </div>
           </ToggleDisplay>
+          <ul className="list-group">
+            <text>Selected performers:</text>
+            {selectedPerformers.map(performer =>
+              <li className="list-group-item">
+                {performer}
+              </li>)}
+          </ul>
         </div>
-        <ul className="list-group">
-          <text>Selected performers:</text>
-          {selectedPerformers.map(performer =>
-            <li className="list-group-item">
-              {performer}
-            </li>)}
-        </ul>
 
-
-        <div className="event-list-container">
+        <div id="events" className="col-sm-10 event-list-container">
           <ul>
             {this.props.listings.map((event, i) =>
               <Event
@@ -100,6 +107,22 @@ class EventList extends Component {
               />,
         )}
           </ul>
+        </div>
+        <div className="modal fade playlist" id="playlistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 className="modal-title" id="myModalLabel">This playlist has been added to your Spotify account!</h4>
+              </div>
+              <div className="modal-body">
+                <iframe
+                  src={`https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark`}
+                  width="100%" height="600" frameBorder="0" allowTransparency="true"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

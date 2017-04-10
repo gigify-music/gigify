@@ -18,6 +18,7 @@ class Home extends Component {
       showPlaylist: false,
       playlistId: [],
       username: '',
+      authenticated: false,
     };
   }
 
@@ -25,6 +26,15 @@ class Home extends Component {
     this.setState({ username: username.target.value });
   }
 
+  handleLogout() {
+    axios.get('/auth/logout')
+        .then((res) => {
+          if (res.data === 'logout') {
+            window.location = '/login';
+          }
+        })
+        .catch(err => console.error(err));
+  }
   // onGenerateClick = (username) => {
   //   console.log('Called+++++++++')
   //   this.props.getEvents(username)
@@ -39,6 +49,24 @@ class Home extends Component {
     this.renderPlaylist(panoramaPlaylist);
   }
 
+  componentWillMount(){
+    console.log("BEFORE MOUNT")
+    axios.get('/api/checksession').then((data) => {
+      console.log(data, "RESP CHECK SESSION")
+      if(data.data === 'logged'){
+        this.setState({ authenticated: true });
+        // window.location = '/auth/signin';
+      }
+      else {
+        window.location = '/auth/signin';
+        // this.setState({authenticated : true});
+      }
+    }).catch((err) => {
+      this.setState({ authenticated: false });
+      window.location = '/auth/signin';
+    });
+  }
+
   handleSecond() {
     const govballPlaylist = {
       data: [1265233623, '5lRkpBlgVkBEmVNYSp9BmB'],
@@ -49,19 +77,29 @@ class Home extends Component {
   handleSubmit(e) {
     const that = this;
     e.preventDefault();
-    axios.get(`/api/events/${this.state.username}`)
-    .then(function (response) {
-      console.log('PROPS', this.props);
-      that.props.getEvents(response);
-      that.setState({ showEventList: true });
+    axios.get('/api/checksession')
+    .then((data) => {
+      console.log(data, "on submit songkik username");
+      if (data.data === 'logged') {
+        axios.get(`/api/events/${this.state.username}`)
+        .then((response) => {
+          that.props.getEvents(response);
+          that.setState({ showEventList: true });
+        })
+        .catch((error) => {
+          console.log(error, 'error in get api/events on submit');
+        });
+      } else {
+        window.location = '/auth/signin';
+      }
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((err) => {
+      console.log(err, 'error in auth check on submit');
     });
   }
 
   renderPlaylist(playlistId) {
-    console.log('AH! REAL MONSTERS', playlistId.data);
+    console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
     this.setState({ showPlaylist: true,
       playlistId: playlistId.data });
   }
@@ -74,100 +112,82 @@ class Home extends Component {
       speed: 1000,
       slidesToShow: 1,
       slidesToScroll: 1,
+      swipeToSlide: false,
       autoplay: true,
       autoplaySpeed: 6000,
     };
+
+    if (this.state.authenticated === false) {
+      return (<div />);   //Empty page while authorization is checked before
+                          //redirect to login
+    }
+
     return (
       <div>
-        <div>
-          <div className="home-page-container">
-            <div className="carousel">
-              <Slider {...settings}>
-                <div id="home-carousel">
-                  <img
-                    className="carousel-image"
-                    src="/assets/gigifycarouselimg.png"
-                    alt="Sad Face"
-                  />
+        <div className="home-page-container">
+          <div className="carousel">
+            <Slider {...settings}>
+              <div id="particles-js" className="top-page-container">
+                <div className="top-content-container">
+                  <label className="page-title"> Gigify </label>
+                  <label className="page-subheader"> Create Spotify playlists from your
+                upcoming songkick gigs </label>
+                  <div className="row logos">
+                    <img src="./assets/Spotify_Icon_RGB_Green.png" className="spotify-logo" alt="Spotify Logo" />
+                    <img src="./assets/sk-badge-pink.png" className="songkick-logo" alt="Songkick Logo" />
                   </div>
-                <a onClick={() => this.handleFirst()}>
-                  <img
-                    className="carousel-image"
-                    src="/assets/panorama.png"
-                    alt="Sad Face"
-                  />
-
-                  </a>
-                <a onClick={() => this.handleSecond()}>
-                  <img
-                    className="carousel-image"
-                    src="/assets/govball.png"
-                    alt="Sad Face"
-                  />
-                </a>
-              </Slider>
-            </div>
-            <div id="songkick-input">
-              <form className="form-inline">
-                <span className="sr-only">songkick Username</span>
-                <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-                  <div className="input-group-addon">@</div>
-                  <input
-                    type="text" className="form-control"
-                    id="inlineFormInputGroup" placeholder="songkick Username"
-                    value={this.state.username} onChange={this.handleUsername.bind(this)}
-                  />
                 </div>
-                <button
-                  type="submit" className="btn btn-primary"
-                  onClick={this.handleSubmit.bind(this)}
-                >
-                Submit
-                </button>
-              </form>
-              <span className="or-label"> OR </span>
-              <div className="genre-buttons">
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Pop
-                </button>
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Rock
-                </button>
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Hip<br />Hop
-                </button>
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Indie
-                </button>
-                <button type="button" className="btn btn-success btn-circle btn-lg">
-                  Rap
-                </button>
               </div>
+              <a className="carousel-image panorama" onClick={() => this.handleFirst()} />
+              <a className="carousel-image govball" onClick={() => this.handleSecond()} />
+            </Slider>
+          </div>
+          <div id="songkick-input">
+            <form className="form-inline">
+              <input
+                type="text" className="col-xs-12 form-control input-lg username-input"
+                id="inlineFormInputGroup" placeholder="songkick Username"
+                value={this.state.username} onChange={this.handleUsername.bind(this)}
+              />
+              <button
+                type="submit" className="input-btn btn btn-lg"
+                onClick={this.handleSubmit.bind(this)}
+              >
+                Submit
+              </button>
+            </form>
+            <span className="or-label"> OR </span>
+            <div className="dropdown">
+              <button
+                className="input-btn btn btn-lg dropdown-toggle"
+                type="button" data-toggle="dropdown">
+                Choose a genre  <i className="fa fa-chevron-down" aria-hidden="true" />
+              </button>
+                <ul className="dropdown-menu genres">
+                  <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Indie</a></li>
+                  <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Hip Hop</a></li>
+                  <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Pop</a></li>
+                </ul>
             </div>
           </div>
-
         </div>
         <ToggleDisplay id="event-list-toggle" show={this.state.showEventList}>
           <EventList
             id="event-list"
+            playlistId={this.state.playlistId}
+            showEventList={this.state.showEventList}
             renderPlaylist={playlistId => this.renderPlaylist(playlistId)}
             listings={this.props.listings}
           />
-        </ToggleDisplay>
-        <ToggleDisplay id="playlist-toggle" show={this.state.showPlaylist}>
-          <Playlist id="playlist" showPlaylist={this.state.showPlaylist} playlistId={this.state.playlistId} />
         </ToggleDisplay>
       </div>
     );
   }
 }
 
-const mapStatetoProps = ({ events }) => {
-  console.log('EVENT MAPPING', events);
-  return {
-    listings: events.eventListings,
-  };
-};
+const mapStatetoProps = ({ events }) => ({
+  listings: events.eventListings,
+});
 
 export default connect(mapStatetoProps, { getEvents })(Home);
 
@@ -175,3 +195,7 @@ export default connect(mapStatetoProps, { getEvents })(Home);
 /* <div>
   <EventList listings={this.props.listings} />
 </div>*/
+
+/*<ToggleDisplay id="playlist-toggle" show={this.state.showPlaylist}>
+  <Playlist id="playlist" showPlaylist={this.state.showPlaylist} playlistId={this.state.playlistId} />
+</ToggleDisplay>*/

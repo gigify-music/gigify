@@ -9,12 +9,9 @@ class Playlist extends React.Component {
   }
   componentDidMount() {
     this.sweetScroll = new SweetScroll();
-    console.log("COMPONENT MOUNTED");
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps);
     if (!prevProps.showPlaylist) {
-      console.log(document.getElementById('playlist-scroll'))
       this.sweetScroll.toElement(document.getElementById('playlist-scroll'));
     }
 

@@ -1,0 +1,193 @@
+$purple-button: #7C25F8;
+$background-pink: #CA3879;
+$background-purple: #8A2CCE;
+$background-black: #232323;
+$spotify-green: #1ED760;
+
+.page-container {
+  height: 100vh;
+  width: 100vw;
+}
+
+.top-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  width: 100vw;
+  box-shadow: 0px 0px 30px rgba(0,0,0,.8);
+}
+
+canvas {
+  top: 0px;
+  left: 0px;
+  position: absolute;
+}
+
+#particles-js {
+    background: $background-black;
+    display: block;
+    vertical-align: bottom;
+    width: 100vw;
+    min-height: 60vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#particles-js .particles-js-canvas-el {
+  width: 100vw!important;
+  height: 60vh!important;
+}
+
+.top-content-container {
+  color: #ffffff;
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.page-title {
+  font-size: 150px;
+}
+
+.page-subheader {
+  font: 25px 'Open Sans', sans-serif;
+}
+
+.logos {
+  display: flex;
+  width: 100vw;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 4;
+}
+
+.downArrow {
+    color: $background-black;
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    margin: 0 auto;
+    font-size: 30px;
+}
+
+i.fa.fa-chevron-downArrow {
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  fill: $background-black;
+  animation: pulse 1.3s infinite;
+}
+
+i.fa.fa-chevron-down.faa-pulse.animated {
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-content-container {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  width: 100vw;
+  min-height: 40vh;
+}
+
+button.btn.btn-lg.spotify-auth-button {
+  display: flex;
+  justify-content: center;
+}
+
+.spotify-auth-button {
+  box-shadow: 1px 1px 10px #B8BFBF;
+  display: flex;
+  font: 'Open Sans', sans-serif;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 3%;
+  background-color: #1DB954;
+  color: #FFFFFF;
+}
+
+.spotify-logo {
+  width: 3%;
+  z-index: 5;
+}
+
+.songkick-logo {
+  width: 3%;
+  z-index: 5;
+  margin-left: 2%;
+}
+
+.spotify-icon {
+  margin-right: 5%;
+}
+
+.aboutUs {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 45vh;
+}
+
+.aboutUsHeader {
+  border-top: 3px solid $background-black;
+  text-align: center;
+  font-size: 25px;
+  width: 100vw;
+  margin: 15px 0;
+}
+
+.developmentTeam {
+  display: flex;
+  flex-direction: row;
+}
+
+.Developer {
+  text-align: center;
+}
+
+.profilePicture {
+  width: 100px;
+  height: auto;
+}
+
+.gitIcon {
+  width: 20px;
+}
+
+.linkedIcon {
+  width: 23px;
+}
+
+.footer {
+  display: flex;
+}
+
+.footer-content {
+    width: 100vw;
+    margin: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    text-align: center;
+    background-color: $background-black;
+    color: #fff;
+}

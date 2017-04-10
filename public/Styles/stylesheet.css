@@ -1,3 +1,7 @@
+body {
+  font-family: 'Open Sans', sans-serif !important;
+}
+
 body:before {
   content: "";
   position: fixed;
@@ -12,44 +16,49 @@ body:before {
 
   z-index: 100;
 }
-.page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+
+#particles-js {
+    background: $background-black;
+    display: block;
+    vertical-align: bottom;
+    width: 100vw;
+    min-height: 60vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.carousel-image {
+  height: 60vh;
   width: 100vw;
+  background-position: center;
+  background-size: cover;
+  z-index: 2;
 }
 
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 18%;
+.panorama {
+  background-image: url('../assets/panorama.png');
 }
 
-.page-title {
-  font-size: 150px;
+.govball {
+  background-image: url('../assets/govball.png');
+}
+#particles-js .particles-js-canvas-el {
+  width: 100vw!important;
+  height: 60vh!important;
 }
 
-.page-subheader {
-  font-size: 25px;
+.username-input {
+  background: url('../assets/sk-badge-black.png') no-repeat scroll 7px 7px;
+  padding-left: 30px;
 }
 
-.spotify-auth-button {
-  box-shadow: 1px 1px 10px #B8BFBF;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin: 3%;
+.input-btn {
   background-color: #1DB954;
   color: #FFFFFF;
 }
-
-.spotify-icon {
-  margin-right: 5%;
+.genres {
+  width: 100%;
 }
 
 .event-page-container {
@@ -60,27 +69,36 @@ body:before {
   width: 100vw;
 }
 
+.event-list-sidebar {
+  margin-top: 7%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
 .event-list-container {
   display: flex;
   justify-content: center;
   height: 100%;
   width: 70%;
-  background-color: gray;
-  overflow: scroll;
-
 }
 
 .event-list-item {
+  border: 1px solid #1DB954;
   display: flex;
   flex-direction: row;
   height: 20%;
-  width: 90%;
+  width: 100%;
   background-color: white;
   margin-top: 3%;
 }
 
+.event-list-item:hover {
+  box-shadow: 1px 1px 10px #B8BFBF;
+}
+
 .event-checkbox {
-  width: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,8 +107,7 @@ body:before {
 
 .event-musicians-container {
   display: flex;
-  height: 100%;
-  width: 60%;
+    padding: 19px;
 }
 
 .event-musicians {
@@ -105,7 +122,8 @@ body:before {
 }
 
 .headliner {
-  font-size: 40px;
+  font: 40px 'Poppins', sans-serif;
+  font-weight: bolder;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -113,20 +131,51 @@ body:before {
 
 .supporting {
   font-size: 15px;
+  font-style: italic;
 }
 
 .event-info-container {
   display: flex;
-  height: 100%;
+  background-color: #1DB954;
 }
 
 .event-info {
+  color: #ffffff;
+  width: 100%;
+  font-size: 13px;
   display: flex;
+  text-align: right;
   align-content: flex-start;
   flex-direction: column;
-  justify-content: right;
+  margin-top: 5%;
 }
 
+.date {
+  font-size: 20px;
+}
+.location {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.venue {
+    color: #8A2CCE;
+}
+
+.info-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+.ticket-btn {
+  background-color: #8A2CCE;
+  color: #ffffff;
+  height: auto;
+  margin: 10px;
+}
 .glyphicon {
     font-size: 50px;
 }
@@ -152,9 +201,11 @@ body:before {
   align-items: center;
   height: 100vh;
   width: 100vw;
+  z-index: 1;
 }
 
 .carousel {
+  z-index: 1;
   margin:0 auto;
   width: 100vw;
   height: 60vh;
@@ -163,12 +214,6 @@ body:before {
   box-shadow: 0 0 10px #B8BFBF;
 }
 
-.carousel-image {
-  position: relative;
-  height: 60vh;
-  width: 100vw;
-  z-index: 1;
-}
 .slick-dots {
   top: 0 !important;
 }
@@ -198,6 +243,7 @@ body:before {
 }
 
 #songkick-input {
+  z-index: 1;
   width: 60vw;
   height: 22vh;
   background: #ffffff;
@@ -217,6 +263,7 @@ body:before {
 }
 
 .genre-buttons {
+  z-index: 1;
   display: flex;
   flex-direction: row;
   width: 50vw;
@@ -225,6 +272,7 @@ body:before {
 }
 
 .btn-circle.btn-lg {
+  z-index: 1;
   box-shadow: 1px 1px 10px #B8BFBF;
   width: 60px;
   height: 60px;
@@ -235,27 +283,42 @@ body:before {
   background-color: #3a8884;
 }
 
-.playlist-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #1DB954;
-  box-shadow: 1px 1px 10px black;
+.modal-body {
+  padding: 0 !important;
+  background-color: #232323;
 }
 
-.playlist-view {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 70%;
-  align-items: center;
-  justify-content: center;
+.modal-title {
+  color: #ffffff;
+  text-align: center;
+}
+.modal-header {
+  background-color: #282828;
+  border-bottom: none !important;
 }
 
-.vignette {
-  box-shadow: inset 1px 1px 150px #474747;
+.logout-container {
+  width: 100%;
+  float: right;
+  position: fixed;
+  background: rgba(255,255,255,.3);
+  z-index: 100;
+}
+
+.logout-btn {
+  border-radius: 10px;
+  color: #2AB759;
+  border-width: 3px;
+  border-color: #2AB759;
+  background: rgba(0,0,0,.8);
+  float: right;
+  margin: 20px;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 8px;
+  font-weight: bold;
+  box-shadow: 2px 2px 30px #000;
 }
 
 /*.home-page-container {

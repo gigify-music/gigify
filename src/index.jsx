@@ -7,9 +7,17 @@ import reducer from './reducers';
 import App from './containers/App';
 import thunk from 'redux-thunk';
 import Routes from './routes/Routes';
+import particleConfig from '../particlesjs-config.json';
 // import requestService from './utils/request-service';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+console.log('PARTICLE CONFIG', particleConfig);
+
+document.addEventListener('DOMContentLoaded', () => {
+  particlesJS('particles-js', particleConfig,
+   !1);
+});
 
 const logger = createLogger();
 
