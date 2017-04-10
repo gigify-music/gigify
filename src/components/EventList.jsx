@@ -11,9 +11,11 @@ class EventList extends Component {
     this.state = {
       selected: {},
       displayWarning: false,
+      currentVenue: '',
     };
     this.toggleEvent = this.toggleEvent.bind(this);
     this.generatePlaylist = this.generatePlaylist.bind(this);
+    this.getVenue = this.getVenue.bind(this);
   }
 
   toggleEvent(performers, id) {
@@ -64,6 +66,18 @@ class EventList extends Component {
       console.error(err),
     );
   }
+
+  getVenue(value, callback) {
+    this.setState({
+      currentVenue: value
+    }, function(state) {  //{currentVenue: props}
+      console.log('inside getVenue-- currentVenue is: ', this.state.currentVenue)
+      callback();
+      // return { currentVenue:value }
+    });
+      console.log(this.state.currentVenue, "GET VALUEEE")
+  }
+
   componentDidMount() {
     this.sweetScroll = new SweetScroll();
   }
@@ -104,6 +118,9 @@ class EventList extends Component {
                 {...event}
                 toggleEvent={this.toggleEvent}
                 locked={this.state.displayWarning}
+                getVenue={this.getVenue}
+                currentVenue={this.state.currentVenue}
+
               />,
         )}
           </ul>

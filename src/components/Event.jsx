@@ -48,6 +48,9 @@ class Event extends Component {
                 <a
                   className="btn btn-sm ticket-btn" data-toggle="modal"
                   data-target="#trackEventModal"
+                  onClick={this.props.getVenue.bind(this, this.props.venueName, function(data){
+                    console.log(this.props.venueName, "INside Event Callback")
+                  }.bind(this), this)}
                 >
                 Track Event
                 </a>
@@ -61,7 +64,7 @@ class Event extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 className="modal-title" id="myModalLabel">Get a reminder via Text </h4>
+                <h4 className="modal-title" id="myModalLabel">Get a reminder via Text  </h4>
               </div>
               <div className="modal-body twilio">
                   <div className="form-inline row telephone">
