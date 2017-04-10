@@ -1,5 +1,6 @@
 body {
   font-family: 'Open Sans', sans-serif !important;
+  background-color: #F7F5F1 !important;
 }
 
 body:before {
@@ -48,14 +49,42 @@ body:before {
   height: 60vh!important;
 }
 
+.sk-input-logo {
+  max-height: 30px;
+}
+
+.input-icon {
+  position:absolute;
+  bottom:28px;
+  left:10px;
+  width:10px;
+  height:10px;
+}
+
+.search-input {
+  position:relative;
+  padding:0;
+  margin:0;
+}
+
 .username-input {
-  background: url('../assets/sk-badge-black.png') no-repeat scroll 7px 7px;
-  padding-left: 30px;
+  border: 1px solid #1DB954;
+  border-right: none;
+  border-radius: 6px 0 0 6px !important;
+  width: 36vw !important;
+  margin:0;
+  padding-left: 50px !important;
+  outline: none;
 }
 
 .input-btn {
   background-color: #1DB954;
   color: #FFFFFF;
+}
+.submit-btn {
+  border: 1px solid black;
+  border-left: none;
+  border-radius: 0 6px 6px 0 !important;
 }
 .genres {
   width: 100%;
@@ -245,7 +274,7 @@ body:before {
 
 #songkick-input {
   z-index: 1;
-  width: 60vw;
+  width: 50vw;
   height: 22vh;
   background: #ffffff;
   display: flex;
@@ -261,6 +290,9 @@ body:before {
 
 .or-label {
   margin: 1.5%;
+  font-size: 18px;
+  font-weight: bolder;
+  font-style: italic;
 }
 
 .genre-buttons {
