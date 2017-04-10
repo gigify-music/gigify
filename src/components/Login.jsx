@@ -59,6 +59,7 @@ class Login extends React.Component {
            Connect with Spotify </button>
 
           <div className="down">
+            <h4>About</h4>
             <button style={{ background: 'transparent', border: 'none', color: 'transparent' }} onClick={() => this.handleScroll()}>
               <i
                 className="icon fa fa-chevron-down faa-pulse animated"
@@ -70,52 +71,73 @@ class Login extends React.Component {
         </div>
         <ToggleDisplay show={this.state.showAbout}>
           <div id="about" className="container aboutUs">
+            <div className="col-md-6 aboutSection">
+              <div className="aboutHeader">
+                About Gigify
+              </div>
+              <div className="gigifyDesc">
+                <p>
+                  Cardigan tumeric listicle, prism art party twee yuccie
+                  plaid cold-pressed shoreditch 8-bit coloring book
+                  godard blog roof party. Tumeric coloring book swag,
+                  vinyl pinterest pop-up meditation brunch dreamcatcher cornhole.
+                  Woke street art disrupt everyday carry, ennui jianbing banjo
+                  portland pour-over bushwick hella occupy yuccie. Lyft slow-carb
+                  messenger bag deep v normcore.
+                </p>
+              </div>
+
+            </div>
             <div className="col-md-6">
-              <div className="aboutUsHeader">Development Team</div>
+              <div className="aboutHeader">Development Team</div>
               <div className="developmentTeam">
-                <div className="Developer col-sm-3">
-                  <a href="http://jpmarra.com">
-                    <img className="profilePicture img-circle" src="https://avatars3.githubusercontent.com/u/22504731?v=3&amp;s=460" />
-                  </a>
-                  <h4>JP Marra</h4>
-                  <h5>Software Engineer</h5>
-                  <p className="contacts">
-                    <a href="https://github.com/jpmarra"><img className="gitIcon" src="https://image.flaticon.com/icons/svg/23/23957.svg" /></a>
-                    <a href="https://www.linkedin.com/in/jpmarra/"><img className="linkedIcon" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png" /></a>
-                  </p>
+                <div className="row devRow">
+                  <div className="Developer col-sm-3">
+                    <a href="http://jpmarra.com">
+                      <img className="profilePicture img-circle" src="https://avatars3.githubusercontent.com/u/22504731?v=3&amp;s=460" />
+                    </a>
+                    <h4>JP Marra</h4>
+                    <h5>Software Engineer</h5>
+                    <p className="contacts">
+                      <a href="https://github.com/jpmarra"><img className="gitIcon" src="https://image.flaticon.com/icons/svg/23/23957.svg" /></a>
+                      <a href="https://www.linkedin.com/in/jpmarra/"><img className="linkedIcon" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png" /></a>
+                    </p>
+                  </div>
+                  <div className="Developer col-sm-3">
+                    <a href="http://jlestes.com">
+                      <img className="profilePicture img-circle" src="https://avatars2.githubusercontent.com/u/24236815?v=3&s=460" />
+                    </a>
+                    <h4>Jordan Estes</h4>
+                    <h5>Software Engineer</h5>
+                    <p className="contacts">
+                      <a href="https://github.com/EstesJL"><img className="gitIcon" src="https://image.flaticon.com/icons/svg/23/23957.svg" /></a>
+                      <a href="https://www.linkedin.com/in/estesjl/"><img className="linkedIcon" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png" /></a>
+                    </p>
+                  </div>
                 </div>
-                <div className="Developer col-sm-3">
-                  <a href="http://jlestes.com">
-                    <img className="profilePicture img-circle" src="https://avatars2.githubusercontent.com/u/24236815?v=3&s=460" />
-                  </a>
-                  <h4>Jordan Estes</h4>
-                  <h5>Software Engineer</h5>
-                  <p className="contacts">
-                    <a href="https://github.com/EstesJL"><img className="gitIcon" src="https://image.flaticon.com/icons/svg/23/23957.svg" /></a>
-                    <a href="https://www.linkedin.com/in/estesjl/"><img className="linkedIcon" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png" /></a>
-                  </p>
-                </div>
-                <div className="Developer col-sm-3">
-                  <a href="http://scottdavidsanders.com">
-                    <img className="profilePicture img-circle" src="https://avatars2.githubusercontent.com/u/9346924?v=3&s=460" />
-                  </a>
-                  <h4>Scott Sanders</h4>
-                  <h5>Software Engineer</h5>
-                  <p className="contacts">
-                    <a href="https://github.com/ScottDavidSanders"><img className="gitIcon" src="https://image.flaticon.com/icons/svg/23/23957.svg" /></a>
-                    <a href="https://www.linkedin.com/in/scottdavidsanders/"><img className="linkedIcon" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png" /></a>
-                  </p>
-                </div>
-                <div className="Developer col-sm-3">
-                  <a href="http://scottdavidsanders.com">
-                    <img className="profilePicture img-circle" src="https://avatars1.githubusercontent.com/u/18608258?v=3&s=460" />
-                  </a>
-                  <h4>Aamir Yousuf</h4>
-                  <h5>Software Engineer</h5>
-                  <p className="contacts">
-                    <a href="https://github.com/iamongit"><img className="gitIcon" src="https://image.flaticon.com/icons/svg/23/23957.svg" /></a>
-                    <a href="https://www.linkedin.com/in/aamirysf/"><img className="linkedIcon" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png" /></a>
-                  </p>
+                <div className="row devRow">
+                  <div className="Developer col-sm-3">
+                    <a href="http://scottdavidsanders.com">
+                      <img className="profilePicture img-circle" src="https://avatars2.githubusercontent.com/u/9346924?v=3&s=460" />
+                    </a>
+                    <h4>Scott Sanders</h4>
+                    <h5>Software Engineer</h5>
+                    <p className="contacts">
+                      <a href="https://github.com/ScottDavidSanders"><img className="gitIcon" src="https://image.flaticon.com/icons/svg/23/23957.svg" /></a>
+                      <a href="https://www.linkedin.com/in/scottdavidsanders/"><img className="linkedIcon" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png" /></a>
+                    </p>
+                  </div>
+                  <div className="Developer col-sm-3">
+                    <a href="http://scottdavidsanders.com">
+                      <img className="profilePicture img-circle" src="https://avatars1.githubusercontent.com/u/18608258?v=3&s=460" />
+                    </a>
+                    <h4>Aamir Yousuf</h4>
+                    <h5>Software Engineer</h5>
+                    <p className="contacts">
+                      <a href="https://github.com/iamongit"><img className="gitIcon" src="https://image.flaticon.com/icons/svg/23/23957.svg" /></a>
+                      <a href="https://www.linkedin.com/in/aamirysf/"><img className="linkedIcon" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png" /></a>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

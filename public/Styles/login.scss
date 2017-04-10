@@ -120,7 +120,6 @@ button.btn.btn-lg.spotify-auth-button {
 .spotify-auth-button {
   box-shadow: 1px 1px 10px #B8BFBF;
   display: flex;
-  font: 'Open Sans', sans-serif;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -146,22 +145,44 @@ button.btn.btn-lg.spotify-auth-button {
 
 .aboutUs {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100vw;
   height: 45vh;
 }
 
-.aboutUsHeader {
-  border-top: 3px solid $background-black;
+.aboutHeader {
   text-align: center;
   font-size: 25px;
-  width: 100vw;
+  width: 50vw;
   margin: 15px 0;
 }
 
 .developmentTeam {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+
+.devRow {
+  display: flex;
+  justify-content: center;
+}
+
+.aboutGigify {
+  display: flex;
+  flex-direction: column;
+}
+
+.aboutSection {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gigifyDesc {
+  font-size: 12px;
+  width: 40vw;
+  height: 100vh;
 }
 
 .Developer {
@@ -199,6 +220,8 @@ button.btn.btn-lg.spotify-auth-button {
 /* PULSE */
 .down {
   display: flex;
+  flex-direction: column;
+  color: $background-black;
   justify-content: center;
   padding-bottom: 3vh;
 }
