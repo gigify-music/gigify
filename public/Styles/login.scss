@@ -1,7 +1,7 @@
 $purple-button: #7C25F8;
 $background-pink: #CA3879;
 $background-purple: #8A2CCE;
-$background-black: #232323;
+$background-black: #383838;
 $spotify-green: #1ED760;
 
 .page-container {
@@ -78,23 +78,27 @@ canvas {
     font-size: 30px;
 }
 
-i.fa.fa-chevron-downArrow {
-  position: absolute;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
-  fill: $background-black;
-  animation: pulse 1.3s infinite;
-}
+// i.fa.fa-chevron-downArrow {
+//   position: absolute;
+//   -webkit-transform-style: preserve-3d;
+//   transform-style: preserve-3d;
+//   top: 50%;
+//   left: 50%;
+//   -webkit-transform: translate(-50%, -50%);
+//   transform: translate(-50%, -50%);
+//   width: 100px;
+//   height: 100px;
+//   fill: $background-black;
+//   animation: pulse 1.3s infinite;
+// }
+//
+// i.fa.fa-chevron-down.faa-pulse.animated {
+//   display: flex;
+//   justify-content: center;
+// }
 
-i.fa.fa-chevron-down.faa-pulse.animated {
-  display: flex;
-  justify-content: center;
+i.icon.fa.fa-chevron-down.faa-pulse.animated {
+  font-size: 40px;
 }
 
 .bottom-content-container {
@@ -190,4 +194,72 @@ button.btn.btn-lg.spotify-auth-button {
     text-align: center;
     background-color: $background-black;
     color: #fff;
+}
+
+/* PULSE */
+.down {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 3vh;
+}
+.fa-chevron-down {
+  color: $background-black;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+
+  50% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+
+  100% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+
+  50% {
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+
+  100% {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+.faa-pulse.animated,
+.faa-pulse.animated-hover:hover,
+.faa-parent.animated-hover:hover > .faa-pulse {
+  -webkit-animation: pulse 2s linear infinite;
+  animation: pulse 2s linear infinite;
+}
+
+.faa-pulse.animated.faa-fast,
+.faa-pulse.animated-hover.faa-fast:hover,
+.faa-parent.animated-hover:hover > .faa-pulse.faa-fast {
+  -webkit-animation: pulse 1s linear infinite;
+  animation: pulse 1s linear infinite;
+}
+
+.faa-pulse.animated.faa-slow,
+.faa-pulse.animated-hover.faa-slow:hover,
+.faa-parent.animated-hover:hover > .faa-pulse.faa-slow {
+  -webkit-animation: pulse 3s linear infinite;
+  animation: pulse 3s linear infinite;
 }
