@@ -48,6 +48,19 @@ body:before {
   height: 60vh!important;
 }
 
+.username-input {
+  background: url('../assets/sk-badge-black.png') no-repeat scroll 7px 7px;
+  padding-left: 30px;
+}
+
+.input-btn {
+  background-color: #1DB954;
+  color: #FFFFFF;
+}
+.genres {
+  width: 100%;
+}
+
 .event-page-container {
   display: flex;
   align-items: center;
