@@ -69,14 +69,16 @@ module.exports = {
           .then((merged) => {
             spotifyApi.getMe()
               .then((data) => {
+                console.log(data);
                 userID = data.body.id;
-                return userID;
+                name = data.body.display_name;
+                return [userID, name];
               })
               .then((user) => {
-                spotifyApi.createPlaylist(user, 'Gigify Playlist', { public: false })
+                spotifyApi.createPlaylist(user[0], `${user[1]}'s Gigify Playlist`, { public: false })
                 .then((data) => {
                   //console.log('Created playlist!');
-                  return [user, data.body.id];
+                  return [user[0], data.body.id];
                 })
                 .then((playlistInfo) => {
                   let tracksToAdd = [];

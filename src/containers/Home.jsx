@@ -158,9 +158,9 @@ class Home extends Component {
             <span className="or-label">OR</span>
             <div className="dropdown">
               <button
-                className="input-btn btn btn-lg dropdown-toggle"
+                className="submit-btn btn btn-lg dropdown-toggle"
                 type="button" data-toggle="dropdown">
-                Choose a genre  <i className="fa fa-chevron-down" aria-hidden="true" />
+                Choose a genre  <i className="arrow fa fa-chevron-down" aria-hidden="true" />
               </button>
                 <ul className="dropdown-menu genres">
                   <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Indie</a></li>
