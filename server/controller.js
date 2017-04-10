@@ -14,47 +14,16 @@ const spotifyApi = new SpotifyWebApi({
 
 const getArtistIDList = (artistList) => {
   return artistList.map((artist) => {
-    return pool.connect()
-      .then((client) => {
-        return client.query(`select spotify_id from artists where artist_name = '${artist}'`)
-          .then((res) => {
-            if (res.rows[0]) {
-              return res.rows[0].spotify_id
-            } else {
-              return spotifyApi.searchArtists(artist)
-                      .then((response) => {
-                        return pool.connect()
-                             .then((client) => {
-                               client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
-                                 .then((resp) => {
-                                   client.release();
-                                 })
-                                 .catch((err) => {
-                                   console.error('Querey Error: ', err);
-                                 });
-                             }).then(() => {
-                               return response.body.artists.items[0].id;
-                             })
-                             .catch((err) => {
-                               console.error('Client Error: ', err);
-                             });
-                        // return response.body.artists.items[0].id;
-                      })
-                      .catch(err => console.error('Spotify API Error: ', err));
-            }
-            // client.release();
-          })
-          .catch((err) => {
-            console.error('error running query', err);
-          });
-      })
-      .catch((err) => {
-        console.error('error fetching client from pool', err);
-      });
+    return spotifyApi.searchArtists(artist)
+            .then((response) => {
+                     return response.body.artists.items[0].id;
+            })
+            .catch(err => console.error('Spotify API Error: ', err));
   });
 };
 const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getArtistTopTracks(artist, 'US')
       .then((data) => {
+        console.log('DATA', data.body.tracks);
         const tracks = data.body.tracks;
         const tracklist = {};
         tracklist[artist] = [];
@@ -63,11 +32,14 @@ const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getAr
         }));
         const artistCount = artistIDList.length;
         const allTracks = tracklist[Object.keys(tracklist)[0]];
+        console.log('ALL TRACKS', allTracks);
         const sizing = Math.floor(30 / artistCount);
+        console.log('SIZING', sizing);
 
         if (allTracks.length > sizing) {
           tracklist[Object.keys(tracklist)[0]].splice(sizing);
         }
+        console.log('NEW TRACKLIST', tracklist);
         return tracklist;
       })
       .catch(err => console.error(err)));
@@ -84,8 +56,8 @@ module.exports = {
     res.send('SECOND FESTIVAL RESPONSE');
   },
   createPlaylist: (req, res) => {
-    console.log("CREATING PLAYLIST");
-    // console.log('SELECTED', req.body.selected);
+    // console.log("CREATING PLAYLIST");
+    console.log('SELECTED', req.body.selected);
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
       .then((tracksArray) => {
