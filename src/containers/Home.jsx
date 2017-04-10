@@ -112,6 +112,7 @@ class Home extends Component {
       speed: 1000,
       slidesToShow: 1,
       slidesToScroll: 1,
+      swipeToSlide: false,
       autoplay: true,
       autoplaySpeed: 6000,
     };
@@ -137,12 +138,8 @@ class Home extends Component {
                   </div>
                 </div>
               </div>
-              <a className="carousel-image panorama" onClick={() => this.handleFirst()}>
-                <div><h1>Panorama Festival Playlist</h1></div>
-              </a>
-              <a className="carousel-image govball" onClick={() => this.handleSecond()}>
-                <div><h1>Governer's Ball</h1></div>
-              </a>
+              <a className="carousel-image panorama" onClick={() => this.handleFirst()} />
+              <a className="carousel-image govball" onClick={() => this.handleSecond()} />
             </Slider>
           </div>
           <div id="songkick-input">
