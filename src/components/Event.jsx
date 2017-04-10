@@ -45,16 +45,39 @@ class Event extends Component {
               <div className="location"><a className="venue" href={this.props.venueUrl}><p>{this.props.venueName}</p></a></div>
               <div className="info-btns">
                 <a target="_blank" href={this.props.eventUrl}  className="btn btn-sm ticket-btn">Buy Tickets</a>
-                <a target="_blank" href={this.props.eventUrl}  className="btn btn-sm ticket-btn">Track Event</a>
+                <a
+                  className="btn btn-sm ticket-btn" data-toggle="modal"
+                  data-target="#trackEventModal"
+                >
+                Track Event
+                </a>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="modal fade trackEvent" id="trackEventModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div className="modal-dialog" role="document">
+            <div className="modalAlign">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 className="modal-title" id="myModalLabel">Get a reminder via Text </h4>
+              </div>
+              <div className="modal-body twilio">
+                  <div className="form-inline row telephone">
+                      <input className="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input" />
+                      <button type="submit" className="btn btn-primary">Submit</button>
+                  </div>
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </li>
     );
   }
 
-
+// <button className="btn btn-success btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
 }
 
 Event.propTypes = {
