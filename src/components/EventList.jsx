@@ -24,7 +24,7 @@ class EventList extends Component {
       this.setState({
         selected,
       });
-      [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 5 ? this.setState({ displayWarning: false }) : console.log('OK');
+      [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 23 ? this.setState({ displayWarning: false }) : console.log('OK');
       console.log('AFTER DELETE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
       return;
     }
@@ -35,7 +35,7 @@ class EventList extends Component {
     console.log('ADDED TO STATE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     const unique = [...new Set([].concat(...(Object.values(this.state.selected))))];
 
-    if (unique.length > 5) {
+    if (unique.length > 23) {
       console.log('WARNING TRIGGERED HERE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
       this.setState({
         displayWarning: true,
