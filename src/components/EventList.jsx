@@ -108,7 +108,7 @@ class EventList extends Component {
         )}
           </ul>
         </div>
-        <div className="modal fade playlist" id="playlistModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div className="modal fade playlist" id="playlistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">

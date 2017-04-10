@@ -137,20 +137,11 @@ class Home extends Component {
                   </div>
                 </div>
               </div>
-              <a onClick={() => this.handleFirst()}>
-                <img
-                  className="carousel-image"
-                  src="/assets/panorama.png"
-                  alt="Sad Face"
-                />
-
+              <a className="carousel-image panorama" onClick={() => this.handleFirst()}>
+                <div><h1>Panorama Festival Playlist</h1></div>
               </a>
-              <a onClick={() => this.handleSecond()}>
-                <img
-                  className="carousel-image"
-                  src="/assets/govball.png"
-                  alt="Sad Face"
-                />
+              <a className="carousel-image govball" onClick={() => this.handleSecond()}>
+                <div><h1>Governer's Ball</h1></div>
               </a>
             </Slider>
           </div>

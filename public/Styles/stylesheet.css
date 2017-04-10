@@ -28,6 +28,21 @@ body:before {
     background-attachment: fixed;
 }
 
+.carousel-image {
+  height: 60vh;
+  width: 100vw;
+  background-position: center;
+  background-size: cover;
+  z-index: 2;
+}
+
+.panorama {
+  background-image: url('../assets/panorama.png');
+}
+
+.govball {
+  background-image: url('../assets/govball.png');
+}
 #particles-js .particles-js-canvas-el {
   width: 100vw!important;
   height: 60vh!important;
@@ -186,12 +201,6 @@ body:before {
   box-shadow: 0 0 10px #B8BFBF;
 }
 
-.carousel-image {
-  position: relative;
-  height: 60vh;
-  width: 100vw;
-  z-index: 2;
-}
 .slick-dots {
   top: 0 !important;
 }
