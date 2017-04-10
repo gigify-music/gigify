@@ -130,12 +130,6 @@ class Home extends Component {
               <div id="particles-js" className="top-page-container">
                 <div className="top-content-container">
                   <label className="page-title"> Gigify </label>
-                  <label className="page-subheader"> Create Spotify playlists from your
-                upcoming songkick gigs </label>
-                  <div className="row logos">
-                    <img src="./assets/Spotify_Icon_RGB_Green.png" className="spotify-logo" alt="Spotify Logo" />
-                    <img src="./assets/sk-badge-pink.png" className="songkick-logo" alt="Songkick Logo" />
-                  </div>
                 </div>
               </div>
               <a className="carousel-image panorama" onClick={() => this.handleFirst()} />
@@ -144,19 +138,24 @@ class Home extends Component {
           </div>
           <div id="songkick-input">
             <form className="form-inline">
-              <input
-                type="text" className="col-xs-12 form-control input-lg username-input"
-                id="inlineFormInputGroup" placeholder="songkick Username"
-                value={this.state.username} onChange={this.handleUsername.bind(this)}
-              />
-              <button
-                type="submit" className="input-btn btn btn-lg"
-                onClick={this.handleSubmit.bind(this)}
-              >
-                Submit
-              </button>
+              <div className="search-input form-group">
+                <input
+                  type="text" className="col-xs-12 input-lg username-input"
+                  id="inlineFormInputGroup" placeholder="Enter your Songkick username..."
+                  value={this.state.username} onChange={this.handleUsername.bind(this)}
+                />
+              <span className="input-icon"><img className="sk-input-logo" src="../assets/sk-badge-black.png" /></span>
+              </div>
+              <div className="form-group">
+                <button
+                  type="submit" className="submit-btn input-btn btn btn-lg"
+                  onClick={this.handleSubmit.bind(this)}
+                  >
+                  Submit
+                </button>
+              </div>
             </form>
-            <span className="or-label"> OR </span>
+            <span className="or-label">OR</span>
             <div className="dropdown">
               <button
                 className="input-btn btn btn-lg dropdown-toggle"
@@ -169,6 +168,12 @@ class Home extends Component {
                   <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Pop</a></li>
                 </ul>
             </div>
+          </div>
+          <label className="page-subheader"> Create Spotify playlists from your
+        upcoming songkick gigs </label>
+          <div className="row logos">
+            <img src="./assets/Spotify_Icon_RGB_Green.png" className="spotify-logo" alt="Spotify Logo" />
+            <img src="./assets/sk-badge-pink.png" className="songkick-logo" alt="Songkick Logo" />
           </div>
         </div>
         <ToggleDisplay id="event-list-toggle" show={this.state.showEventList}>
