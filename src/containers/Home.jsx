@@ -144,39 +144,30 @@ class Home extends Component {
           </div>
           <div id="songkick-input">
             <form className="form-inline">
-              <span className="sr-only">songkick Username</span>
-              <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-                <div className="input-group-addon">@</div>
-                <input
-                  type="text" className="form-control"
-                  id="inlineFormInputGroup" placeholder="songkick Username"
-                  value={this.state.username} onChange={this.handleUsername.bind(this)}
-                />
-              </div>
+              <input
+                type="text" className="col-xs-12 form-control input-lg username-input"
+                id="inlineFormInputGroup" placeholder="songkick Username"
+                value={this.state.username} onChange={this.handleUsername.bind(this)}
+              />
               <button
-                type="submit" className="btn btn-primary"
+                type="submit" className="input-btn btn btn-lg"
                 onClick={this.handleSubmit.bind(this)}
               >
-              Submit
+                Submit
               </button>
             </form>
             <span className="or-label"> OR </span>
-            <div className="genre-buttons">
-              <button type="button" className="btn btn-success btn-circle btn-lg">
-                Pop
+            <div className="dropdown">
+              <button
+                className="input-btn btn btn-lg dropdown-toggle"
+                type="button" data-toggle="dropdown">
+                Choose a genre  <i className="fa fa-chevron-down" aria-hidden="true" />
               </button>
-              <button type="button" className="btn btn-success btn-circle btn-lg">
-                Rock
-              </button>
-              <button type="button" className="btn btn-success btn-circle btn-lg">
-                Hip<br />Hop
-              </button>
-              <button type="button" className="btn btn-success btn-circle btn-lg">
-                Indie
-              </button>
-              <button type="button" className="btn btn-success btn-circle btn-lg">
-                Rap
-              </button>
+                <ul className="dropdown-menu genres">
+                  <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Indie</a></li>
+                  <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Hip Hop</a></li>
+                  <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Pop</a></li>
+                </ul>
             </div>
           </div>
         </div>
