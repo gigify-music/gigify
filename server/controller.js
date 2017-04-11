@@ -75,7 +75,7 @@ module.exports = {
                 return [userID, name];
               })
               .then((user) => {
-                spotifyApi.createPlaylist(user[0], `${user[1]}'s Gigify Playlist`, { public: false })
+                spotifyApi.createPlaylist(user[0], `${user[1]}'s Gigify Playlist - ${moment().format('M/D, hA')}`, { public: false })
                 .then((data) => {
                   //console.log('Created playlist!');
                   return [user[0], data.body.id];
