@@ -3,6 +3,7 @@ $background-pink: #CA3879;
 $background-purple: #8A2CCE;
 $background-black: #383838;
 $spotify-green: #1ED760;
+$header-font: "Poppins";
 
 .page-container {
   height: 100vh;
@@ -53,10 +54,14 @@ canvas {
 
 .page-title {
   font-size: 150px;
+  font-family: $header-font;
+  font-weight: bold;
+  z-index: 2;
 }
 
 .page-subheader {
   font: 25px 'Open Sans', sans-serif;
+  z-index: 2;
 }
 
 .logos {
@@ -65,6 +70,7 @@ canvas {
   align-items: flex-end;
   justify-content: center;
   z-index: 4;
+  height: 15vh;
 }
 
 .downArrow {
@@ -118,15 +124,62 @@ button.btn.btn-lg.spotify-auth-button {
 }
 
 .spotify-auth-button {
+  overflow:hidden;
   box-shadow: 1px 1px 10px #B8BFBF;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   margin: 3%;
-  background-color: #1DB954;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  // background-color: #1DB954;
   color: #FFFFFF;
+  background: $spotify-green;
+  border-color: transparent;
+  border-radius: 5%;
+  cursor: pointer;
+  transition:         0.08s ease-in;
+  -o-transition:      0.08s ease-in;
+  -ms-transition:     0.08s ease-in;
+  -moz-transition:    0.08s ease-in;
+  -webkit-transition: 0.08s ease-in;
+  // color: #FFFFFF;
 }
+
+.fill:hover {
+  // border: 2px $background-black solid;
+  border-radius: 10%;
+}
+
+.introMsg {
+  color: $background-black;
+  margin-top: 3%;
+}
+
+// .ball {
+//   height: 10px;
+//   width: 10px;
+//   border-radius: 80%;
+//   background-color: $spotify-green;
+//   border-color: transparent;
+// }
+
+// .fill:before {
+//   content: "";
+//   position: absolute;
+//
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   top: 100%;
+//   z-index: -1;
+//   -webkit-transition: top 0.09s ease-in;
+// }
+//
+// .fill:hover:before {
+//   top: 0;
+// }
 
 .spotify-logo {
   width: 3%;
@@ -145,26 +198,31 @@ button.btn.btn-lg.spotify-auth-button {
 
 .aboutUs {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100vw;
-  height: 45vh;
+  height: 90vh;
 }
 
 .aboutHeader {
+  font-family: $header-font;
+  font-weight: bold;
   text-align: center;
   font-size: 25px;
-  width: 50vw;
   margin: 15px 0;
 }
 
 .developmentTeam {
-  display: flex;
-  flex-direction: column;
+  font-family: $header-font;
+  font-weight: bold;
 }
 
 .devRow {
   display: flex;
   justify-content: center;
+}
+
+.devName {
+  font-weight: bold;
 }
 
 .aboutGigify {
@@ -173,6 +231,7 @@ button.btn.btn-lg.spotify-auth-button {
 }
 
 .aboutSection {
+  height: 30vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -180,8 +239,8 @@ button.btn.btn-lg.spotify-auth-button {
 }
 
 .gigifyDesc {
-  font-size: 12px;
-  width: 40vw;
+  font-size: 14px;
+  width: 60vw;
   height: 100vh;
 }
 
@@ -225,8 +284,14 @@ button.btn.btn-lg.spotify-auth-button {
   justify-content: center;
   padding-bottom: 3vh;
 }
+
+
 .fa-chevron-down {
   color: $background-black;
+}
+
+.downBtn:focus {
+    outline: none !important;
 }
 
 @-webkit-keyframes pulse {
