@@ -11,14 +11,17 @@ class EventList extends Component {
     this.state = {
       selected: {},
       displayWarning: false,
+      currentVenue: '',
+      currentdate:'',
+      currentevent:'',
     };
     this.toggleEvent = this.toggleEvent.bind(this);
     this.generatePlaylist = this.generatePlaylist.bind(this);
+    this.getVenue = this.getVenue.bind(this);
   }
 
   toggleEvent(performers, id) {
     const selected = this.state.selected;
-
     if (selected[id]) {
       delete selected[id];
       this.setState({
@@ -64,6 +67,23 @@ class EventList extends Component {
       console.error(err),
     );
   }
+
+  getVenue(value, callback) {
+    this.setState({
+      currentVenue: value.venue,
+      currentdate: value.date,
+      currentevent: value.eventname,
+    }, function () {  //{currentVenue: props}
+      console.log('inside getVenue-- currentVenue is: ',
+      this.state.currentVenue,
+      this.state.currentdate,
+      this.state.currentevent
+    )
+      callback();
+      // return { currentVenue:value }
+    });
+  }
+
   componentDidMount() {
     this.sweetScroll = new SweetScroll();
   }
@@ -76,7 +96,6 @@ class EventList extends Component {
 
   render() {
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
-
     return (
       <div id="event-page" className="event-page-container">
         <div className="col-sm-2 event-list-sidebar">
@@ -104,6 +123,11 @@ class EventList extends Component {
                 {...event}
                 toggleEvent={this.toggleEvent}
                 locked={this.state.displayWarning}
+                getVenue={this.getVenue}
+                currentVenue={this.state.currentVenue}
+                currentdate={this.state.currentdate}
+                currentevent={this.state.currentevent}
+
               />,
         )}
           </ul>
