@@ -132,8 +132,8 @@ class Home extends Component {
                   <label className="page-title"> Gigify </label>
                 </div>
               </div>
-              <a className="carousel-image panorama" onClick={() => this.handleFirst()} />
-              <a className="carousel-image govball" onClick={() => this.handleSecond()} />
+              <a className="carousel-image panorama" data-toggle="modal" data-target="#homePlaylistModal" onClick={() => this.handleFirst()} />
+              <a className="carousel-image govball" data-toggle="modal" data-target="#homePlaylistModal" onClick={() => this.handleSecond()} />
             </Slider>
           </div>
           <div id="songkick-input">
@@ -207,6 +207,22 @@ class Home extends Component {
         <div className="footer">
           <h6 className="footer-content">2017 Gigify. | <a>Gigify Github</a></h6>
         </div>
+        <div className="modal fade playlist" id="homePlaylistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 className="modal-title" id="myModalLabel">Gigify Spotlight Playlist</h4>
+            </div>
+            <div className="modal-body">
+              <iframe
+                src={`https://embed.spotify.com/?uri=spotify:user:${this.state.playlistId[0]}:playlist:${this.state.playlistId[1]}&theme=dark`}
+                width="100%" height="600" frameBorder="0" allowTransparency="true"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     );
   }
