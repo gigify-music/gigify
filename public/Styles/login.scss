@@ -1,9 +1,4 @@
-$purple-button: #7C25F8;
-$background-pink: #CA3879;
-$background-purple: #8A2CCE;
-$background-black: #383838;
-$spotify-green: #1ED760;
-$header-font: "Poppins";
+@import './_variables.scss';
 
 .page-container {
   height: 100vh;

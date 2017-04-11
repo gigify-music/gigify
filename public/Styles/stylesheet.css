@@ -30,7 +30,7 @@ body:before {
 }
 
 .carousel-image {
-  height: 60vh;
+  height: 50vh;
   width: 100vw;
   background-position: center;
   background-size: cover;
@@ -47,61 +47,6 @@ body:before {
 #particles-js .particles-js-canvas-el {
   width: 100vw!important;
   height: 60vh!important;
-}
-
-.sk-input-logo {
-  max-height: 30px;
-}
-
-.input-icon {
-  position:absolute;
-  bottom:28px;
-  left:10px;
-  width:10px;
-  height:10px;
-}
-
-.search-input {
-  position:relative;
-  padding:0;
-  margin:0;
-}
-
-.username-input {
-  border: none;
-  border-radius: 0 !important;
-  border-bottom: 1px solid #1DB954 !important;
-  width: 36vw !important;
-  padding-left: 50px !important;
-  outline: none;
-}
-
-.dropdown-btn {
-  background-color: #1DB954;
-  color: #FFFFFF;
-  transition: .45s cubic-bezier(.3,1,.4,1) 0s;
-}
-
-.submit-btn:hover {
-  color: #FFFFFF !important;
-  background-color: #1DB954 !important;
-}
-
-.submit-btn {
-  color: #383838 !important;
-  background-color: #FFFFFF !important;
-  border-bottom: 1px solid #1DB954 !important;
-  border-left: none;
-  border-radius: 0 !important;
-  transition: .45s cubic-bezier(.3,1,.4,1) 0s;
-}
-
-.dropdown-toggle {
-  margin-bottom: 5% !important;
-}
-
-.genres {
-  width: 100%;
 }
 
 .home-subheader{
@@ -251,19 +196,20 @@ body:before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 94.45vh;
   width: 100vw;
   z-index: 1;
 }
 
 .carousel {
   overflow-x: hidden;
+  overflow-y: hidden;
   z-index: 1;
   margin:0 auto;
   width: 100vw;
-  height: 60vh;
+  height: 50vh;
   color: #333;
-  background: #419be0;
+  background: #383838;
   box-shadow: 0 0 10px #B8BFBF;
 }
 
@@ -296,14 +242,15 @@ body:before {
 }
 
 #songkick-input {
-  z-index: 1;
-  width: 50vw;
-  height: 22vh;
-  background: #ffffff;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  align-content: center;
+  z-index: 1;
+  width: 60vw;
+  min-width: 200px;
+  height: 22vh;
+  min-height: 150px;
+  background: #ffffff;
   position: relative;
   border-radius: 4px;
   box-shadow: 1px 1px 10px #B8BFBF;
