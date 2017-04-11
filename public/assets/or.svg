@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="864" height="2880" viewBox="0 0 864 2880">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        font-size: 400px;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #282828;
+      }
+
+      .cls-2 {
+        font-family: "Poppins";
+        font-weight: bold;
+      }
+
+      .cls-3 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <text x="120" y="1581" class="cls-1"><tspan class="cls-2">OR</tspan></text>
+  <path d="M422.000,2736.000 L422.000,1728.000 L442.000,1728.000 L442.000,2736.000 L422.000,2736.000 ZM422.000,144.000 L442.000,144.000 L442.000,1152.000 L422.000,1152.000 L422.000,144.000 Z" class="cls-3"/>
+</svg>

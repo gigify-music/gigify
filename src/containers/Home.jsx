@@ -5,9 +5,9 @@ import axios from 'axios';
 import ToggleDisplay from 'react-toggle-display';
 import EventList from '../components/EventList';
 import { getEvents } from '../actions/index';
-// import Splash from '../components/Splash';
 import Playlist from '../components/Playlist';
-// import * as types from '../constants/actionTypes';
+import '../../public/Styles/input.scss';
+import '../../public/Styles/howto.scss';
 
 
 class Home extends Component {
@@ -137,43 +137,62 @@ class Home extends Component {
             </Slider>
           </div>
           <div id="songkick-input">
-            <form className="form-inline">
-              <div className="search-input form-group">
-                <input
-                  type="text" className="col-xs-12 input-lg username-input"
-                  id="inlineFormInputGroup" placeholder="Enter your Songkick username..."
-                  value={this.state.username} onChange={this.handleUsername.bind(this)}
-                />
-              <span className="input-icon"><img className="sk-input-logo" src="../assets/sk-badge-black.png" /></span>
+              <div className="search-container">
+                <form className="username-form form-group">
+                  <div className="search-input form-group">
+                    <input
+                      type="text" className="username-input input-lg"
+                      id="inlineFormInputGroup" placeholder="Enter Songkick username..."
+                      value={this.state.username} onChange={this.handleUsername.bind(this)}
+                    />
+                  <span className="input-icon"><img className="sk-input-logo" src="../assets/sk-badge-black.png" /></span>
+                  </div>
+                  <div className="form-group">
+                    <button
+                      type="submit" className="submit-btn input-btn btn btn-lg"
+                      onClick={this.handleSubmit.bind(this)}
+                      >
+                      Submit
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div className="form-group">
-                <button
-                  type="submit" className="submit-btn input-btn btn btn-lg"
-                  onClick={this.handleSubmit.bind(this)}
-                  >
-                  Submit
-                </button>
+              <div className="or-container">
+                <img className ="or" src="../../assets/or.svg" />
               </div>
-            </form>
-            <span className="or-label">OR</span>
-            <div className="dropdown">
-              <button
-                className="submit-btn btn btn-lg dropdown-toggle"
-                type="button" data-toggle="dropdown">
-                Choose a genre  <i className="arrow fa fa-chevron-down" aria-hidden="true" />
-              </button>
-                <ul className="dropdown-menu genres">
-                  <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Indie</a></li>
-                  <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Hip Hop</a></li>
-                  <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Pop</a></li>
-                </ul>
-            </div>
+              <div className="genre-container">
+                <div className="dropdown">
+                  <button
+                    className="dropdown-btn btn btn-lg dropdown-toggle"
+                    type="button" data-toggle="dropdown">
+                    Choose a genre  <i className="arrow fa fa-chevron-down" aria-hidden="true" />
+                  </button>
+                    <ul className="dropdown-menu genres">
+                      <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Indie</a></li>
+                      <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Hip Hop</a></li>
+                      <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Pop</a></li>
+                    </ul>
+                </div>
+              </div>
           </div>
-          <label className="page-subheader home-subheader"> Create Spotify playlists from your
-        upcoming songkick gigs </label>
-      <div className="row logos home-logos">
-            <img src="./assets/Spotify_Icon_RGB_Green.png" className="spotify-logo" alt="Spotify Logo" />
-            <img src="./assets/sk-badge-pink.png" className="songkick-logo" alt="Songkick Logo" />
+          <div className="howto-container">
+            <div className="howto-header">How to Gigify</div>
+            <div className="howto-logos">
+              <div className="howto col-xs">
+                <img src="./assets/sk-badge-black.png" className="howto-logo" alt="Songkick Logo" />
+                <p>Find all the upcoming gigs your favorite artists are playing</p>
+              </div>
+              <i className="fa fa-chevron-right fa-2x" aria-hidden="true"></i>
+              <div className="howto col-xs">
+                <img src="./assets/music_playlist.svg" className="howto-logo" alt="Playlist Logo" />
+                <p>Pick the gigs you'd like to add to your playlist</p>
+              </div>
+              <i className="fa fa-chevron-right fa-2x" aria-hidden="true"></i>
+              <div className="howto col-xs">
+                <img src="./assets/Spotify_Icon_RGB_Black.png" className="howto-logo" alt="Spotify Logo" />
+                <p>Jam out to your favorite artists and the folks they have tagging along</p>
+              </div>
+            </div>
           </div>
         </div>
         <ToggleDisplay id="event-list-toggle" show={this.state.showEventList}>
