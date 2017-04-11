@@ -96,10 +96,21 @@ body:before {
   transition: .45s cubic-bezier(.3,1,.4,1) 0s;
 }
 
+.dropdown-toggle {
+  margin-bottom: 5% !important;
+}
+
 .genres {
   width: 100%;
 }
 
+.home-subheader{
+  font-size: 35px !important;
+}
+
+.home-logos {
+  margin-bottom: 5%;
+}
 .event-page-container {
   display: flex;
   align-items: center;
@@ -190,8 +201,9 @@ body:before {
 }
 
 .date {
-  font-size: 20px;
+  font-size: 35px;
 }
+
 .location {
   width: 100%;
   white-space: nowrap;
@@ -201,6 +213,7 @@ body:before {
 
 .venue {
     color: #8A2CCE;
+    font-style: bold;
 }
 
 .info-btns {
@@ -213,7 +226,7 @@ body:before {
   background-color: #8A2CCE;
   color: #ffffff;
   height: auto;
-  margin: 10px;
+  margin: 5px 10px;
 }
 .glyphicon {
     font-size: 50px;

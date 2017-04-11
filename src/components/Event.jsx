@@ -92,7 +92,7 @@ class Event extends Component {
             <div className="event-info">
               <div className="date">{this.props.date}</div>
               <div className="time">{this.props.time}</div>
-              <div className="location"><a className="venue" href={this.props.venueUrl}><p>{this.props.venueName}</p></a></div>
+              <div className="location"><a className="venue" href={this.props.venueUrl}>{this.props.venueName}</a></div>
               <div className="info-btns">
                 <a target="_blank" href={this.props.eventUrl}  className="btn btn-sm ticket-btn">Buy Tickets</a>
                 <a

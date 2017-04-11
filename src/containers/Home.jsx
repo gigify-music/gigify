@@ -169,9 +169,9 @@ class Home extends Component {
                 </ul>
             </div>
           </div>
-          <label className="page-subheader"> Create Spotify playlists from your
+          <label className="page-subheader home-subheader"> Create Spotify playlists from your
         upcoming songkick gigs </label>
-          <div className="row logos">
+      <div className="row logos home-logos">
             <img src="./assets/Spotify_Icon_RGB_Green.png" className="spotify-logo" alt="Spotify Logo" />
             <img src="./assets/sk-badge-pink.png" className="songkick-logo" alt="Songkick Logo" />
           </div>
@@ -185,6 +185,9 @@ class Home extends Component {
             listings={this.props.listings}
           />
         </ToggleDisplay>
+        <div className="footer">
+          <h6 className="footer-content">2017 Gigify. | <a>Gigify Github</a></h6>
+        </div>
       </div>
     );
   }
