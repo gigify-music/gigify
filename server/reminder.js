@@ -5,8 +5,9 @@ module.exports = {
   addReminder: (req, res) => {
     console.log(req.body, "inside reminder controller");
     const singleQuoteReplaced = req.body.eventname.replace(/'/g, '"');
-    const query = `insert into reminder (date, eventname, phone, status) values ('${req.body.date}', '${singleQuoteReplaced}', ${req.body.phone}, 0)`;
-    console.log(query, 'query here');
+    const query = `insert into reminder (date, eventname, phone, status) values
+    ('${req.body.date}', '${singleQuoteReplaced}', ${req.body.phone}, 0)`;
+    // console.log(query, 'query here');
     pool.connect()
          .then((client) => {
            client.query(query)
