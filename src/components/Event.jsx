@@ -7,8 +7,8 @@ class Event extends Component {
     super(props);
     this.state = {
       active: false,
-      checked: 'glyphicon glyphicon-check checkBox animated fadeIn',
-      unchecked: 'glyphicon glyphicon-unchecked checkBox',
+      checked: 'event-list-item-selected',
+      unchecked: '',
       phone:0,
       eventname:'',
       date:'',
@@ -23,16 +23,12 @@ class Event extends Component {
     this.setState({
       active: !this.state.active,
     });
+    console.log('THIS IMAGE', this.props.imageUrl);
     this.props.toggleEvent(this.props.performers, this.props.id);
   }
 
   updateNumber(input) {
     this.setState({ phone: input.target.value });
-    // console.log(this.state.phone, "PHONEEE");
-    // callback();
-
-    // axios.get(`api/addreminder/${this.state.query}`)
-
   }
 
   clickFunction(phone) {
@@ -44,9 +40,6 @@ class Event extends Component {
 
       console.log(this.props.venueName, this.props.currentevent, this.props.currentdate, this.state.phone, "INside Event Callback")
     }.bind(this), this);
-    // this.updateNumber(phone, function () {
-    //   console.log("done");
-    // });
   }
 
   submitquery() {
@@ -66,19 +59,14 @@ class Event extends Component {
     });
   }
 
+
   render() {
-    console.log(this.state.phone, "PHONEEE");
-    console.log(this.props, "state phone heree")
     return (
-      <li className="noBullets">
-        <div className="row event-list-item">
-          <div className="col-sm-2 event-checkbox">
-            <button
-              disabled={this.props.locked && !this.state.active}
-              className={this.state.active ? this.state.checked : this.state.unchecked}
-              onClick={this.onToggleClick}
-            />
-          </div>
+      <li onClick={this.onToggleClick} className="noBullets" disabled={this.props.locked && !this.state.active}>
+        <div
+          className={`event-list-item ${this.state.active ? this.state.checked : this.state.unchecked}`}>
+            <div className="artist-image col-sm-3" style={{ 'background-image': `url(${this.props.imageUrl})` }}>
+            </div>
           <div className="col-sm-7 event-musicians-container">
             <div className="event-musicians">
               <label className="headliner">{this.props.performers[0]}</label>
@@ -133,6 +121,7 @@ class Event extends Component {
     );
   }
 
+
 // <button className="btn btn-success btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
 }
 
@@ -145,6 +134,7 @@ Event.propTypes = {
   venueUrl: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
 };
 
 export default Event;
@@ -158,3 +148,11 @@ export default Event;
 // venueUrl,
 // date,
 // time,
+
+
+// <div className="col-sm-4 event-checkbox">
+// <button
+
+//   onClick={this.onToggleClick}
+// />
+// </div>

@@ -27,19 +27,16 @@ class EventList extends Component {
       this.setState({
         selected,
       });
-      [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 23 ? this.setState({ displayWarning: false }) : console.log('OK');
-      console.log('AFTER DELETE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
+      [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 5 ? this.setState({ displayWarning: false }) : console.log('OK');
       return;
     }
     selected[id] = performers;
     this.setState({
       selected,
     });
-    console.log('ADDED TO STATE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
     const unique = [...new Set([].concat(...(Object.values(this.state.selected))))];
 
-    if (unique.length > 23) {
-      console.log('WARNING TRIGGERED HERE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
+    if (unique.length > 5) {
       this.setState({
         displayWarning: true,
       });
@@ -48,16 +45,12 @@ class EventList extends Component {
         displayWarning: false,
       });
     }
-    console.log('NUMBER SELECTED', unique.length);
   }
 
   generatePlaylist() {
-    console.log("CALLING GENERATE PLAYLIST");
-    const selected = Object.values(this.state.selected);
-    const flatten = [].concat(...selected);
-    const unique = [...new Set(flatten)];
+    const selected = [...new Set([].concat(...(Object.values(this.state.selected))))];
     axios.post('/api/artists', {
-      selected: unique,
+      selected: selected,
     })
     .then((res) => {
       console.log("RESPONSE FROM SERVER FROM /ARTISTS: ", res);
@@ -98,21 +91,24 @@ class EventList extends Component {
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
     return (
       <div id="event-page" className="event-page-container">
-        <div className="col-sm-2 event-list-sidebar">
-          <button className="btn btn-success btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
-          <ToggleDisplay show={this.state.displayWarning}>
-            <div className="selectionWarning animated slideInLeft">
-              <h3>You've reached the maximum playlist length.</h3>
-              <h4>Either deselect an event or press submit to generate your playlist.</h4>
-            </div>
-          </ToggleDisplay>
-          <ul className="list-group">
-            <text>Selected performers:</text>
-            {selectedPerformers.map(performer =>
-              <li className="list-group-item">
-                {performer}
-              </li>)}
-          </ul>
+        <div className="event-list-sidebar col-sm-2">
+          <div data-spy="affix" data-offset-top="640">
+            <button className="btn btn-success btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
+            <ToggleDisplay show={this.state.displayWarning}>
+              <div className="selectionWarning animated slideInLeft">
+                <h3>You've reached the maximum playlist length.</h3>
+                <h4>Either deselect an event or press submit to generate your playlist.</h4>
+              </div>
+            </ToggleDisplay>
+            <ul className="list-group">
+              <h4 className="selected-artists-header">Selected artists</h4>
+              {selectedPerformers.map(performer =>
+                <li className="selected-item animated flipInY">
+                  {performer}
+                </li>)}
+            </ul>
+          </div>
+
         </div>
 
         <div id="events" className="col-sm-10 event-list-container">
@@ -163,6 +159,7 @@ EventList.propTypes = {
     venueUrl: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
   }).isRequired),
   renderPlaylist: PropTypes.func.isRequired,
 };
