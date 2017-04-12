@@ -32,17 +32,30 @@ const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getAr
         }));
         const artistCount = artistIDList.length;
         const allTracks = tracklist[Object.keys(tracklist)[0]];
-        console.log('ALL TRACKS', allTracks);
         const sizing = Math.floor(30 / artistCount);
-        console.log('SIZING', sizing);
 
         if (allTracks.length > sizing) {
           tracklist[Object.keys(tracklist)[0]].splice(sizing);
         }
-        console.log('NEW TRACKLIST', tracklist);
         return tracklist;
       })
       .catch(err => console.error(err)));
+
+  const getArtistImages = artistIDList => spotifyApi.getArtists(artistIDList)
+    .then((data) => {
+      const artistImages = [];
+      data.body.artists.forEach((artist) => {
+        if (artist.images[1] === undefined) {
+          artistImages.push('Picture Unavailable');
+        } else {
+          artistImages.push(artist.images[1].url);
+        }
+
+      });
+      console.log('ARTIST IMAGES', artistImages);
+      return artistImages
+    })
+    .catch(err => console.error(err))
 
 let userID;
 
@@ -56,7 +69,6 @@ module.exports = {
     res.send('SECOND FESTIVAL RESPONSE');
   },
   createPlaylist: (req, res) => {
-    // console.log("CREATING PLAYLIST");
     console.log('SELECTED', req.body.selected);
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
@@ -115,6 +127,7 @@ module.exports = {
       const eventList = results.data.resultsPage.results.calendarEntry;
       const events = [];
       const festivals = [];
+      const allArtists = [];
       eventList.forEach((item) => {
         const concert = item.event;
         let eventTime = moment(concert.start.datetime).format('hA');
@@ -129,6 +142,11 @@ module.exports = {
         concert.performance.forEach((artist) => {
           artists.push(artist.displayName);
         });
+
+        if (artists.length < 7) {
+          allArtists.push(artists[0]);
+        }
+
         const event = {
           eventName: concert.displayName,
           eventUrl: concert.uri,
@@ -144,7 +162,16 @@ module.exports = {
           events.push(event);
         }
       });
-      // console.log(events, "EVENTS")
+      Promise.all(getArtistIDList(allArtists))
+        .then(artistIds => getArtistImages(artistIds))
+          .then((imageUrls) => {
+            console.log(imageUrls, "IMAGES");
+            events.forEach((event, i) => {
+              event.imageUrl = imageUrls[i];
+              console.log('EVNT MOD', event);
+            })
+          });
+      console.log('MODIFIED EVENTS', events);
       res.send(events);
     });
   },

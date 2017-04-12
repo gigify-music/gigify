@@ -67,8 +67,8 @@ class Event extends Component {
   }
 
   render() {
-    console.log(this.state.phone, "PHONEEE");
-    console.log(this.props, "state phone heree")
+    // console.log(this.state.phone, "PHONEEE");
+    // console.log(this.props, "state phone heree")
     return (
       <li className="noBullets">
         <div className="row event-list-item">
