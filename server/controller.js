@@ -52,7 +52,6 @@ const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getAr
         }
 
       });
-      console.log('ARTIST IMAGES', artistImages);
       return artistImages
     })
     .catch(err => console.error(err))
@@ -165,14 +164,11 @@ module.exports = {
       Promise.all(getArtistIDList(allArtists))
         .then(artistIds => getArtistImages(artistIds))
           .then((imageUrls) => {
-            console.log(imageUrls, "IMAGES");
             events.forEach((event, i) => {
               event.imageUrl = imageUrls[i];
-              console.log('EVNT MOD', event);
             })
-          });
-      console.log('MODIFIED EVENTS', events);
-      res.send(events);
+          })
+          .then(() => res.send(events));
     });
   },
   spotifyApi,

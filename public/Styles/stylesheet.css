@@ -160,7 +160,7 @@ button.btn.btn-success.btn-lg {
 }
 
 .event-list-item {
-  border: 1px solid #1DB954;
+  border: 1px solid #383838;
   display: flex;
   flex-direction: row;
   height: 20%;
@@ -171,6 +171,14 @@ button.btn.btn-success.btn-lg {
 
 .event-list-item:hover {
   box-shadow: 1px 1px 10px #B8BFBF;
+}
+
+.artist-image {
+  max-height: 200px;
+  max-width: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .event-checkbox {
@@ -209,7 +217,7 @@ button.btn.btn-success.btn-lg {
 
 .event-info-container {
   display: flex;
-  background-color: #1DB954;
+  background-color: #383838;
 }
 
 .event-info {
@@ -235,7 +243,7 @@ button.btn.btn-success.btn-lg {
 }
 
 .venue {
-    color: #8A2CCE;
+    color:  #ffffff;
     font-style: bold;
 }
 
@@ -246,7 +254,7 @@ button.btn.btn-success.btn-lg {
   width: 100%;
 }
 .ticket-btn {
-  background-color: #8A2CCE;
+  background-color:  #1DB954;
   color: #ffffff;
   height: auto;
   margin: 5px 10px;

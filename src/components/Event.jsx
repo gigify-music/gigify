@@ -23,6 +23,7 @@ class Event extends Component {
     this.setState({
       active: !this.state.active,
     });
+    console.log('THIS IMAGE', this.props.imageUrl);
     this.props.toggleEvent(this.props.performers, this.props.id);
   }
 
@@ -71,14 +72,9 @@ class Event extends Component {
     // console.log(this.props, "state phone heree")
     return (
       <li className="noBullets">
-        <div className="row event-list-item">
-          <div className="col-sm-2 event-checkbox">
-            <button
-              disabled={this.props.locked && !this.state.active}
-              className={this.state.active ? this.state.checked : this.state.unchecked}
-              onClick={this.onToggleClick}
-            />
-          </div>
+        <div className="event-list-item">
+            <div className="artist-image col-sm-3" style={{ 'background-image': `url(${this.props.imageUrl})` }}>
+            </div>
           <div className="col-sm-7 event-musicians-container">
             <div className="event-musicians">
               <label className="headliner">{this.props.performers[0]}</label>
@@ -158,3 +154,12 @@ export default Event;
 // venueUrl,
 // date,
 // time,
+
+
+// <div className="col-sm-4 event-checkbox">
+// <button
+//   disabled={this.props.locked && !this.state.active}
+//   className={this.state.active ? this.state.checked : this.state.unchecked}
+//   onClick={this.onToggleClick}
+// />
+// </div>
