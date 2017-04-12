@@ -13,7 +13,7 @@ module.exports = {
              .then((resp) => {
               //  console.log(resp.rows, 'response from reminder select status query');
                client.release();
-                extractDate(resp.rows);
+               extractDate(resp.rows);
               //  client.release();
              })
              .catch((err) => {
@@ -31,7 +31,7 @@ const extractDate = (objectArray) => {
       let date1= convertDate(new Date()).split('-');
       let date2= convertDate(ele['date']).split('-');
       const difference = getDifferenceInDays(date1, date2);
-      console.log(difference, 'difference of each date');
+      // console.log(difference, 'difference of each date');
       if(difference < 2){
         sendMessage(ele.phone, ele.eventname);
       }
@@ -66,8 +66,8 @@ const convertDate = (date) => {
 const sendMessage = (phoneIn, eventName) => {
   const clientTwilio = new twilio.RestClient(process.env.TWILIOSID, process.env.TWILIOAUTHTOKEN);
   clientTwilio.sms.messages.create({
-      to: `+1${phoneIn}`,
-      from: '+14154032411' ,
+      to: `+1607-766-1451`,
+      from: '+14154032411',
       body: `Gigify: Your gig is tomorrow! => ${eventName}`,
   }, function(err, message) {
       if(message){
