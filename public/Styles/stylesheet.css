@@ -125,9 +125,29 @@ button.btn.btn-success.btn-lg {
   width: 70%;
 }
 
+.top-event-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#gigify-hr {
+  width: 100%;
+}
+
+.event-subheader {
+  font-family: "Poppins";
+  font-weight: 900;
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 .list {
   width: 80%;
 }
+
 .event-list-item {
   border: 1px solid #383838;
   display: flex;
