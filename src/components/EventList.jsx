@@ -83,13 +83,18 @@ class EventList extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (!prevProps.showEventList) {
       console.log("SHOULD SCROLL");
-      this.sweetScroll.toElement(document.getElementById('events'));
+      this.sweetScroll.toElement(document.getElementById('gigify-hr'));
     }
   }
 
   render() {
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
     return (
+      <div>
+        <div className="top-event-container">
+          <img id="gigify-hr" src="./assets/gigifyhr.png" />
+          <div className="event-subheader">Click on events to add them to your playlist</div>
+        </div>
       <div id="event-page" className="event-page-container">
         <div className="event-list-sidebar col-sm-2">
           <div data-spy="affix" data-offset-top="640">
@@ -145,6 +150,7 @@ class EventList extends Component {
           </div>
         </div>
       </div>
+    </div>
     );
   }
 }
