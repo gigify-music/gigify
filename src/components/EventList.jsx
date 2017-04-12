@@ -159,6 +159,7 @@ EventList.propTypes = {
     venueUrl: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
   }).isRequired),
   renderPlaylist: PropTypes.func.isRequired,
 };
