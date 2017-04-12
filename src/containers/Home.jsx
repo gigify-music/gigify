@@ -127,9 +127,9 @@ class Home extends Component {
         <div className="home-page-container">
           <div className="carousel">
             <Slider {...settings}>
-              <div id="particles-js" className="top-page-container">
-                <div className="top-content-container">
-                  <label className="page-title"> Gigify </label>
+              <div className="top-page-container">
+                <div className="home-carousel">
+                  <img className="home-header-logo" src="./assets/gigify.svg"/>
                 </div>
               </div>
               <a className="carousel-image panorama" data-toggle="modal" data-target="#homePlaylistModal" onClick={() => this.handleFirst()} />

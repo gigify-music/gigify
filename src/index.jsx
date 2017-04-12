@@ -12,11 +12,11 @@ import particleConfig from '../particlesjs-config.json';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-console.log('PARTICLE CONFIG', particleConfig);
-
 document.addEventListener('DOMContentLoaded', () => {
   particlesJS('particles-js', particleConfig,
    !1);
+  particlesJS('home-particles-js', particleConfig,
+    !1);
 });
 
 const logger = createLogger();

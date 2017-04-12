@@ -40,13 +40,9 @@ class Login extends React.Component {
       <div className="page-container">
         <div id="particles-js" className="top-page-container">
           <div className="top-content-container">
-            <label className="page-title"> Gigify </label>
+            <img className="header-logo" src="./assets/gigify.svg"/>
             <label className="page-subheader"> Create Spotify playlists from your
           upcoming Songkick gigs </label>
-            <div className="row logos">
-              <img src="./assets/Spotify_Icon_RGB_Green.png" className="spotify-logo" alt="Spotify Logo" />
-              <img src="./assets/sk-badge-pink.png" className="songkick-logo" alt="Songkick Logo" />
-            </div>
           </div>
         </div>
         <div className="bottom-content-container">

@@ -45,13 +45,27 @@ body:before {
   background-image: url('../assets/govball.png');
 }
 #particles-js .particles-js-canvas-el {
-  background-image: url(../assets/particlebackground.png);
+  background-image: url(../assets/loginbackground.png);
   background-position: center;
   background-size: cover;
   width: 100vw!important;
   height: 60vh!important;
 }
-
+.home-carousel {
+  background-image: url(../assets/loginbackground.png);
+  background-position: center;
+  background-size: cover;
+  width: 100vw!important;
+  height: 60vh!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-header-logo {
+  margin-bottom: 8%;
+  width: 30vw;
+  z-index: 2;
+}
 .home-subheader{
   font-size: 35px !important;
 }
