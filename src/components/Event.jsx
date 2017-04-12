@@ -20,11 +20,15 @@ class Event extends Component {
   }
 
   onToggleClick() {
-    this.setState({
-      active: !this.state.active,
-    });
-    console.log('THIS IMAGE', this.props.imageUrl);
-    this.props.toggleEvent(this.props.performers, this.props.id);
+    console.log('CHECK', this.state.active, this.props.locked);
+    if (!this.state.active && this.props.locked) {
+      return;
+    } else {
+      this.setState({
+        active: !this.state.active,
+      });
+      this.props.toggleEvent(this.props.performers, this.props.id);
+    }
   }
 
   updateNumber(input) {
@@ -59,7 +63,7 @@ class Event extends Component {
 
   render() {
     return (
-      <li onClick={this.onToggleClick} className="noBullets" disabled={this.props.locked && !this.state.active}>
+      <li onClick={this.onToggleClick} className="noBullets">
         <div
           className={`event-list-item ${this.state.active ? this.state.checked : this.state.unchecked}`}>
             <div className="artist-image col-sm-3" style={{ 'background-image': `url(${this.props.imageUrl})` }}>
