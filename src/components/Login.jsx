@@ -56,8 +56,8 @@ class Login extends React.Component {
 
 
           <div className="down">
-            <h4>About</h4>
-            <button className="downBtn" style={{ background: 'transparent', border: 'none', color: 'transparent' }} onClick={() => this.handleScroll()}>
+            <button className="downBtn" style={{ background: 'transparent', border: 'none' }} onClick={() => this.handleScroll()}>
+              <h4>About</h4>
               <i
                 className="icon fa fa-chevron-down faa-pulse animated"
                 aria-hidden="true"
