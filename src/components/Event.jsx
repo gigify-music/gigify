@@ -43,9 +43,6 @@ class Event extends Component {
   }
 
   submitquery() {
-    // let query = `insert into reminder (date, eventname, phone, status) values ('${this.props.currentdate}', '${this.props.currentevent}', ${this.state.phone}, 0)`;
-    // query.replace(/'/g, '"');
-    // console.log(query, 'query here');
     axios.post(`/api/addreminder`, {
       date:this.props.currentdate,
       eventname:this.props.currentevent,
@@ -103,15 +100,17 @@ class Event extends Component {
                 <h4 className="modal-title" id="myModalLabel">Get a reminder via Text  </h4>
               </div>
               <div className="modal-body twilio">
-                  <div className="form-inline row telephone">
+                <form className= "form-inline">
+                  <div className="row telephone">
                       <input
-                        className="form-control" type="tel"
-                        placeholder="1-(555)-555-5555"
-                        id="example-tel-input"
+                        className="form-control"
+                        type="tel"
+                        placeholder="Enter Phone Number"
                         onChange={this.updateNumber.bind(this)}
                       />
-                    <button type="submit" className="btn btn-primary" onClick={this.submitquery.bind(this)}>Submit</button>
+                    <button type="submit" className="btn btn-primary" onClick={this.submitquery.bind(this)} data-dismiss="modal">Submit</button>
                   </div>
+                </form>
               </div>
             </div>
           </div>
