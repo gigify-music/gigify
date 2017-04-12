@@ -4,7 +4,7 @@ const sendNotification = require('./sendreminder');
 
 module.exports = {
   job: () => {
-    cron.schedule('00 12 * * *', () => {
+    cron.schedule('01 00 * * *', () => {
       sendNotification.sendNotification();
     });
   },
