@@ -47,14 +47,15 @@ canvas {
   z-index: 1;
 }
 
-.page-title {
-  font-size: 150px;
-  font-family: $header-font;
-  font-weight: bold;
+
+.header-logo {
+  margin-top: 2%;
+  width: 40vw;
   z-index: 2;
 }
 
 .page-subheader {
+  margin-top: 1%;
   font: 25px 'Open Sans', sans-serif;
   font-weight: bold;
   z-index: 2;

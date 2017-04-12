@@ -36,7 +36,7 @@
       }
     },
     "size": {
-      "value": 1.5,
+      "value": 3,
       "random": true,
       "anim": {
         "enable": true,
@@ -89,7 +89,7 @@
       },
       "bubble": {
         "distance": 400,
-        "size": 3,
+        "size": 4,
         "duration": 0.48724632738080703,
         "opacity": 0.5440917322419012,
         "speed": 3
