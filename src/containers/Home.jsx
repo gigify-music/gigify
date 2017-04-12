@@ -173,6 +173,7 @@ class Home extends Component {
                       <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Pop</a></li>
                     </ul>
                 </div>
+                <div className="nyc-events">(NYC Gigs)</div>
               </div>
           </div>
           <div className="howto-container">
