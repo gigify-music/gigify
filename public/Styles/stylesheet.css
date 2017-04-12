@@ -19,7 +19,7 @@ body:before {
 }
 
 #particles-js {
-    background: $background-black;
+    background-image: url(../assets/particlebackground.png) ;
     display: block;
     vertical-align: bottom;
     width: 100vw;
@@ -45,6 +45,9 @@ body:before {
   background-image: url('../assets/govball.png');
 }
 #particles-js .particles-js-canvas-el {
+  background-image: url(../assets/particlebackground.png);
+  background-position: center;
+  background-size: cover;
   width: 100vw!important;
   height: 60vh!important;
 }
