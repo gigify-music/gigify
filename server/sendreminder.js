@@ -1,4 +1,3 @@
-const cron = require('node-cron');
 const twilio = require('twilio');
 const pool = require('./database');
 
@@ -28,14 +27,14 @@ module.exports = {
 
 const extractDate = (objectArray) => {
   objectArray.forEach((ele) => {
-      let date1= convertDate(new Date()).split('-');
-      let date2= convertDate(ele['date']).split('-');
-      const difference = getDifferenceInDays(date1, date2);
-      // console.log(difference, 'difference of each date');
-      if(difference < 2){
-        sendMessage(ele.phone, ele.eventname);
-      }
-      return difference;
+    const date1 = convertDate(new Date()).split('-');
+    const date2 = convertDate(ele['date']).split('-');
+    const difference = getDifferenceInDays(date1, date2);
+    // console.log(difference, 'difference of each date');
+    if (difference < 2) {
+      sendMessage(ele.phone, ele.eventname);
+    }
+    return difference;
   });
 }
 
@@ -66,7 +65,7 @@ const convertDate = (date) => {
 const sendMessage = (phoneIn, eventName) => {
   const clientTwilio = new twilio.RestClient(process.env.TWILIOSID, process.env.TWILIOAUTHTOKEN);
   clientTwilio.sms.messages.create({
-      to: `+1607-766-1451`,
+      to: `+1${phoneIn}`,
       from: '+14154032411',
       body: `Gigify: Your gig is tomorrow! => ${eventName}`,
   }, function(err, message) {
