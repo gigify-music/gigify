@@ -312,7 +312,10 @@ body:before {
   font-weight: bold;
   box-shadow: 2px 2px 30px #000;
 }
-
+.footer-logo {
+  height: 25px;
+  padding-right: 5px;
+}
 /*.home-page-container {
   align-items: center;
   justify-content: center;
