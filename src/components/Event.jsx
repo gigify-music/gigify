@@ -7,7 +7,7 @@ class Event extends Component {
     super(props);
     this.state = {
       active: false,
-      checked: '',
+      checked: 'event-list-item-selected',
       unchecked: '',
       phone:0,
       eventname:'',
@@ -29,11 +29,6 @@ class Event extends Component {
 
   updateNumber(input) {
     this.setState({ phone: input.target.value });
-    // console.log(this.state.phone, "PHONEEE");
-    // callback();
-
-    // axios.get(`api/addreminder/${this.state.query}`)
-
   }
 
   clickFunction(phone) {
@@ -45,9 +40,6 @@ class Event extends Component {
 
       console.log(this.props.venueName, this.props.currentevent, this.props.currentdate, this.state.phone, "INside Event Callback")
     }.bind(this), this);
-    // this.updateNumber(phone, function () {
-    //   console.log("done");
-    // });
   }
 
   submitquery() {
@@ -69,9 +61,6 @@ class Event extends Component {
 
 
   render() {
-    // const eventStyling = 'event-list-item' +
-    // console.log(this.state.phone, "PHONEEE");
-    // console.log(this.props, "state phone heree")
     return (
       <li onClick={this.onToggleClick} className="noBullets" disabled={this.props.locked && !this.state.active}>
         <div
