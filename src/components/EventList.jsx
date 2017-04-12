@@ -16,6 +16,9 @@ class EventList extends Component {
       currentVenue: '',
       currentdate:'',
       currentevent:'',
+      useWindowAsScrollContainer: true,
+      isInfiniteLoading: false,
+      elements: this.buildElements(0, 10),
     };
     this.toggleEvent = this.toggleEvent.bind(this);
     this.generatePlaylist = this.generatePlaylist.bind(this);
@@ -79,6 +82,52 @@ class EventList extends Component {
     });
   }
 
+  buildElements(start, end) {
+    const elements = this.props.listings.map((event, i) =>
+      <Event
+        key={i}
+        {...event}
+        toggleEvent={this.toggleEvent}
+        locked={this.state.displayWarning}
+        getVenue={this.getVenue}
+        currentVenue={this.state.currentVenue}
+        currentdate={this.state.currentdate}
+        currentevent={this.state.currentevent}
+      />)
+    const built = [];
+
+    for (let i = start; i < end; i++) {
+          built.push(elements[i])
+    }
+
+    console.log('ELEMENTS', built);
+      this.setState({
+        elements: built,
+      })
+    }
+
+    handleInfiniteLoad() {
+       var that = this;
+       this.setState({
+           isInfiniteLoading: true
+       });
+       setTimeout(function() {
+           var elemLength = that.state.elements.length,
+               newElements = that.buildElements(elemLength, elemLength + 10);
+           that.setState({
+               isInfiniteLoading: false,
+               elements: that.state.elements.concat(newElements)
+           });
+       }, 2500);
+   }
+
+   elementInfiniteLoad() {
+       return <div className="infinite-list-item">
+           Loading...
+       </div>;
+   }
+
+
   componentDidMount() {
     this.sweetScroll = new SweetScroll();
   }
@@ -115,20 +164,16 @@ class EventList extends Component {
 
         <div id="events" className="col-sm-10 event-list-container">
           <ul>
-            <Infinite containerHeight={200} elementHeight={40}>
-            {this.props.listings.map((event, i) =>
-              <Event
-                key={i}
-                {...event}
-                toggleEvent={this.toggleEvent}
-                locked={this.state.displayWarning}
-                getVenue={this.getVenue}
-                currentVenue={this.state.currentVenue}
-                currentdate={this.state.currentdate}
-                currentevent={this.state.currentevent}
-
-              />,
-        )}
+            <Infinite
+              elementHeight={100}
+              useWindowAsScrollContainer={this.state.useWindowAsScrollContainer}
+              preloadBatchSize={Infinite.containerHeightScaleFactor(1.25)}
+              infiniteLoadingBeginBottomOffset={200}
+              onInfiniteLoad={this.handleInfiniteLoad}
+              loadingSpinnerDelegate={this.elementInfiniteLoad()}
+              isInfiniteLoading={this.state.isInfiniteLoading}
+              >
+            {this.state.elements}
           </Infinite>
           </ul>
         </div>
