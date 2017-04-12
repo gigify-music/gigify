@@ -75,18 +75,43 @@ body:before {
 }
 .event-page-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
   height: 100vh;
   width: 100vw;
 }
 
-.event-list-sidebar {
-  margin-top: 7%;
+.event-list-topbar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 10vh;
+}
+
+.event-list-sidebar {
   height: 100vh;
+  width: 20vw;
+  float: right;
+  position: fixed;
+  z-index: 100;
+}
+
+.affix {
+  width: 16.6666%;
+  top: 2%;
+}
+
+.selected-artists-header {
+  text-align: center;
+  font-weight: bold;
+}
+
+button.btn.btn-success.btn-lg {
   width: 100%;
+}
+
+.selectionWarning {
+  text-align: center;
+  border: 1px solid #1DB954;
 }
 
 .event-list-container {
@@ -114,7 +139,6 @@ body:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  /*background-color: green;*/
 }
 
 .event-musicians-container {
@@ -130,7 +154,6 @@ body:before {
   flex-direction: column;
   justify-content: left;
   padding: 1%;
-  /*background-color: yellow;*/
 }
 
 .headliner {
@@ -208,6 +231,15 @@ body:before {
     background: transparent;
   }
 /*     width: 75px */
+
+.selected-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  text-align: center;
+  border: 2px solid black;
+}
 
 .home-page-container {
   display: flex;
