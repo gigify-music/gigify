@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/moms-spaghetti/gigify.git"
+    "url": "git+https://github.com/gigify-music/gigify.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/moms-spaghetti/gigify/issues"
+    "url": "https://github.com/gigify-music/gigify/issues"
   },
-  "homepage": "https://github.com/moms-spaghetti/gigify#readme",
+  "homepage": "https://github.com/gigify-music/gigify#readme",
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",

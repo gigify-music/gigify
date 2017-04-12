@@ -5,7 +5,7 @@ import axios from 'axios';
 import ToggleDisplay from 'react-toggle-display';
 import EventList from '../components/EventList';
 import { getEvents } from '../actions/index';
-import Playlist from '../components/Playlist';
+// import Playlist from '../components/Playlist';
 import '../../public/Styles/input.scss';
 import '../../public/Styles/howto.scss';
 
@@ -22,6 +22,31 @@ class Home extends Component {
     };
   }
 
+  // onGenerateClick = (username) => {
+  //   console.log('Called+++++++++')
+  //   this.props.getEvents(username)
+  //     .then(() => {
+  //       this.setState({ showEventList: true });
+  //     });
+  // }
+
+
+  componentWillMount() {
+    console.log('BEFORE MOUNT');
+    axios.get('/api/checksession').then((data) => {
+      console.log(data, 'RESP CHECK SESSION');
+      if (data.data === 'logged') {
+        this.setState({ authenticated: true });
+        // window.location = '/auth/signin';
+      } else {
+        window.location = '/auth/signin';
+        // this.setState({authenticated : true});
+      }
+    }).catch((err) => {
+      this.setState({ authenticated: false });
+      window.location = '/auth/signin';
+    });
+  }
   handleUsername(username) {
     this.setState({ username: username.target.value });
   }
@@ -34,37 +59,6 @@ class Home extends Component {
           }
         })
         .catch(err => console.error(err));
-  }
-  // onGenerateClick = (username) => {
-  //   console.log('Called+++++++++')
-  //   this.props.getEvents(username)
-  //     .then(() => {
-  //       this.setState({ showEventList: true });
-  //     });
-  // }
-  handleFirst() {
-    const panoramaPlaylist = {
-      data: ['panoramanyc', '3Tx6bcrYcvmAA9sblNLPrH'],
-    };
-    this.renderPlaylist(panoramaPlaylist);
-  }
-
-  componentWillMount(){
-    console.log("BEFORE MOUNT")
-    axios.get('/api/checksession').then((data) => {
-      console.log(data, "RESP CHECK SESSION")
-      if(data.data === 'logged'){
-        this.setState({ authenticated: true });
-        // window.location = '/auth/signin';
-      }
-      else {
-        window.location = '/auth/signin';
-        // this.setState({authenticated : true});
-      }
-    }).catch((err) => {
-      this.setState({ authenticated: false });
-      window.location = '/auth/signin';
-    });
   }
 
   handleSecond() {
@@ -95,6 +89,18 @@ class Home extends Component {
     })
     .catch((err) => {
       console.log(err, 'error in auth check on submit');
+    });
+  }
+
+  handleGenre(username){
+    const that = this;
+    axios.get(`/api/events/${username}`)
+    .then((response) => {
+      that.props.getEvents(response);
+      that.setState({ showEventList: true });
+    })
+    .catch((error) => {
+      console.log(error, 'error in get api/events on submit');
     });
   }
 
@@ -157,20 +163,22 @@ class Home extends Component {
                   </div>
                 </form>
               </div>
-              <div className="or-container">
-                <img className ="or" src="../../assets/or.svg" />
+            <div className="or-container">
+              <img className ="or" src="../../assets/or.svg" />
               </div>
-              <div className="genre-container">
+            <div className="genre-container">
                 <div className="dropdown">
                   <button
                     className="dropdown-btn btn btn-lg dropdown-toggle"
                     type="button" data-toggle="dropdown">
-                    Choose a genre  <i className="arrow fa fa-chevron-down" aria-hidden="true" />
+                    Choose a genre <i className="arrow fa fa-chevron-down" aria-hidden="true" />
                   </button>
-                    <ul className="dropdown-menu genres">
-                      <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Indie</a></li>
-                      <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Hip Hop</a></li>
-                      <li><a href="#"><i className="fa fa-music" aria-hidden="true"></i> Pop</a></li>
+                  <ul className="dropdown-menu genres">
+                    <li><a onClick={() => this.handleGenre('gigify_edm')}><i className="fa fa-music" aria-hidden="true" /> EDM </a></li>
+                    <li><a onClick={() => this.handleGenre('gigify_hiphop')}><i className="fa fa-music" aria-hidden="true" /> Hip Hop </a></li>
+                    <li><a onClick={() => this.handleGenre('gigify_indie')}><i className="fa fa-music" aria-hidden="true" /> Indie </a></li>
+                    <li><a onClick={() => this.handleGenre('gigify_pop')}><i className="fa fa-music" aria-hidden="true" /> Pop </a></li>
+                    <li><a onClick={() => this.handleGenre('gigify_rock')}><i className="fa fa-music" aria-hidden="true" /> Rock </a></li>
                     </ul>
                 </div>
                 <div className="nyc-events">(NYC Gigs)</div>
