@@ -112,7 +112,7 @@ class EventList extends Component {
         </div>
 
         <div id="events" className="col-sm-10 event-list-container">
-          <ul>
+          <ul className="list">
             {this.props.listings.map((event, i) =>
               <Event
                 key={i}
