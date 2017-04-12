@@ -29,6 +29,11 @@ body:before {
     background-attachment: fixed;
 }
 
+.home-container {
+  height: 100%;
+  margin-bottom: -45px;
+}
+
 .carousel-image {
   height: 50vh;
   width: 100vw;
@@ -76,7 +81,6 @@ body:before {
 .event-page-container {
   display: flex;
   flex-direction: row;
-  height: 100vh;
   width: 100vw;
 }
 

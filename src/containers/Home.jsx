@@ -123,7 +123,7 @@ class Home extends Component {
     }
 
     return (
-      <div>
+      <div className="home-container">
         <div className="home-page-container">
           <div className="carousel">
             <Slider {...settings}>
@@ -205,9 +205,6 @@ class Home extends Component {
             listings={this.props.listings}
           />
         </ToggleDisplay>
-        <div className="footer">
-          <h6 className="footer-content"><img className="footer-logo" src="./assets/gigify-g.svg"/> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
-        </div>
         <div className="modal fade playlist" id="homePlaylistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
@@ -224,6 +221,9 @@ class Home extends Component {
           </div>
         </div>
       </div>
+      <footer className="footer">
+        <h6 className="footer-content container"><img className="footer-logo" src="./assets/gigify-g.svg"/> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
+      </footer>
       </div>
     );
   }
