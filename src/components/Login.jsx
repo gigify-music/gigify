@@ -138,7 +138,7 @@ class Login extends React.Component {
             </div>
           </div>
           <div className="footer">
-            <h6 className="footer-content">2017 Gigify. | <a>Gigify Github</a></h6>
+            <h6 className="footer-content"><img className="footer-logo" src="./assets/gigify-g.svg"/> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
           </div>
         </ToggleDisplay>
 
