@@ -260,6 +260,9 @@ button.btn.btn-lg.spotify-auth-button {
 
 .footer {
   display: flex;
+  bottom: 0;
+  position: relative;
+  height: 45px;
 }
 
 .footer-content {
