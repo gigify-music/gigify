@@ -7,8 +7,8 @@ class Event extends Component {
     super(props);
     this.state = {
       active: false,
-      checked: 'glyphicon glyphicon-check checkBox animated fadeIn',
-      unchecked: 'glyphicon glyphicon-unchecked checkBox',
+      checked: '',
+      unchecked: '',
       phone:0,
       eventname:'',
       date:'',
@@ -67,12 +67,15 @@ class Event extends Component {
     });
   }
 
+
   render() {
+    // const eventStyling = 'event-list-item' +
     // console.log(this.state.phone, "PHONEEE");
     // console.log(this.props, "state phone heree")
     return (
-      <li className="noBullets">
-        <div className="event-list-item">
+      <li onClick={this.onToggleClick} className="noBullets" disabled={this.props.locked && !this.state.active}>
+        <div
+          className={`event-list-item ${this.state.active ? this.state.checked : this.state.unchecked}`}>
             <div className="artist-image col-sm-3" style={{ 'background-image': `url(${this.props.imageUrl})` }}>
             </div>
           <div className="col-sm-7 event-musicians-container">
@@ -129,6 +132,7 @@ class Event extends Component {
     );
   }
 
+
 // <button className="btn btn-success btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
 }
 
@@ -141,6 +145,7 @@ Event.propTypes = {
   venueUrl: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
 };
 
 export default Event;
@@ -158,8 +163,7 @@ export default Event;
 
 // <div className="col-sm-4 event-checkbox">
 // <button
-//   disabled={this.props.locked && !this.state.active}
-//   className={this.state.active ? this.state.checked : this.state.unchecked}
+
 //   onClick={this.onToggleClick}
 // />
 // </div>

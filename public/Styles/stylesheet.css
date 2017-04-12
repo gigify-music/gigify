@@ -167,11 +167,17 @@ button.btn.btn-success.btn-lg {
   width: 100%;
   background-color: white;
   margin-top: 3%;
+  position: relative;
 }
 
 .event-list-item:hover {
   box-shadow: 1px 1px 10px #B8BFBF;
 }
+
+.event-list-item-selected {
+  box-shadow: 5px 5px 50px #B8BFBF;
+}
+
 
 .artist-image {
   max-height: 200px;
@@ -181,11 +187,11 @@ button.btn.btn-success.btn-lg {
   background-position: center;
 }
 
-.event-checkbox {
+/*.event-checkbox {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+}*/
 
 .event-musicians-container {
   display: flex;
