@@ -59,6 +59,7 @@ class Login extends React.Component {
             </button>
           </div>
         </div>
+      </div>
         <ToggleDisplay show={this.state.showAbout}>
           <div id="about" className="container aboutUs">
             <div className="aboutSection">
@@ -134,8 +135,6 @@ class Login extends React.Component {
             <h6 className="footer-content"><img className="footer-logo" src="./assets/gigify-g.svg"/> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
           </div>
         </ToggleDisplay>
-
-        </div>
       </div>
 
     );
