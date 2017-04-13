@@ -51,7 +51,6 @@ class Login extends React.Component {
            Connect with Spotify </button>
           <div className="down">
             <button className="downBtn" style={{ background: 'transparent', border: 'none' }} onClick={() => this.handleScroll()}>
-              <h4>About</h4>
               <i
                 className="icon fa fa-chevron-down faa-pulse animated"
                 aria-hidden="true"
@@ -60,21 +59,20 @@ class Login extends React.Component {
           </div>
         </div>
       </div>
-        <ToggleDisplay show={this.state.showAbout}>
           <div id="about" className="container aboutUs">
             <div className="aboutSection">
               <div className="aboutHeader">
                 About Gigify
               </div>
               <div className="gigifyDesc">
-                <p>
-                  Cardigan tumeric listicle, prism art party twee yuccie
-                  plaid cold-pressed shoreditch 8-bit coloring book
-                  godard blog roof party. Tumeric coloring book swag,
-                  vinyl pinterest pop-up meditation brunch dreamcatcher cornhole.
-                  Woke street art disrupt everyday carry, ennui jianbing banjo
-                  portland pour-over bushwick hella occupy yuccie. Lyft slow-carb
-                  messenger bag deep v normcore.
+                <p className="about-body">
+                  Gigify is an artist discovery tool. We’ve all gone to see
+                  our favorite artists live and didn’t have the time or resources to
+                  check out the supporting acts ahead of time. Gigify uses Songkick’s event data to
+                  show you the gigs that match your interests and allows to choose the ones you’d like to attend.
+                  After making your selections, you can buy tickets, sign up to receive gig reminders, and best of all,
+                  you can create a Spotify playlist with all of the artists playing the gigs! The playlist will
+                  automatically add to your Spotify account, so you can gear up for gigs anywhere you want. 
                 </p>
               </div>
 
@@ -134,7 +132,6 @@ class Login extends React.Component {
           <div className="footer">
             <h6 className="footer-content"><img className="footer-logo" src="./assets/gigify-g.svg"/> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
           </div>
-        </ToggleDisplay>
       </div>
 
     );
