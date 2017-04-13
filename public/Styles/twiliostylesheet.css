@@ -1,0 +1,12 @@
+.modalAlign {
+  height:40%;
+  padding-top: 30%;
+  padding-bottom: 30%;
+}
+
+.twilio {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+ 

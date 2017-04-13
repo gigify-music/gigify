@@ -1,0 +1,107 @@
+@import './_variables.scss';
+
+
+/*SEARCH USERNAME============================================================*/
+.search-container {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.username-form {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input {
+  position:relative;
+  padding:0;
+  margin:0;
+  width: 100%;
+}
+
+.sk-input-logo {
+  max-height: 30px;
+}
+
+.input-icon {
+  position:absolute;
+  bottom:30px;
+  left:3px;
+  width:10px;
+  height:10px;
+}
+
+.username-input {
+  border: none;
+  border-bottom: $green-border;
+  border-radius: 0 !important;
+  padding-left: 50px !important;
+  width: 100%;
+}
+
+.submit-btn {
+  color: $background-black;
+  background-color: $white;
+  border-bottom: $green-border;
+  border-left: none;
+  border-radius: 0 !important;
+  transition: $color-fill-transition;
+}
+
+.submit-btn:hover {
+  color: $white;
+  background-color: $spotify-green;
+}
+
+.or-container {
+  height: 100%;
+  width: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: green;
+}
+
+.or {
+  height: 100%;
+}
+
+.genre-container {
+  height: 100%;
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nyc-events {
+  color: $background-black;
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.dropdown-btn {
+  background-color: $white;
+  color: $background-black;
+  border-radius: 0 !important;
+  border: $green-border;
+  transition: $color-fill-transition;
+}
+
+.dropdown-btn:hover {
+  color: $white;
+  background-color: $spotify-green;
+}
+
+.genres {
+  width: 100%;
+}

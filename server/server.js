@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const authRouter = require('./authRouter.js');
 const router = require('./router.js');
+// const sendNotification = require('./sendreminder');
+const CronJob = require('./cronjob');
 
 const port = process.env.PORT || 8000;
 
@@ -33,8 +35,9 @@ app.use('/api', router);
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '../public', 'index.html'));
 });
-
 // SERVER CONFIGURATION=========================================================
 
 app.listen(port);
 console.log(`Listening on ${port}`);
+// sendNotification.sendNotification();
+CronJob.job();

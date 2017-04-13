@@ -14,47 +14,16 @@ const spotifyApi = new SpotifyWebApi({
 
 const getArtistIDList = (artistList) => {
   return artistList.map((artist) => {
-    return pool.connect()
-      .then((client) => {
-        return client.query(`select spotify_id from artists where artist_name = '${artist}'`)
-          .then((res) => {
-            if (res.rows[0]) {
-              return res.rows[0].spotify_id
-            } else {
-              return spotifyApi.searchArtists(artist)
-                      .then((response) => {
-                        return pool.connect()
-                             .then((client) => {
-                               client.query('INSERT into artists (spotify_id, artist_name) VALUES ($1, $2)', [response.body.artists.items[0].id, artist])
-                                 .then((resp) => {
-                                   client.release();
-                                 })
-                                 .catch((err) => {
-                                   console.error('Querey Error: ', err);
-                                 });
-                             }).then(() => {
-                               return response.body.artists.items[0].id;
-                             })
-                             .catch((err) => {
-                               console.error('Client Error: ', err);
-                             });
-                        // return response.body.artists.items[0].id;
-                      })
-                      .catch(err => console.error('Spotify API Error: ', err));
-            }
-            // client.release();
-          })
-          .catch((err) => {
-            console.error('error running query', err);
-          });
-      })
-      .catch((err) => {
-        console.error('error fetching client from pool', err);
-      });
+    return spotifyApi.searchArtists(artist)
+            .then((response) => {
+                     return response.body.artists.items[0].id;
+            })
+            .catch(err => console.error('Spotify API Error: ', err));
   });
 };
 const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getArtistTopTracks(artist, 'US')
       .then((data) => {
+        console.log('DATA', data.body.tracks);
         const tracks = data.body.tracks;
         const tracklist = {};
         tracklist[artist] = [];
@@ -72,6 +41,21 @@ const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getAr
       })
       .catch(err => console.error(err)));
 
+  const getArtistImages = artistIDList => spotifyApi.getArtists(artistIDList)
+    .then((data) => {
+      const artistImages = [];
+      data.body.artists.forEach((artist) => {
+        if (artist.images[1] === undefined) {
+          artistImages.push('Picture Unavailable');
+        } else {
+          artistImages.push(artist.images[1].url);
+        }
+
+      });
+      return artistImages
+    })
+    .catch(err => console.error(err))
+
 let userID;
 
 module.exports = {
@@ -84,8 +68,7 @@ module.exports = {
     res.send('SECOND FESTIVAL RESPONSE');
   },
   createPlaylist: (req, res) => {
-    console.log("CREATING PLAYLIST");
-    // console.log('SELECTED', req.body.selected);
+    console.log('SELECTED', req.body.selected);
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
       .then((tracksArray) => {
@@ -97,14 +80,16 @@ module.exports = {
           .then((merged) => {
             spotifyApi.getMe()
               .then((data) => {
+                console.log(data);
                 userID = data.body.id;
-                return userID;
+                name = data.body.display_name;
+                return [userID, name];
               })
               .then((user) => {
-                spotifyApi.createPlaylist(user, 'Gigify Playlist', { public: false })
+                spotifyApi.createPlaylist(user[0], `${user[1]}'s Gigify Playlist - ${moment().format('M/D, hA')}`, { public: false })
                 .then((data) => {
                   //console.log('Created playlist!');
-                  return [user, data.body.id];
+                  return [user[0], data.body.id];
                 })
                 .then((playlistInfo) => {
                   let tracksToAdd = [];
@@ -141,6 +126,7 @@ module.exports = {
       const eventList = results.data.resultsPage.results.calendarEntry;
       const events = [];
       const festivals = [];
+      const allArtists = [];
       eventList.forEach((item) => {
         const concert = item.event;
         let eventTime = moment(concert.start.datetime).format('hA');
@@ -155,6 +141,11 @@ module.exports = {
         concert.performance.forEach((artist) => {
           artists.push(artist.displayName);
         });
+
+        if (artists.length < 7) {
+          allArtists.push(artists[0]);
+        }
+
         const event = {
           eventName: concert.displayName,
           eventUrl: concert.uri,
@@ -170,8 +161,14 @@ module.exports = {
           events.push(event);
         }
       });
-      // console.log(events, "EVENTS")
-      res.send(events);
+      Promise.all(getArtistIDList(allArtists))
+        .then(artistIds => getArtistImages(artistIds))
+          .then((imageUrls) => {
+            events.forEach((event, i) => {
+              event.imageUrl = imageUrls[i];
+            })
+          })
+          .then(() => res.send(events));
     });
   },
   spotifyApi,
