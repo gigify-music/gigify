@@ -5,16 +5,6 @@
   width: 100vw;
 }
 
-.top-page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 60vh;
-  width: 100vw;
-  box-shadow: 0px 0px 30px rgba(0,0,0,.8);
-}
-
 canvas {
   top: 0px;
   left: 0px;
@@ -26,7 +16,7 @@ canvas {
     display: block;
     vertical-align: bottom;
     width: 100vw;
-    min-height: 60vh;
+    min-height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -34,17 +24,17 @@ canvas {
 
 #particles-js .particles-js-canvas-el {
   width: 100vw!important;
-  height: 60vh!important;
+  height: 100vh!important;
 }
 
 .top-content-container {
+  height: 100vh;
   color: #ffffff;
   display: flex;
-  align-content: space-between;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  box-shadow: 0px 0px 30px rgba(0,0,0,.8);
 }
 
 
@@ -104,17 +94,6 @@ i.icon.fa.fa-chevron-down.faa-pulse.animated {
   font-size: 40px;
 }
 
-.bottom-content-container {
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  width: 100vw;
-  min-height: 40vh;
-}
-
 button.btn.btn-lg.spotify-auth-button {
   display: flex;
   justify-content: center;
@@ -122,36 +101,22 @@ button.btn.btn-lg.spotify-auth-button {
 
 .spotify-auth-button {
   overflow:hidden;
-  box-shadow: 1px 1px 10px #B8BFBF;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin: 3%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  // background-color: #1DB954;
+  margin-top: 5%;
   color: #FFFFFF;
   background: $spotify-green;
-  border-color: transparent;
-  border-radius: 5%;
-  cursor: pointer;
-  transition:         0.08s ease-in;
-  -o-transition:      0.08s ease-in;
-  -ms-transition:     0.08s ease-in;
-  -moz-transition:    0.08s ease-in;
-  -webkit-transition: 0.08s ease-in;
-  // color: #FFFFFF;
-}
-
-.fill:hover {
-  // border: 2px $background-black solid;
-  border-radius: 10%;
+  box-shadow: 1px 1px 20px $background-black;
+  z-index: 1;
 }
 
 .introMsg {
+  font-family: $header-font;
+  font-weight: 900;
   color: $background-black;
-  margin-top: 3%;
+  font-size: 30px;
 }
 
 // .ball {
@@ -197,7 +162,7 @@ button.btn.btn-lg.spotify-auth-button {
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 90vh;
+  height: 94.45vh;
 }
 
 .aboutHeader {
@@ -286,11 +251,12 @@ button.btn.btn-lg.spotify-auth-button {
   color: $background-black;
   justify-content: center;
   padding-bottom: 3vh;
+  z-index: 1;
 }
 
 
 .fa-chevron-down {
-  color: $background-black;
+  color: $white;
 }
 
 .downBtn:focus {
