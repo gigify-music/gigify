@@ -19,6 +19,8 @@ class Home extends Component {
       playlistId: [],
       username: '',
       authenticated: false,
+      showLoading: false,
+      showList: false,
     };
   }
 
@@ -47,6 +49,7 @@ class Home extends Component {
       window.location = '/auth/signin';
     });
   }
+
   handleUsername(username) {
     this.setState({ username: username.target.value });
   }
@@ -59,6 +62,13 @@ class Home extends Component {
           }
         })
         .catch(err => console.error(err));
+  }
+
+  handleFirst() {
+    const govballPlaylist = {
+      data: ['panoramanyc', '3Tx6bcrYcvmAA9sblNLPrH'],
+    };
+    this.renderPlaylist(govballPlaylist);
   }
 
   handleSecond() {
@@ -106,9 +116,20 @@ class Home extends Component {
 
   renderPlaylist(playlistId) {
     console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
-    this.setState({ showPlaylist: true,
-      playlistId: playlistId.data });
+    const that = this;
+    this.setState({
+      playlistId: playlistId.data,
+      showPlaylist:false });
+    this.setState({ showLoading: true }, function () {
+      setTimeout(function() {
+        $('#loadingModal').modal('hide');
+        that.setState({ showLoading:false, showPlaylist: true });
+    }, 2000)
+
+    });
+    $('#homePlaylistModal').modal('show');
   }
+
   render() {
     const settings = {
       dots: true,
@@ -138,8 +159,8 @@ class Home extends Component {
                   <img className="home-header-logo" src="./assets/gigify.svg"/>
                 </div>
               </div>
-              <a className="carousel-image panorama" data-toggle="modal" data-target="#homePlaylistModal" onClick={() => this.handleFirst()} />
-              <a className="carousel-image govball" data-toggle="modal" data-target="#homePlaylistModal" onClick={() => this.handleSecond()} />
+              <a className="carousel-image panorama" data-toggle="modal"  data-target="#loadingModal" onClick={() => this.handleFirst()} />
+              <a className="carousel-image govball" data-toggle="modal" data-target="#loadingModal" onClick={() => this.handleSecond()} />
             </Slider>
           </div>
           <div id="songkick-input">
@@ -213,6 +234,20 @@ class Home extends Component {
             listings={this.props.listings}
           />
         </ToggleDisplay>
+
+        <ToggleDisplay id="playlist-toggle" show={this.state.showLoading}>
+            <div className="modal fade playlist" id="loadingModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content-loading">
+                <div className="modal-body loading-animation" >
+                  <img className="loading-ring" src="./assets/ring.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+          </ToggleDisplay>
+
+      <ToggleDisplay id="show-playlist" show={this.state.showPlaylist}>
         <div className="modal fade playlist" id="homePlaylistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
@@ -229,6 +264,7 @@ class Home extends Component {
           </div>
         </div>
       </div>
+    </ToggleDisplay>
       <footer className="footer">
         <h6 className="footer-content container"><img className="footer-logo" src="./assets/gigify-g.svg"/> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
       </footer>
@@ -237,8 +273,9 @@ class Home extends Component {
   }
 }
 
-const mapStatetoProps = ({ events }) => ({
+const mapStatetoProps = ({ events, loading }) => ({
   listings: events.eventListings,
+  loadingplaylist: loading,
 });
 
 export default connect(mapStatetoProps, { getEvents })(Home);

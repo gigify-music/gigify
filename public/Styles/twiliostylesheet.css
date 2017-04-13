@@ -9,4 +9,19 @@
   display: flex;
   justify-content: center;
 }
- 
+
+#loadingModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content-loading {
+
+}
