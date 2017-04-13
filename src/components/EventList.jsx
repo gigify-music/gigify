@@ -2,7 +2,9 @@ import React, { PropTypes, Component } from 'react';
 import axios from 'axios';
 import SweetScroll from 'sweet-scroll';
 import ToggleDisplay from 'react-toggle-display';
+import Infinite from 'react-infinite';
 import Event from './Event';
+
 
 
 class EventList extends Component {
@@ -97,15 +99,15 @@ class EventList extends Component {
         </div>
       <div id="event-page" className="event-page-container">
         <div className="event-list-sidebar col-sm-2">
-          <div data-spy="affix" data-offset-top="640">
-            <button className="btn btn-success btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
+          <div className="scrolling-display animated fadeIn" data-spy="affix" data-offset-top="620">
+            <button className="btn playlist-btn btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
             <ToggleDisplay show={this.state.displayWarning}>
               <div className="selectionWarning animated slideInLeft">
                 <h3>You've reached the maximum playlist length.</h3>
                 <h4>Either deselect an event or press submit to generate your playlist.</h4>
               </div>
             </ToggleDisplay>
-            <ul className="list-group">
+            <ul className="list-group selected-artists">
               <h4 className="selected-artists-header">Selected artists</h4>
               {selectedPerformers.map(performer =>
                 <li className="selected-item animated flipInY">

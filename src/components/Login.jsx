@@ -49,16 +49,14 @@ class Login extends React.Component {
           >
             <i className="fa fa-spotify fa-3x spotify-icon" aria-hidden="true" />
            Connect with Spotify </button>
-
-            <div className="down">
+          <div className="down">
+            <button className="downBtn" style={{ background: 'transparent', border: 'none' }} onClick={() => this.handleScroll()}>
               <h4>About</h4>
-              <button className="downBtn" style={{ background: 'transparent', border: 'none', color: 'transparent' }} onClick={() => this.handleScroll()}>
-                <i
-                  className="icon fa fa-chevron-down faa-pulse animated"
-                  aria-hidden="true"
-                />
-              </button>
-            </div>
+              <i
+                className="icon fa fa-chevron-down faa-pulse animated"
+                aria-hidden="true"
+              />
+            </button>
           </div>
         </div>
         <ToggleDisplay show={this.state.showAbout}>
