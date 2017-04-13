@@ -135,7 +135,7 @@ class Login extends React.Component {
           </div>
         </ToggleDisplay>
 
-
+        </div>
       </div>
 
     );
