@@ -20,7 +20,6 @@ class Home extends Component {
       username: '',
       authenticated: false,
       showLoading: false,
-      showList: false,
     };
   }
 
@@ -65,10 +64,10 @@ class Home extends Component {
   }
 
   handleFirst() {
-    const govballPlaylist = {
+    const panoramaPlaylist = {
       data: ['panoramanyc', '3Tx6bcrYcvmAA9sblNLPrH'],
     };
-    this.renderPlaylist(govballPlaylist);
+    this.renderPlaylist(panoramaPlaylist);
   }
 
   handleSecond() {
