@@ -38,15 +38,11 @@ class Login extends React.Component {
     return (
 
       <div className="page-container">
-        <div id="particles-js" className="top-page-container">
+        <div id="particles-js">
           <div className="top-content-container">
             <img className="header-logo" src="./assets/gigify.svg"/>
             <label className="page-subheader"> Create Spotify playlists from your
           upcoming Songkick gigs </label>
-          </div>
-        </div>
-        <div className="bottom-content-container">
-          <h4 className="introMsg">Authenticate with Spotify to get started</h4>
           <button
             className="btn btn-lg spotify-auth-button fill" type="button"
             onClick={() => this.handleAuth()}
@@ -54,17 +50,16 @@ class Login extends React.Component {
             <i className="fa fa-spotify fa-3x spotify-icon" aria-hidden="true" />
            Connect with Spotify </button>
 
-
-          <div className="down">
-            <h4>About</h4>
-            <button className="downBtn" style={{ background: 'transparent', border: 'none', color: 'transparent' }} onClick={() => this.handleScroll()}>
-              <i
-                className="icon fa fa-chevron-down faa-pulse animated"
-                aria-hidden="true"
-              />
-            </button>
+            <div className="down">
+              <h4>About</h4>
+              <button className="downBtn" style={{ background: 'transparent', border: 'none', color: 'transparent' }} onClick={() => this.handleScroll()}>
+                <i
+                  className="icon fa fa-chevron-down faa-pulse animated"
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
           </div>
-
         </div>
         <ToggleDisplay show={this.state.showAbout}>
           <div id="about" className="container aboutUs">
