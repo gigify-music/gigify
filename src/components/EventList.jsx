@@ -5,12 +5,11 @@ import ToggleDisplay from 'react-toggle-display';
 import Infinite from 'react-infinite';
 import Event from './Event';
 
-
-
 class EventList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      allEvents: [],
       selected: {},
       displayWarning: false,
       currentVenue: '',
@@ -79,9 +78,32 @@ class EventList extends Component {
     });
   }
 
+
+
+
+    //  console.log('UNSORTED', allEvents);
+
+     // allEvents.sort((x, y) => {
+     //   return y.locked - x.locked;
+     // });
+     //
+     // console.log('SORTED', allEvents);
+
+  //    this.setState({
+  //      allEvents,
+  //    })
+
+
+  // componentWillMount() {
+  //   this.loadEvents();
+  //   console.log('loading events')
+  // }
+
   componentDidMount() {
+    console.log('UPDATED EVNTS?', this.state.allEvents);
     this.sweetScroll = new SweetScroll();
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (!prevProps.showEventList) {
       console.log("SHOULD SCROLL");
@@ -90,7 +112,24 @@ class EventList extends Component {
   }
 
   render() {
+
+    let allEvents = this.props.listings.map(event =>
+      <Event
+        key={event.id}
+        {...event}
+        toggleEvent={this.toggleEvent}
+        locked={this.state.displayWarning}
+        getVenue={this.getVenue}
+        currentVenue={this.state.currentVenue}
+        currentdate={this.state.currentdate}
+        currentevent={this.state.currentevent}
+      />,
+  ).sort((x, y) => x.props.locked - y.props.locked);
+    console.log('COMPARE ALL', allEvents);
+    console.log('COMPARE SELETECD', this.state.selected);
+
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
+
     return (
       <div>
         <div className="top-event-container">
@@ -98,17 +137,22 @@ class EventList extends Component {
           <div className="event-subheader">Click on events to add them to your playlist</div>
         </div>
       <div id="event-page" className="event-page-container">
-        <div className="event-list-sidebar col-sm-2">
-          <div className="scrolling-display animated fadeIn" data-spy="affix" data-offset-top="620">
-            <button className="btn playlist-btn btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
+        <div className="col-sm-2 event-list-sidebar">
+          <div className="scrolling-display animated fadeIn" data-spy="affix" data-offset-top="800">
+            <button className="btn playlist-btn btn-lg"
+                    data-toggle="modal" data-target="#playlistModal"
+                    onClick={this.generatePlaylist}>Create Playlist
+            </button>
             <ToggleDisplay show={this.state.displayWarning}>
-              <div className="selectionWarning animated slideInLeft">
-                <h3>You've reached the maximum playlist length.</h3>
-                <h4>Either deselect an event or press submit to generate your playlist.</h4>
+              <div className="selectionWarning animated flipInY">
+                <div className="glyphicon glyphicon-exclamation-sign" />
+                <h4 className="warning-header">Maximum playlist length reached.</h4>
+                <h5 className="warning-sub">Please deselect an event or press Create Playlist to generate your playlist.</h5>
               </div>
             </ToggleDisplay>
             <ul className="list-group selected-artists">
               <h4 className="selected-artists-header">Selected artists</h4>
+              <img id="gigify-hr-selected" src="./assets/gigifyhr.png" />
               {selectedPerformers.map(performer =>
                 <li className="selected-item animated flipInY">
                   {performer}
@@ -120,9 +164,9 @@ class EventList extends Component {
 
         <div id="events" className="col-sm-10 event-list-container">
           <ul className="list">
-            {this.props.listings.map((event, i) =>
+            {this.props.listings.map(event =>
               <Event
-                key={i}
+                key={event.id}
                 {...event}
                 toggleEvent={this.toggleEvent}
                 locked={this.state.displayWarning}
@@ -130,9 +174,8 @@ class EventList extends Component {
                 currentVenue={this.state.currentVenue}
                 currentdate={this.state.currentdate}
                 currentevent={this.state.currentevent}
-
               />,
-        )}
+          ).sort((x, y) => y.props.locked - x.props.locked)}
           </ul>
         </div>
         <div className="modal fade playlist" id="playlistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
