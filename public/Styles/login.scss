@@ -161,15 +161,21 @@ button.btn.btn-lg.spotify-auth-button {
 .aboutUs {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100vw;
   height: 94.45vh;
+}
+
+.about-body {
+  margin-top: 2%;
+  margin-bottom: 3%;
 }
 
 .aboutHeader {
   font-family: $header-font;
   font-weight: bold;
   text-align: center;
-  font-size: 25px;
+  font-size: 40px;
   margin: 15px 0;
 }
 
@@ -179,6 +185,7 @@ button.btn.btn-lg.spotify-auth-button {
 }
 
 .devRow {
+  margin-top: 2%;
   display: flex;
   justify-content: center;
 }
@@ -250,6 +257,7 @@ button.btn.btn-lg.spotify-auth-button {
   flex-direction: column;
   color: $background-black;
   justify-content: center;
+  margin-top: 10%;
   padding-bottom: 3vh;
   z-index: 1;
 }
