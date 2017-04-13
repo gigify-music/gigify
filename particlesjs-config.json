@@ -29,7 +29,7 @@
       "value": 0.5932624625202434,
       "random": true,
       "anim": {
-        "enable": false,
+        "enable": true,
         "speed": 1,
         "opacity_min": 0.1,
         "sync": false
