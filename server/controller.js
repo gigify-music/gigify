@@ -165,8 +165,13 @@ module.exports = {
         .then(artistIds => getArtistImages(artistIds))
           .then((imageUrls) => {
             events.forEach((event, i) => {
-              event.imageUrl = imageUrls[i];
-            })
+              if (event.imageUrl === 'Picture Unavailable') {
+                event.imageUrl = '../assets/gigify-g.png';
+              } else {
+                event.imageUrl = imageUrls[i];
+                event.id = i;
+              }
+            });
           })
           .then(() => res.send(events));
     });

@@ -101,25 +101,39 @@ body:before {
 }
 
 .scrolling-display {
-  background-image: url(../assets/gigify-g.svg);
+  background-image: url(../assets/gigify-g-background.svg);
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
+  overflow-y: scroll;
 }
+
+::-webkit-scrollbar { display: none; }
 
 li.selected-item {
   font-weight: bold;
   border: none;
+  font-size: 16;
 }
 
 .affix {
-  width: 16.6666%;
   top: 2%;
   height: 100vh;
+  width: 16.66667%;
 }
 
-.affix.top {
-  display: none;
+.affix-top {
+  position: absolute;
+}
+
+.col-sm-2 affix {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.col-sm-2 event-list-sidebar {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .playlist-btn {
@@ -131,11 +145,36 @@ li.selected-item {
 .selected-artists-header {
   text-align: center;
   font-weight: bold;
+  margin-top: 20%;
+}
+
+#gigify-hr-selected {
+  width: 100%;
 }
 
 .selectionWarning {
+  background: rgba(255,255,255,.3);
   text-align: center;
-  color:  #8A2CCE;
+  color:  #383838;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+  border-radius: 5%;
+  margin-top: 10%;
+}
+
+.warning-header {
+  font-weight: bold;
+  padding: 2%;
+}
+
+.warning-sub {
+  padding: 5%;
+}
+
+.glyphicon-exclamation-sign {
+  font-size: 50px;
+  color: indianred;
+  margin-top: 10%;
 }
 
 .event-list-container {
@@ -166,7 +205,7 @@ li.selected-item {
 }
 
 .list {
-  width: 80%;
+  width: 90%;
 }
 
 .event-list-item {
@@ -177,6 +216,11 @@ li.selected-item {
   min-width: 100%;
   background-color: white;
   margin-top: 3%;
+}
+
+.locked-item {
+  opacity: 0.5!important;
+  color: #383838!important;
 }
 
 .event-list-item:hover {
@@ -195,6 +239,15 @@ li.selected-item {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  width: 25%;
+}
+
+
+.plus-sign {
+  font-size: 35px;
+  color: #1DB954;
+  opacity: 0.6;
+  margin-left: 3%;
 }
 
 .event-musicians-container {

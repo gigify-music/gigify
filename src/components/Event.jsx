@@ -9,6 +9,8 @@ class Event extends Component {
       active: false,
       checked: 'event-list-item-selected',
       unchecked: '',
+      locked: 'locked-item',
+      unlocked: '',
       phone:0,
       eventname:'',
       date:'',
@@ -63,12 +65,14 @@ class Event extends Component {
 
   render() {
     return (
-      <li onClick={this.onToggleClick} className="noBullets">
-        <div
-          className={`event-list-item ${this.state.active ? this.state.checked : this.state.unchecked}`}>
-            <div className="artist-image col-sm-3" style={{ 'background-image': `url(${this.props.imageUrl})` }}>
+      <li className={'noBullets'}>
+        <div className={`event-list-item ${this.state.active ? this.state.checked : this.state.unchecked} ${!this.state.active && this.props.locked ? this.state.locked : this.state.unlocked}`}>
+            <div onClick={this.onToggleClick} className="artist-image" style={{ 'background-image': `url(${this.props.imageUrl})` }}>
+              <div className="plus-sign">
+                <i className="fa fa-plus-square" aria-hidden="true" />
+              </div>
             </div>
-          <div className="col-sm-7 event-musicians-container">
+          <div onClick={this.onToggleClick} className="col-sm-7 event-musicians-container">
             <div className="event-musicians">
               <label className="headliner">{this.props.performers[0]}</label>
               <label className="supporting">{
