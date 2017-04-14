@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import axios from 'axios';
 import ToggleDisplay from 'react-toggle-display';
 import EventList from '../components/EventList';
-import { getEvents } from '../actions/index';
+import { getEvents, gettingEvents } from '../actions/index';
 // import Playlist from '../components/Playlist';
 import '../../public/Styles/input.scss';
 import '../../public/Styles/howto.scss';
@@ -84,6 +84,7 @@ class Home extends Component {
     .then((data) => {
       console.log(data, "on submit songkik username");
       if (data.data === 'logged') {
+        that.props.gettingEvents();
         axios.get(`/api/events/${this.state.username}`)
         .then((response) => {
           that.props.getEvents(response);
@@ -284,7 +285,7 @@ const mapStatetoProps = ({ events, loading }) => ({
   loadingplaylist: loading,
 });
 
-export default connect(mapStatetoProps, { getEvents })(Home);
+export default connect(mapStatetoProps, { getEvents, gettingEvents })(Home);
 
 
 /* <div>
