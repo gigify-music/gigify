@@ -153,7 +153,7 @@ class Home extends Component {
       dots: true,
       dotsClass: 'slick-dots slick-thumb',
       infinite: true,
-      fade: true,
+      fade: false,
       speed: 1000,
       slidesToShow: 1,
       slidesToScroll: 1,
@@ -187,6 +187,7 @@ class Home extends Component {
                   <div className="search-input form-group">
                     <input
                       type="text" className="username-input input-lg"
+                      autoComplete="off"
                       id="inlineFormInputGroup" placeholder="Enter Songkick username..."
                       value={this.state.username} onChange={this.handleUsername.bind(this)}
                     />
@@ -206,7 +207,7 @@ class Home extends Component {
                     <img
                       className="input-loader-gif"
                       id="search-loader"
-                      src="../assets/loadingicon.gif"
+                      src="../assets/loadingring.gif"
                     />
                   </div>
               </ToggleDisplay>
@@ -234,7 +235,7 @@ class Home extends Component {
                 <div className="input-loader">
                   <img
                     className="input-loader-gif" id="genre-loader"
-                    src="../assets/loadingicon.gif"
+                    src="../assets/loadingring.gif"
                   />
                 </div>
               </ToggleDisplay>

@@ -44,6 +44,10 @@
   border-radius: 0 !important;
   padding-left: 50px !important;
   width: 100%;
+  &:focus {
+    outline: none;
+    border: $green-border;
+  }
 }
 
 .submit-btn {
@@ -53,14 +57,22 @@
   border-left: none;
   border-radius: 0 !important;
   transition: $color-fill-transition;
+  &:focus {
+    outline: none;
+  }
+}
+
+.submit-btn-contents {
+  display: flex;
+  flex-direction: row;
 }
 
 .input-loader {
-  height: 10%;
+  height: 30px;
 }
 
 .input-loader-gif {
-  height: 100%;
+  height: 25px;
 }
 
 .submit-btn:hover {

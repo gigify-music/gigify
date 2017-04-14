@@ -39,7 +39,6 @@ body:before {
   width: 100vw;
   background-position: center;
   background-size: cover;
-  z-index: 2;
 }
 
 .panorama {
