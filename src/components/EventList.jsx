@@ -78,26 +78,7 @@ class EventList extends Component {
     });
   }
 
-    //  console.log('UNSORTED', allEvents);
-
-     // allEvents.sort((x, y) => {
-     //   return y.locked - x.locked;
-     // });
-     //
-     // console.log('SORTED', allEvents);
-
-  //    this.setState({
-  //      allEvents,
-  //    })
-
-
-  // componentWillMount() {
-  //   this.loadEvents();
-  //   console.log('loading events')
-  // }
-
   componentDidMount() {
-    console.log('UPDATED EVNTS?', this.state.allEvents);
     this.sweetScroll = new SweetScroll();
   }
 
@@ -110,6 +91,7 @@ class EventList extends Component {
 
   render() {
     const ids = Object.keys(this.state.selected);
+
     const eventList = this.props.listings.map(event =>
       <Event
         key={event.id}
@@ -121,20 +103,23 @@ class EventList extends Component {
         currentdate={this.state.currentdate}
         currentevent={this.state.currentevent}
       />,
-  )
+    )
 
-  const allSelected = eventList.filter(x => {
-      if (ids.includes(x.props.id.toString())) {
-        return x;
-      }
-  });
+      const allSelected = eventList.filter(x => {
+          if (ids.includes(x.props.id.toString())) {
+            return x;
+          }
+      });
 
-  let allUnselected = eventList.filter(x => {
-    if (!ids.includes(x.props.id.toString())) {
-      return x;
-    }
-});
+      const allUnselected = eventList.filter(x => {
+        if (!ids.includes(x.props.id.toString())) {
+          return x;
+        }
+      });
+
     const displayList = allSelected.concat(allUnselected);
+
+
 
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
 

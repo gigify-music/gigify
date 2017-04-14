@@ -35,4 +35,4 @@ render(
   document.getElementById('app'),
 );
 
-store.dispatch({ type: 'GET_EVENTS_DATA' });
+// store.dispatch({ type: 'GET_EVENTS_DATA' });
