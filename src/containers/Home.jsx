@@ -20,6 +20,8 @@ class Home extends Component {
       username: '',
       authenticated: false,
       showLoading: false,
+      showLoadingGif: false,
+      showLoadingGifGenre: false,
     };
   }
 
@@ -47,6 +49,12 @@ class Home extends Component {
       this.setState({ authenticated: false });
       window.location = '/auth/signin';
     });
+  }
+
+  componentWillUpdate() {
+    !(this.props.loadingplaylist)
+    ? this.props.loadingplaylist
+    : this.setState({ showLoadingGif: false, showLoadingGifGenre: false });
   }
 
   handleUsername(username) {
@@ -78,6 +86,7 @@ class Home extends Component {
   }
 
   handleSubmit(e) {
+    this.setState({ showLoadingGif: true });
     const that = this;
     e.preventDefault();
     axios.get('/api/checksession')
@@ -102,8 +111,10 @@ class Home extends Component {
     });
   }
 
-  handleGenre(username){
+  handleGenre(username) {
+    this.setState({ showLoadingGifGenre: true });
     const that = this;
+    that.props.gettingEvents();
     axios.get(`/api/events/${username}`)
     .then((response) => {
       that.props.getEvents(response);
@@ -190,9 +201,15 @@ class Home extends Component {
                     </button>
                   </div>
                 </form>
-                <div className="input-loader">
-                  <img className="input-loader-gif" id="search-loader" src="../assets/loadingicon.gif" />
-                </div>
+                <ToggleDisplay id="toggle-search-gif" show={this.state.showLoadingGif}>
+                  <div className="input-loader">
+                    <img
+                      className="input-loader-gif"
+                      id="search-loader"
+                      src="../assets/loadingicon.gif"
+                    />
+                  </div>
+              </ToggleDisplay>
               </div>
             <div className="or-container">
               <img className="or" src="../../assets/or.svg" />
@@ -213,9 +230,14 @@ class Home extends Component {
                     </ul>
                 </div>
                 <div className="nyc-events">(NYC Gigs)</div>
-                  <div className="input-loader">
-                    <img className="input-loader-gif" id="genre-loader" src="../assets/loadingicon.gif" />
-                  </div>
+              <ToggleDisplay id="toggle-genre-gif" show={this.state.showLoadingGifGenre}>
+                <div className="input-loader">
+                  <img
+                    className="input-loader-gif" id="genre-loader"
+                    src="../assets/loadingicon.gif"
+                  />
+                </div>
+              </ToggleDisplay>
               </div>
           </div>
           <div className="howto-container">
