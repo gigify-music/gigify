@@ -78,9 +78,6 @@ class EventList extends Component {
     });
   }
 
-
-
-
     //  console.log('UNSORTED', allEvents);
 
      // allEvents.sort((x, y) => {
@@ -112,8 +109,8 @@ class EventList extends Component {
   }
 
   render() {
-
-    let allEvents = this.props.listings.map(event =>
+    const ids = Object.keys(this.state.selected);
+    const eventList = this.props.listings.map(event =>
       <Event
         key={event.id}
         {...event}
@@ -124,9 +121,20 @@ class EventList extends Component {
         currentdate={this.state.currentdate}
         currentevent={this.state.currentevent}
       />,
-  ).sort((x, y) => x.props.locked - y.props.locked);
-    console.log('COMPARE ALL', allEvents);
-    console.log('COMPARE SELETECD', this.state.selected);
+  )
+
+  const allSelected = eventList.filter(x => {
+      if (ids.includes(x.props.id.toString())) {
+        return x;
+      }
+  });
+
+  let allUnselected = eventList.filter(x => {
+    if (!ids.includes(x.props.id.toString())) {
+      return x;
+    }
+});
+    const displayList = allSelected.concat(allUnselected);
 
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
 
@@ -164,18 +172,7 @@ class EventList extends Component {
 
         <div id="events" className="col-sm-10 event-list-container">
           <ul className="list">
-            {this.props.listings.map(event =>
-              <Event
-                key={event.id}
-                {...event}
-                toggleEvent={this.toggleEvent}
-                locked={this.state.displayWarning}
-                getVenue={this.getVenue}
-                currentVenue={this.state.currentVenue}
-                currentdate={this.state.currentdate}
-                currentevent={this.state.currentevent}
-              />,
-          ).sort((x, y) => y.props.locked - x.props.locked)}
+            {displayList}
           </ul>
         </div>
         <div className="modal fade playlist" id="playlistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
