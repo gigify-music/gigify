@@ -189,12 +189,12 @@ class Home extends Component {
                     </button>
                   </div>
                 </form>
-                <span>
-                  <img className="search-container-loading-gif" src="../assets/loadingicon.gif" />
-                </span>
+                <div className="input-loader">
+                  <img className="input-loader-gif" id="search-loader" src="../assets/loadingicon.gif" />
+                </div>
               </div>
             <div className="or-container">
-              <img className ="or" src="../../assets/or.svg" />
+              <img className="or" src="../../assets/or.svg" />
               </div>
             <div className="genre-container">
                 <div className="dropdown">
@@ -212,6 +212,9 @@ class Home extends Component {
                     </ul>
                 </div>
                 <div className="nyc-events">(NYC Gigs)</div>
+                  <div className="input-loader">
+                    <img className="input-loader-gif" id="genre-loader" src="../assets/loadingicon.gif" />
+                  </div>
               </div>
           </div>
           <div className="howto-container">

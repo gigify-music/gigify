@@ -16,7 +16,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .search-input {
@@ -53,6 +53,14 @@
   border-left: none;
   border-radius: 0 !important;
   transition: $color-fill-transition;
+}
+
+.input-loader {
+  height: 10%;
+}
+
+.input-loader-gif {
+  height: 100%;
 }
 
 .submit-btn:hover {
