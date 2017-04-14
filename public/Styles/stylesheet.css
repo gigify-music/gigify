@@ -93,7 +93,7 @@ body:before {
 
 .event-list-sidebar {
   height: 100vh;
-  width: 20vw;
+  width: 20vw !important;
   float: right;
   position: fixed;
   margin-top: 3%;
@@ -101,7 +101,8 @@ body:before {
 }
 
 .scrolling-display {
-  background-image: url(../assets/gigify-g-background.svg);
+  background-image: url(../assets/gigify-g-background.png);
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
@@ -140,6 +141,7 @@ li.selected-item {
   background-color: #1DB954;
   color: #ffffff;
   width: 100%;
+  margin-top: 20%;
 }
 
 .selected-artists-header {
