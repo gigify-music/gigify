@@ -68,7 +68,7 @@ module.exports = {
     res.send('SECOND FESTIVAL RESPONSE');
   },
   createPlaylist: (req, res) => {
-    console.log('SELECTED', req.body.selected);
+    // console.log('SELECTED', req.body.selected);
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
       .then((tracksArray) => {
@@ -80,7 +80,7 @@ module.exports = {
           .then((merged) => {
             spotifyApi.getMe()
               .then((data) => {
-                console.log(data);
+                console.log('USER DATA', data);
                 userID = data.body.id;
                 name = data.body.display_name;
                 return [userID, name];
