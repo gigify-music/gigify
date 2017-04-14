@@ -153,13 +153,16 @@ li.selected-item {
 }
 
 .selectionWarning {
-  background: rgba(255,255,255,.3);
+  background-color: indianred;
   text-align: center;
-  color:  #383838;
+  color:  #ffffff;
   font-weight: bold;
-  box-shadow: 0px 0px 10px rgba(0,0,0,.8);
   border-radius: 5%;
   margin-top: 10%;
+}
+
+.selectionWarning.animated {
+  animation-duration: 2s;
 }
 
 .warning-header {
@@ -173,7 +176,7 @@ li.selected-item {
 
 .glyphicon-exclamation-sign {
   font-size: 50px;
-  color: indianred;
+  color: #ffffff;
   margin-top: 10%;
 }
 
