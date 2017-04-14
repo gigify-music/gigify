@@ -110,6 +110,8 @@ button.btn.btn-lg.spotify-auth-button {
   background: $spotify-green;
   box-shadow: 1px 1px 20px $background-black;
   z-index: 1;
+  -webkit-transform: translate3d(0,0,1px);
+  transform: translate3d(0,0,1px);
   &:focus {
     outline: none;
   }
