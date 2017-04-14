@@ -106,7 +106,6 @@ body:before {
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
-  margin-top: 20%;
   overflow-y: scroll;
 }
 
@@ -142,6 +141,7 @@ li.selected-item {
   background-color: #1DB954;
   color: #ffffff;
   width: 100%;
+  margin-top: 20%;
 }
 
 .selected-artists-header {
