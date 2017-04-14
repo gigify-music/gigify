@@ -189,6 +189,9 @@ class Home extends Component {
                     </button>
                   </div>
                 </form>
+                <span>
+                  <img className="search-container-loading-gif" src="../assets/loadingicon.gif" />
+                </span>
               </div>
             <div className="or-container">
               <img className ="or" src="../../assets/or.svg" />
