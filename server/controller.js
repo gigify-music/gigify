@@ -23,7 +23,7 @@ const getArtistIDList = (artistList) => {
 };
 const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getArtistTopTracks(artist, 'US')
       .then((data) => {
-        console.log('DATA', data.body.tracks);
+        // console.log('DATA', data.body.tracks);
         const tracks = data.body.tracks;
         const tracklist = {};
         tracklist[artist] = [];
@@ -68,7 +68,7 @@ module.exports = {
     res.send('SECOND FESTIVAL RESPONSE');
   },
   createPlaylist: (req, res) => {
-    console.log('SELECTED', req.body.selected);
+    // console.log('SELECTED', req.body.selected);
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
       .then((tracksArray) => {
@@ -80,7 +80,7 @@ module.exports = {
           .then((merged) => {
             spotifyApi.getMe()
               .then((data) => {
-                console.log(data);
+                // console.log(data);
                 userID = data.body.id;
                 name = data.body.display_name;
                 return [userID, name];
