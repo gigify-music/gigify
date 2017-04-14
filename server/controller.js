@@ -79,11 +79,6 @@ module.exports = {
           .then((merged) => {
             spotifyApi.getMe()
               .then((data) => {
-<<<<<<< HEAD
-                // console.log(data);
-=======
-                console.log(data, 'USER DATA');
->>>>>>> ArtistInfo
                 userID = data.body.id;
                 name = data.body.display_name;
                 return [userID, name];
