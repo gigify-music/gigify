@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import axios from 'axios';
 import SweetScroll from 'sweet-scroll';
 import ToggleDisplay from 'react-toggle-display';
-import Infinite from 'react-infinite';
 import { StickyContainer, Sticky } from 'react-sticky';
 import Event from './Event';
 
