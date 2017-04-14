@@ -129,6 +129,13 @@ class Home extends Component {
     $('#homePlaylistModal').modal('show');
   }
 
+  renderPlaylist2(playlistId) {
+    console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
+    this.setState({
+      playlistId: playlistId.data,
+      showPlaylist:true });
+  }
+
   render() {
     const settings = {
       dots: true,
@@ -229,7 +236,7 @@ class Home extends Component {
             id="event-list"
             playlistId={this.state.playlistId}
             showEventList={this.state.showEventList}
-            renderPlaylist={playlistId => this.renderPlaylist(playlistId)}
+            renderPlaylist={playlistId => this.renderPlaylist2(playlistId)}
             listings={this.props.listings}
           />
         </ToggleDisplay>
