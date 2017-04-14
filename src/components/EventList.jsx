@@ -82,8 +82,14 @@ class EventList extends Component {
     this.sweetScroll = new SweetScroll();
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.displayWarning) {
+      this.sweetScroll.toElement(document.getElementById('gigify-hr'));
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    if (!prevProps.showEventList) {
+    if (!prevProps.showEventList || prevState.displayWarning) {
       console.log("SHOULD SCROLL");
       this.sweetScroll.toElement(document.getElementById('gigify-hr'));
     }
@@ -105,22 +111,19 @@ class EventList extends Component {
       />,
     )
 
-      const allSelected = eventList.filter(x => {
-          if (ids.includes(x.props.id.toString())) {
-            return x;
-          }
-      });
-
-      const allUnselected = eventList.filter(x => {
-        if (!ids.includes(x.props.id.toString())) {
+    const allSelected = eventList.filter(x => {
+        if (ids.includes(x.props.id.toString())) {
           return x;
         }
-      });
+    });
 
-    const displayList = allSelected.concat(allUnselected);
+    const allUnselected = eventList.filter(x => {
+      if (!ids.includes(x.props.id.toString())) {
+        return x;
+      }
+    });
 
-
-
+    const displayList = this.state.displayWarning ? allSelected.concat(allUnselected) : eventList;
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
 
     return (
@@ -137,7 +140,7 @@ class EventList extends Component {
                     onClick={this.generatePlaylist}>Create Playlist
             </button>
             <ToggleDisplay show={this.state.displayWarning}>
-              <div className="selectionWarning animated flipInY">
+              <div className="selectionWarning animated slideInLeft">
                 <div className="glyphicon glyphicon-exclamation-sign" />
                 <h4 className="warning-header">Maximum playlist length reached.</h4>
                 <h5 className="warning-sub">Please deselect an event or press Create Playlist to generate your playlist.</h5>
