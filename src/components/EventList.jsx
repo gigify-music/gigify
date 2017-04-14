@@ -3,6 +3,7 @@ import axios from 'axios';
 import SweetScroll from 'sweet-scroll';
 import ToggleDisplay from 'react-toggle-display';
 import Infinite from 'react-infinite';
+import { StickyContainer, Sticky } from 'react-sticky';
 import Event from './Event';
 
 class EventList extends Component {
@@ -133,8 +134,10 @@ class EventList extends Component {
           <div className="event-subheader">Click on events to add them to your playlist</div>
         </div>
       <div id="event-page" className="event-page-container">
+        <StickyContainer>
         <div className="col-sm-2 event-list-sidebar">
-          <div className="scrolling-display animated fadeIn" data-spy="affix" data-offset-top="800">
+          <Sticky>
+          <div className="scrolling-display animated fadeIn">
             <button className="btn playlist-btn btn-lg"
                     data-toggle="modal" data-target="#playlistModal"
                     onClick={this.generatePlaylist}>Create Playlist
@@ -154,9 +157,10 @@ class EventList extends Component {
                   {performer}
                 </li>)}
             </ul>
-          </div>
-
         </div>
+          </Sticky>
+      </div>
+      </StickyContainer>
 
         <div id="events" className="col-sm-10 event-list-container">
           <ul className="list">
