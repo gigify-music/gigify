@@ -400,6 +400,7 @@ li.selected-item {
   display: flex;
   flex-direction: row;
   align-content: center;
+  justify-content: center;
   z-index: 1;
   width: 60vw;
   min-width: 200px;
