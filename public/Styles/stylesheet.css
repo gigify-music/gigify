@@ -256,7 +256,8 @@ li.selected-item {
 
 .event-musicians-container {
   display: flex;
-    padding: 19px;
+  padding: 19px;
+  max-width: 50%;
 }
 
 .event-musicians {
