@@ -22,7 +22,9 @@ class Home extends Component {
       showLoading: false,
       showLoadingGif: false,
       showLoadingGifGenre: false,
+      showSelectedPlaylist: false,
     };
+    this.renderPlaylist2 = this.renderPlaylist2.bind(this);
   }
 
   // onGenerateClick = (username) => {
@@ -126,7 +128,7 @@ class Home extends Component {
   }
 
   renderPlaylist(playlistId) {
-    console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
+    // console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
     const that = this;
     this.setState({
       playlistId: playlistId.data,
@@ -142,10 +144,17 @@ class Home extends Component {
   }
 
   renderPlaylist2(playlistId) {
-    console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
+    // console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
+    const that = this;
     this.setState({
       playlistId: playlistId.data,
-      showPlaylist:true });
+      showSelectedPlaylist: false,
+      showLoading: true,
+    });
+    setTimeout(function(){
+      $('#loadingModal').modal('hide');
+      that.setState({ showSelectedPlaylist: true });
+    }, 3000)
   }
 
   render() {
@@ -268,6 +277,7 @@ class Home extends Component {
             showEventList={this.state.showEventList}
             renderPlaylist={playlistId => this.renderPlaylist2(playlistId)}
             listings={this.props.listings}
+            showPlaylist={this.state.showSelectedPlaylist}
           />
         </ToggleDisplay>
 

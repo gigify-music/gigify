@@ -54,7 +54,12 @@ class EventList extends Component {
       selected: selected,
     })
     .then((res) => {
-      console.log("RESPONSE FROM SERVER FROM /ARTISTS: ", res);
+      // console.log("RESPONSE FROM SERVER FROM /ARTISTS: ", res);
+      this.props.renderPlaylist(res);
+      setTimeout(function(){
+        $('#loadingModal').modal('hide');
+        $('#playlistModal').modal('show');
+      }, 3000)
       this.props.renderPlaylist(res);
     })
     .catch(err =>
@@ -138,7 +143,7 @@ class EventList extends Component {
           <Sticky>
           <div className="scrolling-display animated fadeIn">
             <button className="btn playlist-btn btn-lg"
-                    data-toggle="modal" data-target="#playlistModal"
+                    data-toggle="modal" data-target="#loadingModal"
                     onClick={this.generatePlaylist}>Create Playlist
             </button>
             <ToggleDisplay show={this.state.displayWarning}>
@@ -166,22 +171,24 @@ class EventList extends Component {
             {displayList}
           </ul>
         </div>
-        <div className="modal fade playlist" id="playlistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 className="modal-title" id="myModalLabel">This playlist has been added to your Spotify account!</h4>
-              </div>
-              <div className="modal-body">
-                <iframe
-                  src={`https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark`}
-                  width="100%" height="600" frameBorder="0" allowTransparency="true"
-                />
+        <ToggleDisplay id="show-selected-playlist" show={this.props.showPlaylist}>
+          <div className="modal fade playlist" id="playlistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 className="modal-title" id="myModalLabel">This playlist has been added to your Spotify account!</h4>
+                </div>
+                <div className="modal-body">
+                  <iframe
+                    src={`https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark`}
+                    width="100%" height="600" frameBorder="0" allowTransparency="true"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ToggleDisplay>
       </div>
     </div>
     );
