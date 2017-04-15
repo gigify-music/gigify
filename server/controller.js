@@ -45,7 +45,7 @@ const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getAr
       const artistImages = [];
       data.body.artists.forEach((artist) => {
         if (artist.images[1] === undefined) {
-          artistImages.push('../assets/gigify-g-background.png');
+          artistImages.push('../assets/unavailable.png');
         } else {
           artistImages.push(artist.images[1].url);
         }
