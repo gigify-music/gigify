@@ -13,8 +13,9 @@ class EventList extends Component {
       selected: {},
       displayWarning: false,
       currentVenue: '',
-      currentdate:'',
-      currentevent:'',
+      currentdate: '',
+      currentevent: '',
+      reset: false,
     };
     this.toggleEvent = this.toggleEvent.bind(this);
     this.generatePlaylist = this.generatePlaylist.bind(this);
@@ -61,6 +62,9 @@ class EventList extends Component {
         $('#playlistModal').modal('show');
       }, 3000)
       this.props.renderPlaylist(res);
+      this.setState({ reset: true });
+      this.setState({ selected: {} });
+      this.setState({ reset: false });
     })
     .catch(err =>
       console.error(err),
@@ -113,6 +117,7 @@ class EventList extends Component {
         currentVenue={this.state.currentVenue}
         currentdate={this.state.currentdate}
         currentevent={this.state.currentevent}
+        reset={this.state.reset}
       />,
     )
 
