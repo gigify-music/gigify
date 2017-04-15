@@ -4,10 +4,11 @@ import Slider from 'react-slick';
 import axios from 'axios';
 import ToggleDisplay from 'react-toggle-display';
 import EventList from '../components/EventList';
-import { getEvents } from '../actions/index';
+import { getEvents, gettingEvents } from '../actions/index';
 // import Playlist from '../components/Playlist';
-import '../../public/Styles/input.scss';
-import '../../public/Styles/howto.scss';
+// import '../../public/Styles/input.scss';
+// import '../../public/Styles/howto.scss';
+// import '../../public/Styles/main.scss';
 
 
 class Home extends Component {
@@ -19,7 +20,12 @@ class Home extends Component {
       playlistId: [],
       username: '',
       authenticated: false,
+      showLoading: false,
+      showLoadingGif: false,
+      showLoadingGifGenre: false,
+      showSelectedPlaylist: false,
     };
+    this.renderPlaylist2 = this.renderPlaylist2.bind(this);
   }
 
   // onGenerateClick = (username) => {
@@ -47,6 +53,13 @@ class Home extends Component {
       window.location = '/auth/signin';
     });
   }
+
+  componentWillUpdate() {
+    !(this.props.loadingplaylist)
+    ? this.props.loadingplaylist
+    : this.setState({ showLoadingGif: false, showLoadingGifGenre: false });
+  }
+
   handleUsername(username) {
     this.setState({ username: username.target.value });
   }
@@ -61,6 +74,13 @@ class Home extends Component {
         .catch(err => console.error(err));
   }
 
+  handleFirst() {
+    const panoramaPlaylist = {
+      data: ['panoramanyc', '3Tx6bcrYcvmAA9sblNLPrH'],
+    };
+    this.renderPlaylist(panoramaPlaylist);
+  }
+
   handleSecond() {
     const govballPlaylist = {
       data: [1265233623, '5lRkpBlgVkBEmVNYSp9BmB'],
@@ -69,12 +89,14 @@ class Home extends Component {
   }
 
   handleSubmit(e) {
+    this.setState({ showLoadingGif: true });
     const that = this;
     e.preventDefault();
     axios.get('/api/checksession')
     .then((data) => {
       console.log(data, "on submit songkik username");
       if (data.data === 'logged') {
+        that.props.gettingEvents();
         axios.get(`/api/events/${this.state.username}`)
         .then((response) => {
           that.props.getEvents(response);
@@ -92,8 +114,10 @@ class Home extends Component {
     });
   }
 
-  handleGenre(username){
+  handleGenre(username) {
+    this.setState({ showLoadingGifGenre: true });
     const that = this;
+    that.props.gettingEvents();
     axios.get(`/api/events/${username}`)
     .then((response) => {
       that.props.getEvents(response);
@@ -105,16 +129,41 @@ class Home extends Component {
   }
 
   renderPlaylist(playlistId) {
-    console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
-    this.setState({ showPlaylist: true,
-      playlistId: playlistId.data });
+    // console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
+    const that = this;
+    this.setState({
+      playlistId: playlistId.data,
+      showPlaylist:false });
+    this.setState({ showLoading: true }, function () {
+      setTimeout(function() {
+        $('#loadingModal').modal('hide');
+        that.setState({ showLoading:false, showPlaylist: true });
+    }, 2000)
+
+    });
+    $('#homePlaylistModal').modal('show');
   }
+
+  renderPlaylist2(playlistId) {
+    // console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
+    const that = this;
+    this.setState({
+      playlistId: playlistId.data,
+      showSelectedPlaylist: false,
+      showLoading: true,
+    });
+    setTimeout(function(){
+      $('#loadingModal').modal('hide');
+      that.setState({ showSelectedPlaylist: true });
+    }, 3000)
+  }
+
   render() {
     const settings = {
       dots: true,
       dotsClass: 'slick-dots slick-thumb',
       infinite: true,
-      fade: true,
+      fade: false,
       speed: 1000,
       slidesToShow: 1,
       slidesToScroll: 1,
@@ -138,8 +187,8 @@ class Home extends Component {
                   <img className="home-header-logo" src="./assets/gigify.svg"/>
                 </div>
               </div>
-              <a className="carousel-image panorama" data-toggle="modal" data-target="#homePlaylistModal" onClick={() => this.handleFirst()} />
-              <a className="carousel-image govball" data-toggle="modal" data-target="#homePlaylistModal" onClick={() => this.handleSecond()} />
+              <a className="carousel-image panorama" data-toggle="modal"  data-target="#loadingModal" onClick={() => this.handleFirst()} />
+              <a className="carousel-image govball" data-toggle="modal" data-target="#loadingModal" onClick={() => this.handleSecond()} />
             </Slider>
           </div>
           <div id="songkick-input">
@@ -148,6 +197,7 @@ class Home extends Component {
                   <div className="search-input form-group">
                     <input
                       type="text" className="username-input input-lg"
+                      autoComplete="off"
                       id="inlineFormInputGroup" placeholder="Enter Songkick username..."
                       value={this.state.username} onChange={this.handleUsername.bind(this)}
                     />
@@ -162,9 +212,18 @@ class Home extends Component {
                     </button>
                   </div>
                 </form>
+                <ToggleDisplay id="toggle-search-gif" show={this.state.showLoadingGif}>
+                  <div className="input-loader">
+                    <img
+                      className="input-loader-gif"
+                      id="search-loader"
+                      src="../assets/loadingring.gif"
+                    />
+                  </div>
+              </ToggleDisplay>
               </div>
             <div className="or-container">
-              <img className ="or" src="../../assets/or.svg" />
+              <img className="or" src="../../assets/or.png" />
               </div>
             <div className="genre-container">
                 <div className="dropdown">
@@ -182,6 +241,14 @@ class Home extends Component {
                     </ul>
                 </div>
                 <div className="nyc-events">(NYC Gigs)</div>
+              <ToggleDisplay id="toggle-genre-gif" show={this.state.showLoadingGifGenre}>
+                <div className="input-loader">
+                  <img
+                    className="input-loader-gif" id="genre-loader"
+                    src="../assets/loadingring.gif"
+                  />
+                </div>
+              </ToggleDisplay>
               </div>
           </div>
           <div className="howto-container">
@@ -209,10 +276,25 @@ class Home extends Component {
             id="event-list"
             playlistId={this.state.playlistId}
             showEventList={this.state.showEventList}
-            renderPlaylist={playlistId => this.renderPlaylist(playlistId)}
+            renderPlaylist={playlistId => this.renderPlaylist2(playlistId)}
             listings={this.props.listings}
+            showPlaylist={this.state.showSelectedPlaylist}
           />
         </ToggleDisplay>
+
+        <ToggleDisplay id="playlist-toggle" show={this.state.showLoading}>
+            <div className="modal fade playlist" id="loadingModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content-loading">
+                <div className="modal-body loading-animation" >
+                  <img className="loading-ring" src="./assets/ring.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+          </ToggleDisplay>
+
+      <ToggleDisplay id="show-playlist" show={this.state.showPlaylist}>
         <div className="modal fade playlist" id="homePlaylistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
@@ -229,6 +311,7 @@ class Home extends Component {
           </div>
         </div>
       </div>
+    </ToggleDisplay>
       <footer className="footer">
         <h6 className="footer-content container"><img className="footer-logo" src="./assets/gigify-g.svg"/> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
       </footer>
@@ -237,11 +320,12 @@ class Home extends Component {
   }
 }
 
-const mapStatetoProps = ({ events }) => ({
+const mapStatetoProps = ({ events, loading }) => ({
   listings: events.eventListings,
+  loadingplaylist: loading,
 });
 
-export default connect(mapStatetoProps, { getEvents })(Home);
+export default connect(mapStatetoProps, { getEvents, gettingEvents })(Home);
 
 
 /* <div>

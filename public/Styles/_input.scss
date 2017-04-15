@@ -1,7 +1,27 @@
-@import './_variables.scss';
+//_input.scss
 
+/*CONTAINER============================================================*/
+
+#songkick-input {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  z-index: 1;
+  width: 60vw;
+  min-width: 200px;
+  height: 22vh;
+  min-height: 150px;
+  background: $white;
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 1px 1px 10px $shadow;
+  top: -80px;
+  top: -10vh;
+}
 
 /*SEARCH USERNAME============================================================*/
+
 .search-container {
   width: 49%;
   display: flex;
@@ -16,6 +36,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0 !important;
 }
 
 .search-input {
@@ -43,6 +64,10 @@
   border-radius: 0 !important;
   padding-left: 50px !important;
   width: 100%;
+  &:focus {
+    outline: none;
+    border: $green-border;
+  }
 }
 
 .submit-btn {
@@ -52,6 +77,22 @@
   border-left: none;
   border-radius: 0 !important;
   transition: $color-fill-transition;
+  &:focus {
+    outline: none;
+  }
+}
+
+.submit-btn-contents {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-loader {
+  height: 30px;
+}
+
+.input-loader-gif {
+  height: 25px;
 }
 
 .submit-btn:hover {
@@ -66,7 +107,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: green;
 }
 
 .or {

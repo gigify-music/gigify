@@ -23,7 +23,6 @@ const getArtistIDList = (artistList) => {
 };
 const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getArtistTopTracks(artist, 'US')
       .then((data) => {
-        console.log('DATA', data.body.tracks);
         const tracks = data.body.tracks;
         const tracklist = {};
         tracklist[artist] = [];
@@ -46,7 +45,7 @@ const getTopTracks = artistIDList => artistIDList.map(artist => spotifyApi.getAr
       const artistImages = [];
       data.body.artists.forEach((artist) => {
         if (artist.images[1] === undefined) {
-          artistImages.push('Picture Unavailable');
+          artistImages.push('../assets/unavailable.png');
         } else {
           artistImages.push(artist.images[1].url);
         }
@@ -68,7 +67,7 @@ module.exports = {
     res.send('SECOND FESTIVAL RESPONSE');
   },
   createPlaylist: (req, res) => {
-    console.log('SELECTED', req.body.selected);
+    // console.log('SELECTED', req.body.selected);
     Promise.all(getArtistIDList(req.body.selected))
       .then(artistIDList => getTopTracks(artistIDList))
       .then((tracksArray) => {
@@ -80,7 +79,6 @@ module.exports = {
           .then((merged) => {
             spotifyApi.getMe()
               .then((data) => {
-                console.log(data);
                 userID = data.body.id;
                 name = data.body.display_name;
                 return [userID, name];
@@ -165,8 +163,9 @@ module.exports = {
         .then(artistIds => getArtistImages(artistIds))
           .then((imageUrls) => {
             events.forEach((event, i) => {
-              event.imageUrl = imageUrls[i];
-            })
+                event.imageUrl = imageUrls[i];
+                event.id = i;
+            });
           })
           .then(() => res.send(events));
     });

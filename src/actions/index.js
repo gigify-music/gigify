@@ -9,9 +9,8 @@ export function getEvents({ data }) {
   };
 }
 
-// export function toggleActive(id) {
-//   return ({
-//     type: types.TOGGLE_ACTIVE,
-//     payload: id,
-//   });
-// }
+export function gettingEvents() {
+  return {
+    type: types.GET_EVENTS_DATA,
+  };
+}
