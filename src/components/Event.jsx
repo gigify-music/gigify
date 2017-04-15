@@ -11,9 +11,9 @@ class Event extends Component {
       unchecked: '',
       locked: 'locked-item',
       unlocked: '',
-      phone:0,
-      eventname:'',
-      date:'',
+      phone: 0,
+      eventname: '',
+      date: '',
 
     };
     this.onToggleClick = this.onToggleClick.bind(this);
@@ -21,8 +21,22 @@ class Event extends Component {
     this.submitquery = this.submitquery.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.reset) {
+      this.onToggleClick();
+    }
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('componentWillUpdate', nextProps, nextState);
+  //   if (nextProps.reset && nextState.active) {
+  //     this.onToggleClick();
+  //   }
+  // }
+
+
   onToggleClick() {
-    console.log('CHECK', this.state.active, this.props.locked);
+    // console.log('CHECK', this.state.active, this.props.locked);
     if (!this.state.active && this.props.locked) {
       return;
     } else {
