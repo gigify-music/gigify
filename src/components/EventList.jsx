@@ -144,7 +144,7 @@ class EventList extends Component {
         </div>
       <div id="event-page" className="event-page-container">
         <StickyContainer>
-        <div className="col-sm-2 event-list-sidebar">
+        <div className="event-list-sidebar">
           <Sticky>
           <div className="scrolling-display animated fadeIn">
             <button className="btn playlist-btn btn-lg"
@@ -171,7 +171,7 @@ class EventList extends Component {
       </div>
       </StickyContainer>
 
-        <div id="events" className="col-sm-10 event-list-container">
+        <div id="events" className="event-list-container">
           <ul className="list">
             {displayList}
           </ul>
