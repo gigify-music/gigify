@@ -222,7 +222,7 @@ class Home extends Component {
               </ToggleDisplay>
               </div>
             <div className="or-container">
-              <img className="or" src="../../assets/or.png" />
+              <img className="or" src="../../assets/or.svg" />
               </div>
             <div className="genre-container">
                 <div className="dropdown">
