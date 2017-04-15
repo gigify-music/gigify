@@ -239,7 +239,6 @@ li.selected-item {
 
 .artist-image {
   max-height: 200px;
-  max-width: 200px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
