@@ -1,0 +1,269 @@
+//_eventList.scss
+
+/*CONTAINERS==================================================================*/
+
+.event-page-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+}
+
+.event-list-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 70%;
+}
+
+.top-event-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/*TOP BAR==================================================================*/
+
+#gigify-hr {
+  width: 100%;
+  margin-top: 5%;
+}
+
+.event-subheader {
+  font-family: "Poppins";
+  font-weight: 900;
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/*SIDE BAR==================================================================*/
+
+.event-list-sidebar {
+  height: 100vh;
+  width: 20vw !important;
+  float: right;
+  margin-top: 3%;
+  z-index: 10;
+}
+
+.scrolling-display {
+  background-image: url(../assets/gigify-g-background.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.col-sm-2 event-list-sidebar {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.playlist-btn {
+  background-color: $spotify-green;
+  color: $white;
+  width: 100%;
+  margin-top: 20%;
+}
+
+.event-page-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+}
+
+.event-list-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 70%;
+}
+
+.event-list-topbar {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 10vh;
+}
+
+////*WARNING==================================================================*/
+
+.selectionWarning {
+  background-color: indianred;
+  text-align: center;
+  color:  $white;
+  font-weight: bold;
+  border-radius: 5%;
+  margin-top: 10%;
+}
+
+.selectionWarning.animated {
+  animation-duration: 2s;
+}
+
+.warning-header {
+  font-weight: bold;
+  padding: 2%;
+}
+
+.warning-sub {
+  padding: 5%;
+}
+
+.glyphicon-exclamation-sign {
+  font-size: 50px;
+  color: $white;
+  margin-top: 10%;
+}
+
+////*SELECTED ARTISTS==================================================================*/
+
+.selected-artists-header {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20%;
+}
+
+#gigify-hr-selected {
+  width: 100%;
+}
+
+.selected-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  text-align: center;
+  border: 2px solid black;
+}
+
+/*EVENT LIST==================================================================*/
+
+.list {
+  width: 90%;
+}
+
+.noBullets {
+  list-style-type: none;
+}
+
+.event-list-item {
+  border: 1px solid $background-black;
+  display: flex;
+  flex-direction: row;
+  height: 20%;
+  min-width: 100%;
+  background-color: $white;
+  margin-top: 3%;
+}
+
+.event-list-item:hover {
+  box-shadow: 1px 1px 10px $shadow;
+}
+
+.event-list-item-selected {
+  box-shadow: 5px 5px 30px $shadow;
+  border: 4px solid $spotify-green;
+}
+
+li.selected-item {
+  font-weight: bold;
+  border: none;
+  font-size: 16;
+}
+
+.locked-item {
+  opacity: 0.5!important;
+  color: $background-black !important;
+}
+
+.artist-image {
+  max-height: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 25%;
+}
+
+.plus-sign {
+  font-size: 35px;
+  color: $spotify-green;
+  opacity: 0.6;
+  margin-left: 3%;
+}
+
+.event-musicians-container {
+  display: flex;
+  padding: 19px;
+  max-width: 50%;
+}
+
+.event-musicians {
+  align-content: flex-start;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: left;
+  padding: 1%;
+}
+
+.headliner {
+  font: 40px 'Poppins', sans-serif;
+  font-weight: bolder;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.supporting {
+  font-size: 15px;
+  font-style: italic;
+}
+
+.event-info-container {
+  display: flex;
+  background-color: $background-black;
+}
+
+.event-info {
+  color: $white;
+  width: 100%;
+  font-size: 13px;
+  display: flex;
+  text-align: right;
+  align-content: flex-start;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+.date {
+  font-size: 35px;
+}
+
+.location {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.venue {
+    color:  $white;
+    font-style: bold;
+}
+
+.info-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+.ticket-btn {
+  background-color:  $spotify-green;
+  color: $white;
+  height: auto;
+  margin: 5px 10px;
+}

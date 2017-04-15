@@ -6,8 +6,9 @@ import ToggleDisplay from 'react-toggle-display';
 import EventList from '../components/EventList';
 import { getEvents, gettingEvents } from '../actions/index';
 // import Playlist from '../components/Playlist';
-import '../../public/Styles/input.scss';
-import '../../public/Styles/howto.scss';
+// import '../../public/Styles/input.scss';
+// import '../../public/Styles/howto.scss';
+// import '../../public/Styles/main.scss';
 
 
 class Home extends Component {

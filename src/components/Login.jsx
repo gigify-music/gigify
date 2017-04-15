@@ -1,7 +1,8 @@
 import React from 'react';
 import ToggleDisplay from 'react-toggle-display';
 import SweetScroll from 'sweet-scroll';
-import '../../public/Styles/login.scss';
+// import '../../public/Styles/login.scss';
+import '../../public/Styles/main.scss';
 
 
 class Login extends React.Component {
@@ -72,7 +73,7 @@ class Login extends React.Component {
                   show you the gigs that match your interests and allows to choose the ones you’d like to attend.
                   After making your selections, you can buy tickets, sign up to receive gig reminders, and best of all,
                   you can create a Spotify playlist with all of the artists playing the gigs! The playlist will
-                  automatically add to your Spotify account, so you can gear up for gigs anywhere you want. 
+                  automatically add to your Spotify account, so you can gear up for gigs anywhere you want.
                 </p>
               </div>
 
