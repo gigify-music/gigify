@@ -1,3 +1,20 @@
+//_modal.scss
+
+.modal-body {
+  padding: 0 !important;
+  background-color: #232323;
+}
+
+.modal-title {
+  color: $white;
+  text-align: center;
+}
+
+.modal-header {
+  background-color: #282828;
+  border-bottom: none !important;
+}
+
 .modalAlign {
   height:40%;
   padding-top: 30%;
@@ -20,8 +37,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.modal-content-loading {
-
 }

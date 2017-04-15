@@ -70,7 +70,8 @@
     "spotify-web-api-js": "^0.21.2",
     "spotify-web-api-node": "^2.3.6",
     "sweet-scroll": "^2.2.0",
-    "twilio": "^2.11.1"
+    "twilio": "^2.11.1",
+    "url-loader": "^0.5.8"
   },
   "config": {
     "commitizen": {

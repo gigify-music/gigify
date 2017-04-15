@@ -33,6 +33,13 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000000
+        }
+      },
+      {
         use: [{
           loader: 'babel-loader',
           options: { presets: ['airbnb', 'stage-1'] },
