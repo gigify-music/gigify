@@ -203,7 +203,7 @@ class Home extends Component {
                     />
                   <span className="input-icon"><img className="sk-input-logo" src="../assets/sk-badge-black.png" /></span>
                   </div>
-                  <div className="form-group">
+                  <div className="submit-form form-group">
                     <button
                       type="submit" className="submit-btn input-btn btn btn-lg"
                       onClick={this.handleSubmit.bind(this)}
