@@ -11,6 +11,7 @@ class Songkick extends Component {
     super();
     this.state = {
       username: '',
+      onSubmitLoadingGif: false,
     }
 
     // this.handleUsername = this.handleUsername.bind(this);
@@ -24,6 +25,7 @@ class Songkick extends Component {
   }
 
   handleSubmit(e) {
+    this.setState({ onSubmitLoadingGif: true })
     this.props.submitUsername(this.state.username);
     const that = this;
     e.preventDefault();
@@ -34,6 +36,7 @@ class Songkick extends Component {
         axios.get(`/api/events/${this.props.username}`)
         .then((response) => {
           that.props.getEvents(response);
+          this.setState({ onSubmitLoadingGif: false })
         })
         .catch((error) => {
           console.error(error);
@@ -71,7 +74,7 @@ class Songkick extends Component {
                 </button>
               </div>
             </form>
-            <ToggleDisplay id="toggle-search-gif" show={this.props.showLoadingGif}>
+            <ToggleDisplay id="toggle-search-gif" show={this.state.onSubmitLoadingGif}>
               <div className="input-loader">
                 <img
                   className="input-loader-gif"

@@ -6,16 +6,21 @@ import { getEvents, gettingEvents } from '../actions/index';
 
 class Genres extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      onLoadingGenreGif: false,
+    }
     this.handleGenre = this.handleGenre.bind(this);
   }
 
   handleGenre(username) {
+    this.setState({ onLoadingGenreGif: true })
     const that = this;
     that.props.gettingEvents();
     axios.get(`/api/events/${username}`)
     .then((response) => {
       that.props.getEvents(response);
+      this.setState({ onLoadingGenreGif: false })
       // that.setState({ showEventList: true });
     })
     .catch((error) => {
@@ -41,7 +46,7 @@ class Genres extends Component {
         </ul>
       </div>
       <div className="nyc-events">(NYC Gigs)</div>
-      <ToggleDisplay id="toggle-genre-gif" show={this.props.showLoadingGifGenre}>
+      <ToggleDisplay id="toggle-genre-gif" show={this.state.onLoadingGenreGif}>
         <div className="input-loader">
           <img
             className="input-loader-gif" id="genre-loader"
