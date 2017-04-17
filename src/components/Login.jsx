@@ -19,7 +19,6 @@ class Login extends React.Component {
     this.setState({
       showAbout: !this.state.showAbout,
     });
-    console.log('UPDATE STATE', this.state);
   }
 
   componentDidMount() {
@@ -27,9 +26,7 @@ class Login extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('UPDATE COMPONENT', prevProps, prevState);
     if (!prevState.showAbout) {
-      console.log('SHOULD SCROLL');
       this.sweetScroll.toElement(document.getElementById('about'));
     }
   }

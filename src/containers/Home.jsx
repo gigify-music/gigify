@@ -9,7 +9,6 @@ import Playlists from './Playlists';
 import HowTo from '../components/HowTo';
 import Carousel from '../components/Carousel';
 
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +24,6 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    console.log('BEFORE MOUNT');
     axios.get('/api/checksession').then((data) => {
       if (data.data === 'logged') {
         this.setState({
