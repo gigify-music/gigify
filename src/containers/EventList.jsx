@@ -31,9 +31,12 @@ class EventList extends Component {
       this.setState({
         selected,
       });
-      [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 23 ? this.setState({ displayWarning: false }) : console.log('OK');
+      if([...new Set([].concat(...(Object.values(this.state.selected))))].length <= 23){
+        this.setState({ displayWarning: false });
+      }
       return;
     }
+
     selected[id] = performers;
     this.setState({
       selected,
@@ -96,7 +99,6 @@ class EventList extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.loading || prevState.displayWarning) {
-      console.log("SHOULD SCROLL");
       this.sweetScroll.toElement(document.getElementById('gigify-hr'));
     }
   }

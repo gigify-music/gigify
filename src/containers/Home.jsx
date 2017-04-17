@@ -24,7 +24,6 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    console.log('BEFORE MOUNT');
     axios.get('/api/checksession').then((data) => {
       if (data.data === 'logged') {
         this.setState({
