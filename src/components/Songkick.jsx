@@ -36,7 +36,7 @@ class Songkick extends Component {
         axios.get(`/api/events/${this.props.username}`)
         .then((response) => {
           that.props.getEvents(response);
-          that.showEvents();
+          // that.showEvents();
           // that.setState({ showEventList: true });
         })
         .catch((error) => {
@@ -75,7 +75,7 @@ class Songkick extends Component {
                 </button>
               </div>
             </form>
-            <ToggleDisplay id="toggle-search-gif" show={this.props.loading}>
+            <ToggleDisplay id="toggle-search-gif" show={this.props.showLoadingGif}>
               <div className="input-loader">
                 <img
                   className="input-loader-gif"
@@ -99,9 +99,7 @@ class Songkick extends Component {
 
 const mapStatetoProps = ({ username, loading }) => ({
   username,
-  loading,
+  showLoadingGif: loading,
 });
 
 export default connect(mapStatetoProps, { submitUsername, gettingEvents, getEvents })(Songkick);
-
-// value={this.props.username}

@@ -4,6 +4,7 @@ import SweetScroll from 'sweet-scroll';
 import ToggleDisplay from 'react-toggle-display';
 import { StickyContainer, Sticky } from 'react-sticky';
 import Event from './Event';
+import { connect } from 'react-redux';
 
 class EventList extends Component {
   constructor(props) {
@@ -93,7 +94,8 @@ class EventList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!prevProps.showEventList || prevState.displayWarning) {
+    if (prevProps.loading || prevState.displayWarning) {
+      console.log("SHOULD SCROLL");
       this.sweetScroll.toElement(document.getElementById('gigify-hr'));
     }
   }
@@ -209,20 +211,10 @@ EventList.propTypes = {
   renderPlaylist: PropTypes.func.isRequired,
 };
 
-// const mapStatetoProps = ({ events }) => ({
-//   lockedEvents: events.locked,
-// });
+const mapStatetoProps = ({ events, loading }) => ({
+  loading,
+});
 
-// export default connect(mapStatetoProps, { lockEvents })(EventList);
+export default connect(mapStatetoProps, {})(EventList);
 
-export default EventList;
-
-// else if (selected[id]) {
-//   delete selected[id];
-//   this.setState({
-//     selected,
-//   });
-//   console.log('AFTER DELETE PASSED UNIQUE', [...new Set([].concat(...(Object.values(this.state.selected))))]);
-// }
-
-            // {loading ? 'Loading...' : ''}
+// export default EventList;
