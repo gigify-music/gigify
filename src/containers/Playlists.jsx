@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ToggleDisplay from 'react-toggle-display';
 
-class HomePlaylist extends Component {
+class Playlists extends Component {
   constructor() {
     super();
   }
@@ -53,4 +53,4 @@ const mapStatetoProps = ({ loadingplaylist, showplaylist, playlistid }) => ({
   playlistid,
 });
 
-export default connect(mapStatetoProps, {})(HomePlaylist);
+export default connect(mapStatetoProps, {})(Playlists);
