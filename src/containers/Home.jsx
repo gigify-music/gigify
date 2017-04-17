@@ -8,8 +8,9 @@ import { getEvents, gettingEvents } from '../actions/index';
 import SongKick from '../components/SongKick';
 import Genres from '../components/Genres';
 // import Playlist from '../components/Playlist';
-import '../../public/Styles/input.scss';
-import '../../public/Styles/howto.scss';
+// import '../../public/Styles/input.scss';
+// import '../../public/Styles/howto.scss';
+// import '../../public/Styles/main.scss';
 
 
 class Home extends Component {

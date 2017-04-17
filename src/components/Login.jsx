@@ -3,6 +3,8 @@ import ToggleDisplay from 'react-toggle-display';
 import SweetScroll from 'sweet-scroll';
 import '../../public/Styles/login.scss';
 import About from './About'
+// import '../../public/Styles/login.scss';
+import '../../public/Styles/main.scss';
 
 
 class Login extends React.Component {

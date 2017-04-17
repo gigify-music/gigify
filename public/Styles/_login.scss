@@ -1,4 +1,4 @@
-@import './_variables.scss';
+//_login.scss
 
 .page-container {
   height: 100vh;
@@ -23,20 +23,22 @@ canvas {
 }
 
 #particles-js .particles-js-canvas-el {
+  background-image: url(../assets/loginbackground.png);
+  background-position: center;
+  background-size: cover;
   width: 100vw!important;
   height: 100vh!important;
 }
 
 .top-content-container {
   height: 100vh;
-  color: #ffffff;
+  color: $white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   box-shadow: 0px 0px 30px rgba(0,0,0,.8);
 }
-
 
 .header-logo {
   margin-top: 2%;
@@ -71,25 +73,6 @@ canvas {
     font-size: 30px;
 }
 
-// i.fa.fa-chevron-downArrow {
-//   position: absolute;
-//   -webkit-transform-style: preserve-3d;
-//   transform-style: preserve-3d;
-//   top: 50%;
-//   left: 50%;
-//   -webkit-transform: translate(-50%, -50%);
-//   transform: translate(-50%, -50%);
-//   width: 100px;
-//   height: 100px;
-//   fill: $background-black;
-//   animation: pulse 1.3s infinite;
-// }
-//
-// i.fa.fa-chevron-down.faa-pulse.animated {
-//   display: flex;
-//   justify-content: center;
-// }
-
 i.icon.fa.fa-chevron-down.faa-pulse.animated {
   font-size: 40px;
 }
@@ -106,7 +89,7 @@ button.btn.btn-lg.spotify-auth-button {
   align-items: center;
   justify-content: center;
   margin-top: 5%;
-  color: #FFFFFF;
+  color: $white;
   background: $spotify-green;
   box-shadow: 1px 1px 20px $background-black;
   z-index: 1;
@@ -126,30 +109,6 @@ button.btn.btn-lg.spotify-auth-button {
   color: $background-black;
   font-size: 30px;
 }
-
-// .ball {
-//   height: 10px;
-//   width: 10px;
-//   border-radius: 80%;
-//   background-color: $spotify-green;
-//   border-color: transparent;
-// }
-
-// .fill:before {
-//   content: "";
-//   position: absolute;
-//
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-//   top: 100%;
-//   z-index: -1;
-//   -webkit-transition: top 0.09s ease-in;
-// }
-//
-// .fill:hover:before {
-//   top: 0;
-// }
 
 .spotify-logo {
   width: 3%;
