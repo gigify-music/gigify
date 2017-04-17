@@ -1,8 +1,8 @@
 import React from 'react';
 import ToggleDisplay from 'react-toggle-display';
 import SweetScroll from 'sweet-scroll';
-// import '../../public/Styles/login.scss';
-import '../../public/Styles/main.scss';
+import '../../public/Styles/login.scss';
+import About from './About'
 
 
 class Login extends React.Component {
@@ -60,6 +60,7 @@ class Login extends React.Component {
           </div>
         </div>
       </div>
+<<<<<<< 28524cee02115b96cbab19f30778793d2cb078dc
           <div id="about" className="container aboutUs">
             <div className="aboutSection">
               <div className="aboutHeader">
@@ -130,6 +131,9 @@ class Login extends React.Component {
               </div>
             </div>
           </div>
+=======
+        <About />
+>>>>>>> Refactoring to modularize components
           <div className="footer">
             <h6 className="footer-content"><img className="footer-logo" src="./assets/gigify-g.svg"/> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
           </div>

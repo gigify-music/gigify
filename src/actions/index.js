@@ -14,3 +14,11 @@ export function gettingEvents() {
     type: types.GET_EVENTS_DATA,
   };
 }
+
+export function submitUsername(username) {
+  console.log('USERNAME ACTION', username);
+  return {
+    type: types.SUBMIT_USERNAME,
+    payload: username,
+  }
+}
