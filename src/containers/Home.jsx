@@ -5,6 +5,8 @@ import axios from 'axios';
 import ToggleDisplay from 'react-toggle-display';
 import EventList from '../components/EventList';
 import { getEvents, gettingEvents } from '../actions/index';
+import SongKick from '../components/SongKick';
+import Genres from '../components/Genres';
 // import Playlist from '../components/Playlist';
 import '../../public/Styles/input.scss';
 import '../../public/Styles/howto.scss';
@@ -21,7 +23,6 @@ class Home extends Component {
       authenticated: false,
       showLoading: false,
       showLoadingGif: false,
-      showLoadingGifGenre: false,
       showSelectedPlaylist: false,
     };
     this.renderPlaylist2 = this.renderPlaylist2.bind(this);
@@ -59,10 +60,6 @@ class Home extends Component {
     : this.setState({ showLoadingGif: false, showLoadingGifGenre: false });
   }
 
-  handleUsername(username) {
-    this.setState({ username: username.target.value });
-  }
-
   handleLogout() {
     axios.get('/auth/logout')
         .then((res) => {
@@ -87,45 +84,6 @@ class Home extends Component {
     this.renderPlaylist(govballPlaylist);
   }
 
-  handleSubmit(e) {
-    this.setState({ showLoadingGif: true });
-    const that = this;
-    e.preventDefault();
-    axios.get('/api/checksession')
-    .then((data) => {
-      console.log(data, "on submit songkik username");
-      if (data.data === 'logged') {
-        that.props.gettingEvents();
-        axios.get(`/api/events/${this.state.username}`)
-        .then((response) => {
-          that.props.getEvents(response);
-          that.setState({ showEventList: true });
-        })
-        .catch((error) => {
-          console.log(error, 'error in get api/events on submit');
-        });
-      } else {
-        window.location = '/auth/signin';
-      }
-    })
-    .catch((err) => {
-      console.log(err, 'error in auth check on submit');
-    });
-  }
-
-  handleGenre(username) {
-    this.setState({ showLoadingGifGenre: true });
-    const that = this;
-    that.props.gettingEvents();
-    axios.get(`/api/events/${username}`)
-    .then((response) => {
-      that.props.getEvents(response);
-      that.setState({ showEventList: true });
-    })
-    .catch((error) => {
-      console.log(error, 'error in get api/events on submit');
-    });
-  }
 
   renderPlaylist(playlistId) {
     // console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
@@ -171,10 +129,10 @@ class Home extends Component {
       autoplaySpeed: 6000,
     };
 
-    if (this.state.authenticated === false) {
-      return (<div />);   //Empty page while authorization is checked before
+    // if (this.state.authenticated === false) {
+    //   return (<div />);   //Empty page while authorization is checked before
                           //redirect to login
-    }
+    // }
 
     return (
       <div className="home-container">
@@ -190,66 +148,9 @@ class Home extends Component {
               <a className="carousel-image govball" data-toggle="modal" data-target="#loadingModal" onClick={() => this.handleSecond()} />
             </Slider>
           </div>
-          <div id="songkick-input">
-              <div className="search-container">
-                <form className="username-form form-group">
-                  <div className="search-input form-group">
-                    <input
-                      type="text" className="username-input input-lg"
-                      autoComplete="off"
-                      id="inlineFormInputGroup" placeholder="Enter Songkick username..."
-                      value={this.state.username} onChange={this.handleUsername.bind(this)}
-                    />
-                  <span className="input-icon"><img className="sk-input-logo" src="../assets/sk-badge-black.png" /></span>
-                  </div>
-                  <div className="form-group">
-                    <button
-                      type="submit" className="submit-btn input-btn btn btn-lg"
-                      onClick={this.handleSubmit.bind(this)}
-                      >
-                      Submit
-                    </button>
-                  </div>
-                </form>
-                <ToggleDisplay id="toggle-search-gif" show={this.state.showLoadingGif}>
-                  <div className="input-loader">
-                    <img
-                      className="input-loader-gif"
-                      id="search-loader"
-                      src="../assets/loadingring.gif"
-                    />
-                  </div>
-              </ToggleDisplay>
-              </div>
-            <div className="or-container">
-              <img className="or" src="../../assets/or.png" />
-              </div>
-            <div className="genre-container">
-                <div className="dropdown">
-                  <button
-                    className="dropdown-btn btn btn-lg dropdown-toggle"
-                    type="button" data-toggle="dropdown">
-                    Choose a genre <i className="arrow fa fa-chevron-down" aria-hidden="true" />
-                  </button>
-                  <ul className="dropdown-menu genres">
-                    <li><a onClick={() => this.handleGenre('gigify_edm')}><i className="fa fa-music" aria-hidden="true" /> EDM </a></li>
-                    <li><a onClick={() => this.handleGenre('gigify_hiphop')}><i className="fa fa-music" aria-hidden="true" /> Hip Hop </a></li>
-                    <li><a onClick={() => this.handleGenre('gigify_indie')}><i className="fa fa-music" aria-hidden="true" /> Indie </a></li>
-                    <li><a onClick={() => this.handleGenre('gigify_pop')}><i className="fa fa-music" aria-hidden="true" /> Pop </a></li>
-                    <li><a onClick={() => this.handleGenre('gigify_rock')}><i className="fa fa-music" aria-hidden="true" /> Rock </a></li>
-                    </ul>
-                </div>
-                <div className="nyc-events">(NYC Gigs)</div>
-              <ToggleDisplay id="toggle-genre-gif" show={this.state.showLoadingGifGenre}>
-                <div className="input-loader">
-                  <img
-                    className="input-loader-gif" id="genre-loader"
-                    src="../assets/loadingring.gif"
-                  />
-                </div>
-              </ToggleDisplay>
-              </div>
-          </div>
+
+          <SongKick />
+
           <div className="howto-container">
             <div className="howto-header">How to Gigify</div>
             <div className="howto-logos">
@@ -270,7 +171,7 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <ToggleDisplay id="event-list-toggle" show={this.state.showEventList}>
+        <ToggleDisplay id="event-list-toggle" show={this.props.showEvents}>
           <EventList
             id="event-list"
             playlistId={this.state.playlistId}
@@ -321,6 +222,7 @@ class Home extends Component {
 
 const mapStatetoProps = ({ events, loading }) => ({
   listings: events.eventListings,
+  showEvents: events.showEvents,
   loadingplaylist: loading,
 });
 
