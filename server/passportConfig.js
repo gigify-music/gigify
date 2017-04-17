@@ -9,7 +9,7 @@ const pool = require('./database');
 const signIn = new SpotifyStrategy({
   clientID: appKey,
   clientSecret: appSecret,
-  callbackURL: 'http://localhost:8000/auth/callback',
+  callbackURL: 'http://gigify.io/auth/callback',
 }, (accessToken, refreshToken, profile, done) => {
     // asynchronous verification, for effect...
     // ADD USERS TO DATABASE VIA THE PROFILE OBJECT RECIEVED IN THIS FUNCTION

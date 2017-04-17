@@ -29,7 +29,7 @@ class EventList extends Component {
       this.setState({
         selected,
       });
-      [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 5 ? this.setState({ displayWarning: false }) : console.log('OK');
+      [...new Set([].concat(...(Object.values(this.state.selected))))].length <= 23 ? this.setState({ displayWarning: false }) : console.log('OK');
       return;
     }
     selected[id] = performers;
@@ -38,7 +38,7 @@ class EventList extends Component {
     });
     const unique = [...new Set([].concat(...(Object.values(this.state.selected))))];
 
-    if (unique.length > 5) {
+    if (unique.length > 23) {
       this.setState({
         displayWarning: true,
       });
@@ -77,11 +77,6 @@ class EventList extends Component {
       currentdate: value.date,
       currentevent: value.eventname,
     }, function () {  //{currentVenue: props}
-      console.log('inside getVenue-- currentVenue is: ',
-      this.state.currentVenue,
-      this.state.currentdate,
-      this.state.currentevent
-    )
       callback();
       // return { currentVenue:value }
     });
@@ -99,7 +94,6 @@ class EventList extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (!prevProps.showEventList || prevState.displayWarning) {
-      console.log("SHOULD SCROLL");
       this.sweetScroll.toElement(document.getElementById('gigify-hr'));
     }
   }
