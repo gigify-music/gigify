@@ -1,10 +1,11 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import SweetScroll from 'sweet-scroll';
 import ToggleDisplay from 'react-toggle-display';
 import { StickyContainer, Sticky } from 'react-sticky';
-import Event from './Event';
-import { connect } from 'react-redux';
+import Event from '../components/Event';
+
 
 class EventList extends Component {
   constructor(props) {
@@ -216,5 +217,3 @@ const mapStatetoProps = ({ events, loading }) => ({
 });
 
 export default connect(mapStatetoProps, {})(EventList);
-
-// export default EventList;

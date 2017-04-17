@@ -16,7 +16,6 @@ export function gettingEvents() {
 }
 
 export function submitUsername(username) {
-  console.log('USERNAME ACTION', username);
   return {
     type: types.SUBMIT_USERNAME,
     payload: username,
@@ -24,7 +23,6 @@ export function submitUsername(username) {
 }
 
 export function showLoadingPlaylist(boolean) {
-  console.log('SHOW LOADING PLAYLIST ACTION', boolean);
   return {
     type: types.SHOW_LOADING_PLAYLIST,
     payload: boolean,
@@ -32,7 +30,6 @@ export function showLoadingPlaylist(boolean) {
 }
 
 export function showPlaylist(boolean) {
-  console.log('SHOW PLAYLIST ACTION', boolean);
   return {
     type: types.SHOW_PLAYLIST,
     payload: boolean,

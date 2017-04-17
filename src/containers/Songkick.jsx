@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ToggleDisplay from 'react-toggle-display';
-import Genres from '../components/Genres';
+import Genres from './Genres';
 import { getEvents, gettingEvents, submitUsername } from '../actions/index';
 
 
@@ -18,14 +18,12 @@ class Songkick extends Component {
   }
 
   handleUsername(username) {
-    console.log('USERNAME SONGKICK', username.target.value);
     this.setState({
       username: username.target.value,
     })
   }
 
   handleSubmit(e) {
-    console.log('USERNAME STATE', this.state.username);
     this.props.submitUsername(this.state.username);
     const that = this;
     e.preventDefault();
@@ -36,8 +34,6 @@ class Songkick extends Component {
         axios.get(`/api/events/${this.props.username}`)
         .then((response) => {
           that.props.getEvents(response);
-          // that.showEvents();
-          // that.setState({ showEventList: true });
         })
         .catch((error) => {
           console.error(error);
