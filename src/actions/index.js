@@ -20,5 +20,28 @@ export function submitUsername(username) {
   return {
     type: types.SUBMIT_USERNAME,
     payload: username,
-  }
+  };
+}
+
+export function showLoadingPlaylist(boolean) {
+  console.log('SHOW LOADING PLAYLIST ACTION', boolean);
+  return {
+    type: types.SHOW_LOADING_PLAYLIST,
+    payload: boolean,
+  };
+}
+
+export function showPlaylist(boolean) {
+  console.log('SHOW PLAYLIST ACTION', boolean);
+  return {
+    type: types.SHOW_PLAYLIST,
+    payload: boolean,
+  };
+}
+
+export function setPlaylistIds(array) {
+  return {
+    type: types.PLAYLIST_ID,
+    payload: array,
+  };
 }
