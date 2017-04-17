@@ -9,7 +9,6 @@ import Playlists from './Playlists';
 import HowTo from '../components/HowTo';
 import Carousel from '../components/Carousel';
 
-
 class Home extends Component {
   constructor(props) {
     super(props);
