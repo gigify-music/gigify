@@ -27,16 +27,8 @@ class Event extends Component {
     }
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('componentWillUpdate', nextProps, nextState);
-  //   if (nextProps.reset && nextState.active) {
-  //     this.onToggleClick();
-  //   }
-  // }
-
 
   onToggleClick() {
-    // console.log('CHECK', this.state.active, this.props.locked);
     if (!this.state.active && this.props.locked) {
       return;
     } else {
@@ -139,9 +131,6 @@ class Event extends Component {
       </li>
     );
   }
-
-
-// <button className="btn btn-success btn-lg" data-toggle="modal" data-target="#playlistModal" onClick={this.generatePlaylist}>Create Playlist</button>
 }
 
 Event.propTypes = {
@@ -157,21 +146,3 @@ Event.propTypes = {
 };
 
 export default Event;
-
-// () => { this.props.toggleEvent.bind(this, this.props.performers, this.props.id); this.toggleActive(); };
-
-// id,
-// toggleEvent,
-// performers,
-// venueName,
-// venueUrl,
-// date,
-// time,
-
-
-// <div className="col-sm-4 event-checkbox">
-// <button
-
-//   onClick={this.onToggleClick}
-// />
-// </div>
