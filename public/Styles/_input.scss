@@ -18,6 +18,12 @@
   box-shadow: 1px 1px 10px $shadow;
   top: -80px;
   top: -10vh;
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    width: 100vw;
+  }
 }
 
 /*SEARCH USERNAME============================================================*/
@@ -28,6 +34,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    width: 100%;
+  }
 }
 
 .username-form {
@@ -37,6 +49,13 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 0 !important;
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .search-input {
@@ -48,6 +67,12 @@
 
 .sk-input-logo {
   max-height: 30px;
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    max-height: 50px;
+  }
 }
 
 .input-icon {
@@ -56,6 +81,12 @@
   left:3px;
   width:10px;
   height:10px;
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    bottom: 60px;
+  }
 }
 
 .username-input {
@@ -68,6 +99,25 @@
     outline: none;
     border: $green-border;
   }
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    height: 100px;
+    width: 100%;
+    font-size: 50px;
+    padding-left: 70px !important;
+  }
+}
+.submit-form {
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    height: 30%;
+    width: 50%;
+    margin-top: 3%;
+  }
 }
 
 .submit-btn {
@@ -79,6 +129,14 @@
   transition: $color-fill-transition;
   &:focus {
     outline: none;
+  }
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    height: 100%;
+    width: 100%;
+    font-size: 50px;
   }
 }
 
@@ -111,6 +169,12 @@
 
 .or {
   height: 100%;
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
 }
 
 .genre-container {
@@ -120,6 +184,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
 }
 
 .nyc-events {
