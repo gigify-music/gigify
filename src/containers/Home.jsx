@@ -20,6 +20,8 @@ class Home extends Component {
       showLoadingGif: false,
       showSelectedPlaylist: false,
     };
+    this.handleFirst = this.handleFirst.bind(this);
+    this.handleSecond = this.handleSecond.bind(this);
   }
 
   componentWillMount() {
@@ -57,6 +59,7 @@ class Home extends Component {
     const govballPlaylist = {
       data: [1265233623, '5lRkpBlgVkBEmVNYSp9BmB'],
     };
+    this.props.setPlaylistIds(govballPlaylist.data);
     this.renderFeaturePlaylist(govballPlaylist);
   }
 
@@ -68,7 +71,7 @@ class Home extends Component {
       setTimeout(function() {
         $('#loadingModal').modal('hide');
         that.props.showLoadingPlaylist(false);
-        // that.props.showPlaylist(true);
+        that.props.showPlaylist(true);
     }, 2000)
 
     $('#homePlaylistModal').modal('show');
@@ -97,7 +100,10 @@ class Home extends Component {
     return (
       <div className="home-container">
         <div className="home-page-container">
-          <Carousel />
+          <Carousel
+            handleFirst={this.handleFirst}
+            handleSecond={this.handleSecond}
+          />
           <SongKick />
           <HowTo />
         </div>
@@ -128,4 +134,4 @@ const mapStatetoProps = ({ events, loading }) => ({
   loadingplaylist: loading,
 });
 
-export default connect(mapStatetoProps, { setPlaylistIds, showLoadingPlaylist })(Home);
+export default connect(mapStatetoProps, { setPlaylistIds, showLoadingPlaylist, showPlaylist })(Home);
