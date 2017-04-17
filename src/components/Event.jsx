@@ -57,8 +57,6 @@ class Event extends Component {
       date:`${this.props.date}/2017`,
       eventname:this.props.eventName,
     }, function () {
-
-      console.log(this.props.venueName, this.props.currentevent, this.props.currentdate, this.state.phone, "INside Event Callback")
     }.bind(this), this);
   }
 

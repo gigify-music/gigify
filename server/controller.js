@@ -9,7 +9,7 @@ require('dotenv').config();
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.APP_KEY,
   clientSecret: process.env.APP_SECRET,
-  redirectUri: 'http://localhost:8000/auth/callback',
+  redirectUri: 'http://gigify.io/auth/callback',
 });
 
 const getArtistIDList = (artistList) => {
