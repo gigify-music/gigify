@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/gigify-music/gigify.git"
   },
-  "author": "",
+  "author": "Jordan Estes, JP Marra, Scott Sanders, and Aamir Yousuf",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gigify-music/gigify/issues"

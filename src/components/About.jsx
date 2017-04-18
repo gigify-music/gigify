@@ -11,10 +11,11 @@ const About = () => (
           Gigify is an artist discovery tool. We’ve all gone to see
           our favorite artists live and didn’t have the time or resources to
           check out the supporting acts ahead of time. Gigify uses Songkick’s event data to
-          show you the gigs that match your interests and allows to choose the ones you’d like to attend.
-          After making your selections, you can buy tickets, sign up to receive gig reminders, and best of all,
-          you can create a Spotify playlist with all of the artists playing the gigs! The playlist will
-          automatically add to your Spotify account, so you can gear up for gigs anywhere you want.
+          show you the gigs that match your interests and allows to choose the ones you’d like
+          to attend. After making your selections, you can buy tickets, sign up to receive gig
+          reminders, and best of all, you can create a Spotify playlist with all of the artists
+          playing the gigs! The playlist will automatically add to your Spotify account, so you
+          can gear up for gigs anywhere you want.
         </p>
       </div>
 
@@ -57,7 +58,7 @@ const About = () => (
             </p>
           </div>
           <div className="Developer col-sm-2">
-            <a href="">
+            <a href="https://github.com/iamongit">
               <img className="profilePicture img-circle" src="https://avatars1.githubusercontent.com/u/18608258?v=3&s=460" alt="Aamir Yousuf" />
             </a>
             <h4 className="devName">Aamir Yousuf</h4>
