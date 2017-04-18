@@ -85,6 +85,7 @@ class Home extends Component {
     });
     setTimeout(function(){
       that.props.showLoadingPlaylist(false);
+      that.props.showPlaylist(true);
       $('#loadingModal').modal('hide');
       that.setState({ showSelectedPlaylist: true });
     }, 3000)
