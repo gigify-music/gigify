@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import ToggleDisplay from 'react-toggle-display';
 import EventList from './EventList';
-import { setPlaylistIds, showPlaylist, showLoadingPlaylist } from '../actions/index';
-import SongKick from './SongKick';
+import { setPlaylistIds, showPlaylist, showLoadingPlaylist, loadingFeatured } from '../actions/index';
+import SongKick from './Songkick';
 import Playlists from './Playlists';
 import HowTo from '../components/HowTo';
 import Carousel from '../components/Carousel';
@@ -18,6 +19,7 @@ class Home extends Component {
       username: '',
       showLoadingGif: false,
       showSelectedPlaylist: false,
+      loadingFeaturePlaylist: false,
     };
     this.handleFirst = this.handleFirst.bind(this);
     this.handleSecond = this.handleSecond.bind(this);
@@ -28,7 +30,7 @@ class Home extends Component {
       if (data.data === 'logged') {
         this.setState({
           authenticate: true,
-        })
+        });
       } else {
         window.location = '/auth/signin';
       }
@@ -37,6 +39,7 @@ class Home extends Component {
         authenticate: false,
       })
       window.location = '/auth/signin';
+      console.err(err);
     });
   }
 
@@ -63,37 +66,36 @@ class Home extends Component {
 
 
   renderFeaturePlaylist(playlistId) {
-    const that = this;
     this.props.setPlaylistIds(playlistId.data);
     this.props.showLoadingPlaylist(true);
-      setTimeout(function() {
-        $('#loadingModal').modal('hide');
-        that.props.showLoadingPlaylist(false);
-        that.props.showPlaylist(true);
-    }, 2000)
-
-    $('#homePlaylistModal').modal('show');
+    this.props.loadingFeatured(true);
+    setTimeout(() => {
+      $('#loadingModal').modal('hide');
+      this.props.showLoadingPlaylist(false);
+      this.props.showPlaylist(true);
+      $('#homePlaylistModal').modal('show');
+    }, 3000)
   }
 
   renderUserPlaylist(playlistId) {
-    // console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
-    const that = this;
     this.props.showLoadingPlaylist(true);
     this.setState({
       playlistId: playlistId.data,
       showSelectedPlaylist: false,
     });
-    setTimeout(function(){
-      that.props.showLoadingPlaylist(false);
-      that.props.showPlaylist(true);
+    setTimeout(() => {
+      this.props.showLoadingPlaylist(false);
+      this.props.showPlaylist(true);
+      this.setState({ loadingFeaturePlaylist: true });
       $('#loadingModal').modal('hide');
-      that.setState({ showSelectedPlaylist: true });
-    }, 3000)
+      this.setState({ showSelectedPlaylist: true });
+      $('#playlistModal').modal('show');
+    }, 3000);
   }
 
   render() {
     if (this.state.authenticate === false) {
-      return (<div />);   //Empty page while authorization is checked before
+      return (<div />);   //  Empty page while authorization is checked before
                           // redirect to login
     }
     return (
@@ -120,17 +122,36 @@ class Home extends Component {
         <Playlists />
 
         <footer className="footer">
-          <h6 className="footer-content container"><img className="footer-logo" src="./assets/gigify-g.svg"/> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
+          <h6 className="footer-content container"><img className="footer-logo" src="./assets/gigify-g.svg" alt="Smiley face" /> | <a href="https://github.com/gigify-music/gigify" className="github-link">Gigify Github</a></h6>
         </footer>
       </div>
     );
   }
 }
 
+Home.propTypes = {
+  listings: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    performers: PropTypes.array.isRequired,
+    venueName: PropTypes.string.isRequired,
+    venueUrl: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+  }).isRequired),
+  loadingeventlist: PropTypes.bool.isRequired,
+  setPlaylistIds: PropTypes.func.isRequired,
+  showLoadingPlaylist: PropTypes.func.isRequired,
+  showEvents: PropTypes.bool.isRequired,
+  showPlaylist: PropTypes.func.isRequired,
+  loadingFeatured: PropTypes.func.isRequired,
+};
+
 const mapStatetoProps = ({ events, loading }) => ({
   listings: events.eventListings,
   showEvents: events.showEvents,
-  loadingplaylist: loading,
+  loadingeventlist: loading,
 });
 
-export default connect(mapStatetoProps, { setPlaylistIds, showLoadingPlaylist, showPlaylist })(Home);
+export default connect(mapStatetoProps,
+  { setPlaylistIds, showLoadingPlaylist, showPlaylist, loadingFeatured })(Home);
