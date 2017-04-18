@@ -26,6 +26,32 @@ class EventList extends Component {
     this.getVenue = this.getVenue.bind(this);
   }
 
+  componentDidMount() {
+    this.sweetScroll = new SweetScroll();
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.displayWarning) {
+      this.sweetScroll.toElement(document.getElementById('gigify-hr'));
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.loading || prevState.displayWarning) {
+      this.sweetScroll.toElement(document.getElementById('gigify-hr'));
+    }
+  }
+
+  getVenue(value, callback) {
+    this.setState({
+      currentVenue: value.venue,
+      currentdate: value.date,
+      currentevent: value.eventname,
+    }, () => {
+      callback();
+    });
+  }
+
   toggleEvent(performers, id) {
     const selected = this.state.selected;
     if (selected[id]) {
@@ -33,7 +59,7 @@ class EventList extends Component {
       this.setState({
         selected,
       });
-      if([...new Set([].concat(...(Object.values(this.state.selected))))].length <= 23){
+      if ([...new Set([].concat(...(Object.values(this.state.selected))))].length <= 23) {
         this.setState({ displayWarning: false });
       }
       return;
@@ -59,12 +85,11 @@ class EventList extends Component {
   generatePlaylist() {
     const selected = [...new Set([].concat(...(Object.values(this.state.selected))))];
     axios.post('/api/artists', {
-      selected: selected,
+      selected,
     })
     .then((res) => {
-      // console.log("RESPONSE FROM SERVER FROM /ARTISTS: ", res);
       this.props.renderPlaylist(res);
-      setTimeout(function(){
+      setTimeout(() => {
         $('#loadingModal').modal('hide');
         $('#playlistModal').modal('show');
       }, 3000)
@@ -76,33 +101,6 @@ class EventList extends Component {
     .catch(err =>
       console.error(err),
     );
-  }
-
-  getVenue(value, callback) {
-    this.setState({
-      currentVenue: value.venue,
-      currentdate: value.date,
-      currentevent: value.eventname,
-    }, function () {  //{currentVenue: props}
-      callback();
-      // return { currentVenue:value }
-    });
-  }
-
-  componentDidMount() {
-    this.sweetScroll = new SweetScroll();
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.displayWarning) {
-      this.sweetScroll.toElement(document.getElementById('gigify-hr'));
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.loading || prevState.displayWarning) {
-      this.sweetScroll.toElement(document.getElementById('gigify-hr'));
-    }
   }
 
   render() {
@@ -120,103 +118,131 @@ class EventList extends Component {
         currentevent={this.state.currentevent}
         reset={this.state.reset}
       />,
-    )
+  );
 
-    const allSelected = eventList.filter(x => {
-        if (ids.includes(x.props.id.toString())) {
-          return x;
-        }
+    const allSelected = eventList.filter((x) => {
+      if (ids.includes(x.props.id.toString())) {
+        return x;
+      }
+      return false;
     });
 
-    const allUnselected = eventList.filter(x => {
+    const allUnselected = eventList.filter((x) => {
       if (!ids.includes(x.props.id.toString())) {
         return x;
       }
+      return false;
     });
 
     const displayList = this.state.displayWarning ? allSelected.concat(allUnselected) : eventList;
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
+    const assignPerformers = [];
+
+    selectedPerformers.forEach((performer, i) => {
+      const newPair = {};
+      newPair.name = performer;
+      newPair.id = i;
+      assignPerformers.push(newPair);
+    });
 
     return (
       <div>
         <div className="top-event-container">
-          <img id="gigify-hr" src="./assets/gigifyhr.png" />
+          <img id="gigify-hr" src="./assets/gigifyhr.png" alt="Gigify logo hr" />
           <div className="event-subheader">Click on events to add them to your playlist</div>
         </div>
-      <div id="event-page" className="event-page-container">
-        <StickyContainer>
-        <div className="event-list-sidebar">
-          <Sticky>
-          <div className="scrolling-display animated fadeIn">
-            <button className="btn playlist-btn btn-lg"
+        <div id="event-page" className="event-page-container">
+          <StickyContainer>
+            <div className="event-list-sidebar">
+              <Sticky>
+                <div className="scrolling-display animated fadeIn">
+                  <button
+                    className="btn playlist-btn btn-lg"
                     data-toggle="modal" data-target="#loadingModal"
-                    onClick={this.generatePlaylist}>Create Playlist
-            </button>
-            <ToggleDisplay show={this.state.displayWarning}>
-              <div className="selectionWarning animated slideInLeft">
-                <div className="glyphicon glyphicon-exclamation-sign" />
-                <h4 className="warning-header">Maximum playlist length reached.</h4>
-                <h5 className="warning-sub">Please deselect an event or press Create Playlist to generate your playlist.</h5>
-              </div>
-            </ToggleDisplay>
-            <ul className="list-group selected-artists">
-              <h4 className="selected-artists-header">Selected artists</h4>
-              <img id="gigify-hr-selected" src="./assets/gigifyhr.png" />
-              {selectedPerformers.map(performer =>
-                <li className="selected-item animated flipInY">
-                  {performer}
-                </li>)}
-            </ul>
-        </div>
-          </Sticky>
-      </div>
-      </StickyContainer>
+                    onClick={this.generatePlaylist}
+                  >Create Playlist
+                </button>
+                  <ToggleDisplay show={this.state.displayWarning}>
+                    <div className="selectionWarning animated slideInLeft">
+                      <div className="glyphicon glyphicon-exclamation-sign" />
+                      <h4 className="warning-header">Maximum playlist length reached.</h4>
+                      <h5
+                        className="warning-sub"
+                      >Please deselect an event or press Create Playlist to generate your playlist.
+                      </h5>
+                    </div>
+                  </ToggleDisplay>
+                  <ul className="list-group selected-artists">
+                    <h4 className="selected-artists-header">Selected artists</h4>
+                    <img
+                      id="gigify-hr-selected"
+                      alt="Gigify horizontal logo"
+                      src="./assets/gigifyhr.png"
+                    />
 
-        <div id="events" className="event-list-container">
-          <ul className="list">
-            {displayList}
-          </ul>
-        </div>
-        <ToggleDisplay id="show-selected-playlist" show={this.props.showPlaylist}>
-          <div className="modal fade playlist" id="playlistModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 className="modal-title" id="myModalLabel">This playlist has been added to your Spotify account!</h4>
+                    {assignPerformers.map(performer =>
+                      <li className="selected-item animated flipInY" key={performer.id}>
+                        {performer.name}
+                      </li>)}
+                  </ul>
                 </div>
-                <div className="modal-body">
-                  <iframe
-                    src={(this.props.showplaylist && this.state.warningstate) ? `https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark` : 'about:blank'}
-                    width="100%" height="600" frameBorder="0" allowTransparency="true"
-                  />
+              </Sticky>
+            </div>
+          </StickyContainer>
+
+          <div id="events" className="event-list-container">
+            <ul className="list">
+              {displayList}
+            </ul>
+          </div>
+          <ToggleDisplay id="show-selected-playlist" show={this.props.showPlaylist}>
+            <div
+              className="modal fade playlist"
+              id="playlistModal" tabIndex="-1"
+              role="dialog" aria-labelledby="myModalLabel"
+            >
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <button
+                      type="button" className="close"
+                      data-dismiss="modal" aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4
+                      className="modal-title" id="myModalLabel"
+                    >This playlist has been added to your Spotify account!</h4>
+                  </div>
+                  <div className="modal-body">
+                    <iframe
+                      src={`https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark`}
+                      width="100%" height="600" frameBorder="0" allowTransparency="true"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </ToggleDisplay>
+          </ToggleDisplay>
+        </div>
       </div>
-    </div>
     );
   }
 }
 
 
 EventList.propTypes = {
-  listings: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    // active: PropTypes.bool.isRequired,
-    performers: PropTypes.array.isRequired,
-    venueName: PropTypes.string.isRequired,
-    venueUrl: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-    imageUrl: PropTypes.string.isRequired,
-  }).isRequired),
+  listings: PropTypes.arrayOf.isRequired,
   renderPlaylist: PropTypes.func.isRequired,
+  playlistId: PropTypes.number.isRequired,
+  showPlaylist: PropTypes.bool.isRequired,
 };
 
+<<<<<<< HEAD
 const mapStatetoProps = ({ events, loading, showplaylist }) => ({
+=======
+const mapStatetoProps = ({ loading }) => ({
+>>>>>>> StyleFixes
   loading,
   showplaylist,
 });
