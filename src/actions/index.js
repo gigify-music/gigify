@@ -42,3 +42,10 @@ export function setPlaylistIds(array) {
     payload: array,
   };
 }
+
+export function loadingFeatured(boolean) {
+  return {
+    type: types.LOADING_FEATURED_PLAYLISTS,
+    payload: boolean,
+  };
+}
