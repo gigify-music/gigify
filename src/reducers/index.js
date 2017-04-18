@@ -5,6 +5,7 @@ import username from './username';
 import loadingplaylist from './loadingplaylist';
 import showplaylist from './showplaylist';
 import playlistid from './playlistid';
+import loadingfeaturedplaylist from './loadingfeaturedplaylist';
 
 
 const eventsApp = combineReducers({
@@ -14,6 +15,7 @@ const eventsApp = combineReducers({
   loadingplaylist,
   showplaylist,
   playlistid,
+  loadingfeaturedplaylist,
 });
 
 export default eventsApp;
