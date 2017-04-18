@@ -80,7 +80,7 @@ const mapStatetoProps =
 Playlists.propTypes = {
   loadingplaylist: PropTypes.bool.isRequired,
   showplaylistStore: PropTypes.bool.isRequired,
-  playlistid: PropTypes.string.isRequired,
+  playlistid: PropTypes.array.isRequired,
   loadingfeaturedplaylist: PropTypes.bool.isRequired,
 };
 
