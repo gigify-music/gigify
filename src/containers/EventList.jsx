@@ -19,6 +19,7 @@ class EventList extends Component {
       currentdate: '',
       currentevent: '',
       reset: false,
+      warningstate: false,
     };
     this.toggleEvent = this.toggleEvent.bind(this);
     this.generatePlaylist = this.generatePlaylist.bind(this);
@@ -68,7 +69,7 @@ class EventList extends Component {
         $('#playlistModal').modal('show');
       }, 3000)
       this.props.renderPlaylist(res);
-      this.setState({ reset: true });
+      this.setState({ reset: true, warningstate: true });
       this.setState({ selected: {} });
       this.setState({ reset: false });
     })
@@ -186,7 +187,7 @@ class EventList extends Component {
                 </div>
                 <div className="modal-body">
                   <iframe
-                    src={`https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark`}
+                    src={this.props.showplaylist && this.state.warningstate ? `https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark` : 'about:blank'}
                     width="100%" height="600" frameBorder="0" allowTransparency="true"
                   />
                 </div>
@@ -215,8 +216,9 @@ EventList.propTypes = {
   renderPlaylist: PropTypes.func.isRequired,
 };
 
-const mapStatetoProps = ({ events, loading }) => ({
+const mapStatetoProps = ({ events, loading, showplaylist }) => ({
   loading,
+  showplaylist,
 });
 
 export default connect(mapStatetoProps, {})(EventList);

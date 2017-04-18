@@ -33,7 +33,7 @@ class Playlists extends Component {
               </div>
               <div className="modal-body">
                 <iframe
-                  src={`https://embed.spotify.com/?uri=spotify:user:${this.props.playlistid[0]}:playlist:${this.props.playlistid[1]}&theme=dark`}
+                  src={this.props.showplaylist ? `https://embed.spotify.com/?uri=spotify:user:${this.props.playlistid[0]}:playlist:${this.props.playlistid[1]}&theme=dark` : 'about:blank'}
                   width="100%" height="600" frameBorder="0" allowTransparency="true"
                 />
               </div>
