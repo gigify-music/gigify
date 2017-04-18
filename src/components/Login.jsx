@@ -1,8 +1,9 @@
 import React from 'react';
-import ToggleDisplay from 'react-toggle-display';
+import 'particles.js';
 import SweetScroll from 'sweet-scroll';
 import '../../public/Styles/main.scss';
-import About from './About'
+import About from './About';
+import particleConfig from '../../particlesjs-config.json';
 
 class Login extends React.Component {
   constructor(props) {
@@ -11,24 +12,32 @@ class Login extends React.Component {
       showAbout: false,
     };
   }
+
+  componentDidMount() {
+    this.sweetScroll = new SweetScroll();
+    /* eslint-disable no-undef */
+    particlesJS('particles-js', particleConfig, !1);
+    /* eslint-enable no-undef */
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.showAbout) {
+      /* eslint-disable no-undef */
+      this.sweetScroll.toElement(document.getElementById('about'));
+      /* eslint-enable no-undef */
+    }
+  }
+
   handleAuth() {
+    /* eslint-disable no-undef */
     window.location = '/auth/signin';
+    /* eslint-enable no-undef */
   }
 
   handleScroll() {
     this.setState({
       showAbout: !this.state.showAbout,
     });
-  }
-
-  componentDidMount() {
-    this.sweetScroll = new SweetScroll();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevState.showAbout) {
-      this.sweetScroll.toElement(document.getElementById('about'));
-    }
   }
 
   render() {
@@ -46,14 +55,14 @@ class Login extends React.Component {
           >
             <i className="fa fa-spotify fa-3x spotify-icon" aria-hidden="true" />
            Connect with Spotify </button>
-          <div className="down">
-            <button className="downBtn" style={{ background: 'transparent', border: 'none' }} onClick={() => this.handleScroll()}>
-              <i
+            <div className="down">
+              <button className="downBtn" style={{ background: 'transparent', border: 'none' }} onClick={() => this.handleScroll()}>
+                <i
                 className="icon fa fa-chevron-down faa-pulse animated"
                 aria-hidden="true"
-              />
-            </button>
-          </div>
+                />
+              </button>
+            </div>
         </div>
       </div>
         <About />
