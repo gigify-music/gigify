@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 
-class Carousel extends PureComponent {
+class Carousel extends Component {
   render() {
     const settings = {
       dots: true,
@@ -15,7 +16,6 @@ class Carousel extends PureComponent {
       autoplay: true,
       autoplaySpeed: 6000,
     };
-
 
     return (
       <div className="carousel">
