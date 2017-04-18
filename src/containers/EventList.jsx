@@ -187,7 +187,7 @@ class EventList extends Component {
                 </div>
                 <div className="modal-body">
                   <iframe
-                    src={this.props.showplaylist && this.state.warningstate ? `https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark` : 'about:blank'}
+                    src={(this.props.showplaylist && this.state.warningstate) ? `https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark` : 'about:blank'}
                     width="100%" height="600" frameBorder="0" allowTransparency="true"
                   />
                 </div>
