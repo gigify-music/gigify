@@ -232,17 +232,13 @@ class EventList extends Component {
 
 
 EventList.propTypes = {
-  listings: PropTypes.arrayOf.isRequired,
+  listings: PropTypes.array.isRequired,
   renderPlaylist: PropTypes.func.isRequired,
   playlistId: PropTypes.number.isRequired,
   showPlaylist: PropTypes.bool.isRequired,
 };
 
-<<<<<<< HEAD
-const mapStatetoProps = ({ events, loading, showplaylist }) => ({
-=======
-const mapStatetoProps = ({ loading }) => ({
->>>>>>> StyleFixes
+const mapStatetoProps = ({ loading, showplaylist }) => ({
   loading,
   showplaylist,
 });
