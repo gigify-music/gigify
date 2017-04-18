@@ -15,23 +15,17 @@ class Login extends React.Component {
 
   componentDidMount() {
     this.sweetScroll = new SweetScroll();
-    /* eslint-disable no-undef */
     particlesJS('particles-js', particleConfig, !1);
-    /* eslint-enable no-undef */
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.showAbout) {
-      /* eslint-disable no-undef */
       this.sweetScroll.toElement(document.getElementById('about'));
-      /* eslint-enable no-undef */
     }
   }
 
   handleAuth() {
-    /* eslint-disable no-undef */
     window.location = '/auth/signin';
-    /* eslint-enable no-undef */
   }
 
   handleScroll() {
