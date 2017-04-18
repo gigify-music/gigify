@@ -82,7 +82,7 @@ const mapStatetoProps = ({ loadingplaylist, showplaylist, playlistid }) => ({
 Playlists.propTypes = {
   loadingplaylist: PropTypes.bool.isRequired,
   showplaylist: PropTypes.bool.isRequired,
-  playlistid: PropTypes.string.isRequired,
+  playlistid: PropTypes.array.isRequired,
 };
 
 export default connect(mapStatetoProps, {})(Playlists);
