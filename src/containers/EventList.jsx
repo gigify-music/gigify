@@ -233,7 +233,7 @@ class EventList extends Component {
 EventList.propTypes = {
   listings: PropTypes.array.isRequired,
   renderPlaylist: PropTypes.func.isRequired,
-  playlistId: PropTypes.number.isRequired,
+  playlistId: PropTypes.array.isRequired,
   showPlaylist: PropTypes.bool.isRequired,
   showplaylistStore: PropTypes.bool.isRequired,
 };
