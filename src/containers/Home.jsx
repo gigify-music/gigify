@@ -78,7 +78,6 @@ class Home extends Component {
   }
 
   renderUserPlaylist(playlistId) {
-    // console.log("HERE IS THE PLAYLIST ID ARRAY IN RENDERPLAYLIST: ", playlistId)
     this.props.showLoadingPlaylist(true);
     this.setState({
       playlistId: playlistId.data,
@@ -145,6 +144,7 @@ Home.propTypes = {
   showLoadingPlaylist: PropTypes.func.isRequired,
   showEvents: PropTypes.bool.isRequired,
   showPlaylist: PropTypes.func.isRequired,
+  loadingFeatured: PropTypes.func.isRequired,
 };
 
 const mapStatetoProps = ({ events, loading }) => ({

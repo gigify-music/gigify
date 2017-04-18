@@ -14,8 +14,7 @@ class Songkick extends Component {
       username: '',
       onSubmitLoadingGif: false,
     };
-
-    // this.handleUsername = this.handleUsername.bind(this);
+    this.handleUsername = this.handleUsername.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -61,7 +60,7 @@ class Songkick extends Component {
                 autoComplete="off"
                 id="inlineFormInputGroup" placeholder="Enter Songkick username..."
                 value={this.state.username}
-                onChange={this.handleUsername.bind(this)}
+                onChange={this.handleUsername}
               />
               <span className="input-icon">
                 <img
