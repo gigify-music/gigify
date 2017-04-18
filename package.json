@@ -4,7 +4,7 @@
   "description": "Playlist generator",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./server/server.js & webpack -w",
+    "start": "node ./server/server.js & webpack -w",
     "build": "webpack src/index.jsx build/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/gigify-music/gigify.git"
   },
-  "author": "",
+  "author": "Jordan Estes, JP Marra, Scott Sanders, and Aamir Yousuf",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gigify-music/gigify/issues"

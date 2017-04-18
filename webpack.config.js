@@ -3,8 +3,6 @@ const srcPath = path.join(__dirname, 'src');
 const buildPath = path.join(__dirname, 'public');
 const cssPath = path.join(__dirname, 'public/Styles');
 
-console.log('CSS PATH', cssPath);
-
 const config = {
   context: srcPath,
   entry: path.resolve(__dirname, 'src/index'),

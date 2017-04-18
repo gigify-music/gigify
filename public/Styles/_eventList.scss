@@ -64,7 +64,8 @@
 .playlist-btn {
   background-color: $spotify-green;
   color: $white;
-  width: 100%;
+  width: 95%;
+  margin-left: 5%;
   margin-top: 20%;
 }
 
@@ -97,6 +98,7 @@
   font-weight: bold;
   border-radius: 5%;
   margin-top: 10%;
+  margin-left: 5%;
 }
 
 .selectionWarning.animated {

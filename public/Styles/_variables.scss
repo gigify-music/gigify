@@ -8,3 +8,5 @@ $purple-button: #7C25F8;
 $spotify-green: #1DB954 !important;
 $white: #FFFFFF !important;
 $shadow: #B8BFBF;
+$iPhone: screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2);
+$Galaxy: screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3);
