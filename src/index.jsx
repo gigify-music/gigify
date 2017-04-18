@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger';
 import reducer from './reducers';
 import App from './containers/App';
 import thunk from 'redux-thunk';
@@ -19,12 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     !1);
 });
 
-const logger = createLogger();
-
 const store = createStore(
   reducer,
   composeEnhancers(
-      applyMiddleware(logger, thunk),
+      applyMiddleware(thunk),
   ),
 );
 

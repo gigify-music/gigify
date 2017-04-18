@@ -72,7 +72,7 @@ class Event extends Component {
     return (
       <li className={'noBullets'}>
         <div className={`event-list-item ${this.state.active ? this.state.checked : this.state.unchecked} ${!this.state.active && this.props.locked ? this.state.locked : this.state.unlocked}`}>
-            <div onClick={this.onToggleClick} className="artist-image" style={{ 'background-image': `url(${this.props.imageUrl})` }}>
+            <div onClick={this.onToggleClick} className="artist-image" style={{ 'backgroundImage': `url(${this.props.imageUrl})` }}>
               <div className="plus-sign">
                 <i className="fa fa-plus-square" aria-hidden="true" />
               </div>
