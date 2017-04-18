@@ -10,8 +10,6 @@ const signIn = new SpotifyStrategy({
   clientSecret: appSecret,
   callbackURL: 'http://localhost:8000/auth/callback',
 }, (accessToken, refreshToken, profile, done) => {
-    // asynchronous verification, for effect...
-    // ADD USERS TO DATABASE VIA THE PROFILE OBJECT RECIEVED IN THIS FUNCTION
   pool.connect()
   .then((client) => {
     client.query(`INSERT into users (spotify_id, display_name, email) SELECT
