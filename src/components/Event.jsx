@@ -1,5 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 
 class Event extends Component {
@@ -137,7 +138,7 @@ Event.propTypes = {
   locked: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
   toggleEvent: PropTypes.func.isRequired,
-  performers: PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  performers: PropTypes.arrayOf(PropTypes.string).isRequired,
   venueName: PropTypes.string.isRequired,
   venueUrl: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
