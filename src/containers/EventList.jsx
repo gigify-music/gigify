@@ -58,10 +58,9 @@ class EventList extends Component {
   generatePlaylist() {
     const selected = [...new Set([].concat(...(Object.values(this.state.selected))))];
     axios.post('/api/artists', {
-      selected: selected,
+      selected,
     })
     .then((res) => {
-      // console.log("RESPONSE FROM SERVER FROM /ARTISTS: ", res);
       this.props.renderPlaylist(res);
       setTimeout(function(){
         $('#loadingModal').modal('hide');
@@ -82,9 +81,8 @@ class EventList extends Component {
       currentVenue: value.venue,
       currentdate: value.date,
       currentevent: value.eventname,
-    }, function () {  //{currentVenue: props}
+    }, () => {
       callback();
-      // return { currentVenue:value }
     });
   }
 
@@ -135,6 +133,14 @@ class EventList extends Component {
 
     const displayList = this.state.displayWarning ? allSelected.concat(allUnselected) : eventList;
     const selectedPerformers = [...new Set([].concat(...(Object.values(this.state.selected))))];
+    const assignPerformers = [];
+
+    selectedPerformers.forEach((performer, i) => {
+      const newPair = {};
+      newPair.name = performer;
+      newPair.id = i;
+      assignPerformers.push(newPair);
+    });
 
     return (
       <div>
@@ -161,9 +167,10 @@ class EventList extends Component {
             <ul className="list-group selected-artists">
               <h4 className="selected-artists-header">Selected artists</h4>
               <img id="gigify-hr-selected" src="./assets/gigifyhr.png" />
-              {selectedPerformers.map(performer =>
-                <li className="selected-item animated flipInY">
-                  {performer}
+
+              {assignPerformers.map(performer =>
+                <li className="selected-item animated flipInY" key={performer.id}>
+                  {performer.name}
                 </li>)}
             </ul>
         </div>
