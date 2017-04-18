@@ -211,7 +211,6 @@ class EventList extends Component {
 EventList.propTypes = {
   listings: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    // active: PropTypes.bool.isRequired,
     performers: PropTypes.array.isRequired,
     venueName: PropTypes.string.isRequired,
     venueUrl: PropTypes.string.isRequired,
@@ -222,7 +221,7 @@ EventList.propTypes = {
   renderPlaylist: PropTypes.func.isRequired,
 };
 
-const mapStatetoProps = ({ events, loading }) => ({
+const mapStatetoProps = ({ loading }) => ({
   loading,
 });
 
