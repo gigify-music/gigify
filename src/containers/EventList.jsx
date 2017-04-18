@@ -57,6 +57,7 @@ class EventList extends Component {
   }
 
   generatePlaylist() {
+    const that = this;
     const selected = [...new Set([].concat(...(Object.values(this.state.selected))))];
     axios.post('/api/artists', {
       selected: selected,
@@ -65,13 +66,15 @@ class EventList extends Component {
       // console.log("RESPONSE FROM SERVER FROM /ARTISTS: ", res);
       this.props.renderPlaylist(res);
       setTimeout(function(){
-        $('#loadingModal').modal('hide');
-        $('#playlistModal').modal('show');
+        // $('#loadingModal').modal('hide');
+        // $('#playlistModal').modal('show');
+        that.setState({ warningstate: true });
       }, 3000)
       this.props.renderPlaylist(res);
-      this.setState({ reset: true, warningstate: true });
+      this.setState({ reset: true });
       this.setState({ selected: {} });
       this.setState({ reset: false });
+
     })
     .catch(err =>
       console.error(err),
@@ -83,9 +86,8 @@ class EventList extends Component {
       currentVenue: value.venue,
       currentdate: value.date,
       currentevent: value.eventname,
-    }, function () {  //{currentVenue: props}
+    }, function () {
       callback();
-      // return { currentVenue:value }
     });
   }
 
@@ -187,7 +189,7 @@ class EventList extends Component {
                 </div>
                 <div className="modal-body">
                   <iframe
-                    src={(this.props.showplaylist && this.state.warningstate) ? `https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark` : 'about:blank'}
+                    src={this.props.showplaylistStore && this.state.warningstate ? `https://embed.spotify.com/?uri=spotify:user:${this.props.playlistId[0]}:playlist:${this.props.playlistId[1]}&theme=dark` : 'about:blank'}
                     width="100%" height="600" frameBorder="0" allowTransparency="true"
                   />
                 </div>
@@ -218,7 +220,7 @@ EventList.propTypes = {
 
 const mapStatetoProps = ({ events, loading, showplaylist }) => ({
   loading,
-  showplaylist,
+  showplaylistStore: showplaylist,
 });
 
 export default connect(mapStatetoProps, {})(EventList);

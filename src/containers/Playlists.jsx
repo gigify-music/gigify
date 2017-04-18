@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import ToggleDisplay from 'react-toggle-display';
 
 class Playlists extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
 
@@ -33,7 +33,7 @@ class Playlists extends Component {
               </div>
               <div className="modal-body">
                 <iframe
-                  src={this.props.showplaylist ? `https://embed.spotify.com/?uri=spotify:user:${this.props.playlistid[0]}:playlist:${this.props.playlistid[1]}&theme=dark` : 'about:blank'}
+                  src={this.props.showplaylistStore && this.props.loadingfeaturedplaylist ? `https://embed.spotify.com/?uri=spotify:user:${this.props.playlistid[0]}:playlist:${this.props.playlistid[1]}&theme=dark` : 'about:blank'}
                   width="100%" height="600" frameBorder="0" allowTransparency="true"
                 />
               </div>
@@ -47,10 +47,11 @@ class Playlists extends Component {
 
 }
 
-const mapStatetoProps = ({ loadingplaylist, showplaylist, playlistid }) => ({
+const mapStatetoProps = ({ loadingplaylist, showplaylist, playlistid, loadingfeaturedplaylist }) => ({
   loadingplaylist,
-  showplaylist,
+  showplaylistStore: showplaylist,
   playlistid,
+  loadingfeaturedplaylist,
 });
 
 export default connect(mapStatetoProps, {})(Playlists);

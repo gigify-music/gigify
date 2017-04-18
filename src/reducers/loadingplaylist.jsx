@@ -5,6 +5,6 @@ const loadingplaylist = (state = false, action) => {
     default:
       return state;
   }
-}
+};
 
 export default loadingplaylist;
