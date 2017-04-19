@@ -60,7 +60,7 @@ const mapStatetoProps =
 ({ loadingplaylist, showplaylist, playlistid, loadingfeaturedplaylist }) => ({
   loadingplaylist,
   showplaylistStore: showplaylist.showplaylist,
-  playlistid,
+  playlistid: playlistid.playlistid,
   loadingfeaturedplaylist,
 });
 
