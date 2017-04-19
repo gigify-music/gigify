@@ -39,23 +39,28 @@ PGURL=(replace with url of PostgreSQL database or localhost)
 PGPORT=5432 (This is the default PostgreSQL port, change if necessary)
 ```
 
-## Use
-# Login
+### Using
+#### Login
 
-1. ![Splash](public/assets/readme/GigifySplash.png)
+![Splash](public/assets/readme/GigifySplash.png)
 
-2. ![Spotify Login](public/assets/readme/SpotifyLogin.png)
+![Spotify Login](public/assets/readme/SpotifyLogin.png)
+
 Note: A Spotify account is required to use Gigify. Spotify credentials are never handled by Gigify and are transmitted securely to Spotify only.
 
-# Search
+#### Search
+
+
 Enter your Songkick Username if you have one.
 
-1. ![Songkick](public/assets/readme/SongkickLogin.png)
+![Songkick](public/assets/readme/SongkickLogin.png)
+
 
 Or select a genre search. These searches only are valid in New York City at this time.
-2. ![Genre Search](public/assets/readme/GenreSearch.png)
 
-# Select Gigs and make a playlist
+![Genre Search](public/assets/readme/GenreSearch.png)
+
+#### Select Gigs and make a playlist
 ![Playlist Creation](public/assets/readme/PlaylistCreation.gif)
 
 ## Built With
@@ -80,15 +85,18 @@ Or select a genre search. These searches only are valid in New York City at this
 
 Please read [CONTRIBUTING.md] for details on our code of conduct, and the process for submitting pull requests to us.
 
+[Contributors](https://github.com/your/project/contributors) will be gratefully acknowledged.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
+
+
 ## Authors
 
 * **Jordan Estes** - [EstesJL](https://github.com/EstesJL)
 * **JP Marra** - [jpmarra](https://github.com/jpmarra)
 * **Scott Sanders** - [ScottDavidSanders](https://github.com/ScottDavidSanders)
 * **Aamir Yousuf** - [iamongit](https://github.com/iamongit)
-
-[Contributors](https://github.com/your/project/contributors) will be gratefully acknowledged.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
