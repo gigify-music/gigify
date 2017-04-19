@@ -1,6 +1,6 @@
-[![Gigify](public/assets/gigify.png)](www.gigify.io)
+![Gigify](public/assets/gigify.png)
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/gigify-music/gigify/issues)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 Gigify is an artist discovery tool. It uses [Songkick](http://www.songkick.com) event data to display upcoming concerts that you might be interested in and allows you to make [Spotify](http://www.spotify.com) playlists to help you learn more about supporting artists and better plan your night out. You can also receive SMS reminders of upcoming gigs and purchase tickets.
 
@@ -14,18 +14,17 @@ Note, these steps are not required to run our deployed version of [Gigify](gigif
 
 1. Fork and clone the repo.
 
-2. To install dependencies, navigate to the downloaded repo directory directory using the command line and run:
-```npm install
-```
+2. To install dependencies, navigate to the downloaded repo directory directory using the command line and run: ```npm install```
 3. Create a new application on the [Spotify Developer Site](https://developer.spotify.com/my-applications/) to obtain an API key.
 
-4. Request a [Songkick API key](https://www.songkick.com/api_key_requests/new). Be prepared to wait at least a week and to be asked to justify your request before a key is granted. The [Songkick API Forum](https://groups.google.com/forum/#!forum/songkick-api) can be helpful if it takes too long. Songkick staff respond to questions in the forum.
+4. Request a [Songkick API key](https://www.songkick.com/api_key_requests/new). Be prepared to wait at least a week and to be asked to justify your request before a key is granted. The [Songkick API Forum](https://groups.google.com/forum/#!forum/songkick-api) can be helpful if it takes too long. Songkick staff respond to questions there.
 
-5. Create a [Twilio](https://www.twilio.com/try-twilio) account and request an [API key](https://www.twilio.com/docs/api/rest/keys)
+5. Create a [Twilio](https://www.twilio.com/try-twilio) account and request an [API key](https://www.twilio.com/docs/api/rest/keys).
 
 ### Installing
 
 Gigify requires a .env file to be created before running it. This file should be placed in the root of your directory and should look like this:
+
 ```
 TWILIOSID=(replace with Twilio ID) // Provided by Twilio
 TWILIOAUTHTOKEN=(replace with Twilio auth token) Provided by Twilio
@@ -39,24 +38,29 @@ PGURL=(replace with url of PostgreSQL database or localhost)
 PGPORT=5432 (This is the default PostgreSQL port, change if necessary)
 ```
 
-## Use
-# Login
+### Using
+#### Login
 
-1. ![Splash](public/assets/readme/Gigify Splash.png)
+![Splash](public/assets/readme/GigifySplash.png)
 
-2. ![Login](public/assets/readme/Spotify Login.png)
-  Note: Spotify credentials are never handled by Gigify and are transmitted securely to Spotify only.
+![Spotify Login](public/assets/readme/SpotifyLogin.png)
 
-# Search
+Note: A Spotify account is required to use Gigify. Spotify credentials are never handled by Gigify and are transmitted securely to Spotify only.
+
+#### Search
+
+
 Enter your Songkick Username if you have one.
 
-1. ![Songkick](public/assets/readme/Songkick Login.png)
+![Songkick](public/assets/readme/SongkickLogin.png)
+
 
 Or select a genre search. These searches only are valid in New York City at this time.
-2. ![Genre Search](public/assets/readme/Genre Search.png)
 
-# Select Gigs and make a playlist
-![Gig](public/assets/readme/Playlist Creation.gif)
+![Genre Search](public/assets/readme/GenreSearch.png)
+
+#### Select Gigs and make a playlist
+![Playlist Creation](public/assets/readme/PlaylistCreation.gif)
 
 ## Built With
 
@@ -78,17 +82,20 @@ Or select a genre search. These searches only are valid in New York City at this
 
 ## Contributing
 
-Please read [CONTRIBUTING.md] for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Authors
-
-* **Jordan Estes** - [EstesJL](https://github.com/EstesJL)
-* **JP Marra** - [jpmarra](https://github.com/jpmarra)
-* **Scott Sanders** - [ScottDavidSanders](https://github.com/ScottDavidSanders)
-* **Aamir Yousuf** - [iamongit](https://github.com/iamongit)
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
 
 [Contributors](https://github.com/your/project/contributors) will be gratefully acknowledged.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
+
+
+## Authors
+Made with :heart: in New York City.
+* **Jordan Estes** - [EstesJL](https://github.com/EstesJL)
+* **JP Marra** - [jpmarra](https://github.com/jpmarra)
+* **Scott Sanders** - [ScottDavidSanders](https://github.com/ScottDavidSanders)
+* **Aamir Yousuf** - [iamongit](https://github.com/iamongit)
