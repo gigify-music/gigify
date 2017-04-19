@@ -72,7 +72,7 @@ class Playlists extends Component {
 const mapStatetoProps =
 ({ loadingplaylist, showplaylist, playlistid, loadingfeaturedplaylist }) => ({
   loadingplaylist,
-  showplaylistStore: showplaylist,
+  showplaylistStore: showplaylist.showplaylist,
   playlistid,
   loadingfeaturedplaylist,
 });

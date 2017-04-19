@@ -110,7 +110,7 @@ Songkick.propTypes = {
 };
 
 const mapStatetoProps = ({ username, loading }) => ({
-  username,
+  username: username.username,
   showLoadingGif: loading,
 });
 
