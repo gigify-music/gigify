@@ -27,8 +27,8 @@ Note, these steps are not required to run our deployed version of [Gigify](gigif
 
 Gigify requires a .env file to be created before running it. This file should be placed in the root of your directory and should look like this:
 ```
-TWILIOSID=ACc055156cbf315b56709a43dc98a233d9
-TWILIOAUTHTOKEN=e54cd097af06eca02ea5dc2e031909cf
+TWILIOSID=(replace with Twilio ID) // Provided by Twilio
+TWILIOAUTHTOKEN=(replace with Twilio auth token) Provided by Twilio
 APP_KEY= (replace with Spotify app key) // Provided by Spotify
 APP_SECRET= (replace with Spotify app secret) // Provided by Spotify
 SONGKICK_KEY=8CwyZanXp3Y52D1K (replace with Songkick API key) // Provided by Songkick
