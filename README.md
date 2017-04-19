@@ -7,9 +7,8 @@ Gigify is an artist discovery tool. It uses [Songkick](http://www.songkick.com) 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-![Gigify](public/assets/gigifyhr.png)
 
 ### Prerequisites
 
@@ -24,7 +23,6 @@ Note, these steps are not required to run our deployed version of [Gigify](gigif
 
 5. Create a [Twilio](https://www.twilio.com/try-twilio) account and request an [API key](https://www.twilio.com/docs/api/rest/keys).
 
-![Gigify](public/assets/gigifyhr.png)
 
 ### Installing
 
@@ -44,8 +42,6 @@ PGPORT=5432 (This is the default PostgreSQL port, change if necessary)
 ```
 
 ### Using
-
-![Gigify](public/assets/gigifyhr.png)
 
 #### Login
 
@@ -70,7 +66,6 @@ Or select a genre search. These searches only are valid in New York City at this
 #### Select Gigs and make a playlist
 ![Playlist Creation](public/assets/readme/PlaylistCreation.gif)
 
-![Gigify](public/assets/gigifyhr.png)
 
 ## Built With
 
@@ -85,14 +80,13 @@ Or select a genre search. These searches only are valid in New York City at this
 * [Twilio](https://www.twilio.com/) - Messaging platform
 * [Webpack](https://webpack.github.io/) - Module bundler
 
-![Gigify](public/assets/gigifyhr.png)
 
 ## Data Sources
 * [Songkick API](https://www.songkick.com/developer) - Songkick gives you easy access to over 5 million upcoming and past concerts
 
 * [Spotify API](https://developer.spotify.com/web-api/) - With Spotify, it’s easy to find the right music for every moment – on your phone, your computer, your tablet and more.
 
-![Gigify](public/assets/gigifyhr.png)
+
 
 ## Contributing
 
@@ -100,19 +94,18 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 [Contributors](https://github.com/your/project/contributors) will be gratefully acknowledged.
 
-![Gigify](public/assets/gigifyhr.png)
+
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 
-![Gigify](public/assets/gigifyhr.png)
-
-
 ## Authors
-Made with :heart: in New York City.
+Made with :heart: in New York City by:
 * **Jordan Estes** - [EstesJL](https://github.com/EstesJL)
 * **JP Marra** - [jpmarra](https://github.com/jpmarra)
 * **Scott Sanders** - [ScottDavidSanders](https://github.com/ScottDavidSanders)
 * **Aamir Yousuf** - [iamongit](https://github.com/iamongit)
+
+![Gigify](public/assets/gigifyhr.png)
