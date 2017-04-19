@@ -1,4 +1,4 @@
-[![Gigify](public/assets/gigify.png)](www.gigify.io)
+[![Gigify](public/assets/gigify.png)]
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/gigify-music/gigify/issues)
 
@@ -42,21 +42,21 @@ PGPORT=5432 (This is the default PostgreSQL port, change if necessary)
 ## Use
 # Login
 
-1. ![Splash](public/assets/readme/Gigify Splash.png)
+1. ![Splash](public/assets/readme/GigifySplash.png)
 
-2. ![Login](public/assets/readme/Spotify Login.png)
-  Note: Spotify credentials are never handled by Gigify and are transmitted securely to Spotify only.
+2. ![Spotify Login](public/assets/readme/SpotifyLogin.png)
+Note: A Spotify account is required to use Gigify. Spotify credentials are never handled by Gigify and are transmitted securely to Spotify only.
 
 # Search
 Enter your Songkick Username if you have one.
 
-1. ![Songkick](public/assets/readme/Songkick Login.png)
+1. ![Songkick](public/assets/readme/SongkickLogin.png)
 
 Or select a genre search. These searches only are valid in New York City at this time.
-2. ![Genre Search](public/assets/readme/Genre Search.png)
+2. ![Genre Search](public/assets/readme/GenreSearch.png)
 
 # Select Gigs and make a playlist
-![Gig](public/assets/readme/Playlist Creation.gif)
+![Playlist Creation](public/assets/readme/PlaylistCreation.gif)
 
 ## Built With
 
