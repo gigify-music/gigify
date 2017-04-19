@@ -1,4 +1,4 @@
-[![Gigify](public/assets/gigify.png)]
+![Gigify](public/assets/gigify.png)
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/gigify-music/gigify/issues)
 
@@ -15,7 +15,8 @@ Note, these steps are not required to run our deployed version of [Gigify](gigif
 1. Fork and clone the repo.
 
 2. To install dependencies, navigate to the downloaded repo directory directory using the command line and run:
-```npm install
+```
+npm install
 ```
 3. Create a new application on the [Spotify Developer Site](https://developer.spotify.com/my-applications/) to obtain an API key.
 
@@ -83,7 +84,7 @@ Or select a genre search. These searches only are valid in New York City at this
 
 ## Contributing
 
-Please read [CONTRIBUTING.md] for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
 
 [Contributors](https://github.com/your/project/contributors) will be gratefully acknowledged.
 
@@ -95,7 +96,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 
 ## Authors
-
+Made with :heart: in New York City.
 * **Jordan Estes** - [EstesJL](https://github.com/EstesJL)
 * **JP Marra** - [jpmarra](https://github.com/jpmarra)
 * **Scott Sanders** - [ScottDavidSanders](https://github.com/ScottDavidSanders)
