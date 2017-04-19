@@ -1,6 +1,6 @@
 ![Gigify](public/assets/gigify.png)
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/gigify-music/gigify/issues)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 Gigify is an artist discovery tool. It uses [Songkick](http://www.songkick.com) event data to display upcoming concerts that you might be interested in and allows you to make [Spotify](http://www.spotify.com) playlists to help you learn more about supporting artists and better plan your night out. You can also receive SMS reminders of upcoming gigs and purchase tickets.
 
@@ -14,19 +14,17 @@ Note, these steps are not required to run our deployed version of [Gigify](gigif
 
 1. Fork and clone the repo.
 
-2. To install dependencies, navigate to the downloaded repo directory directory using the command line and run:
-```
-npm install
-```
+2. To install dependencies, navigate to the downloaded repo directory directory using the command line and run: ```npm install```
 3. Create a new application on the [Spotify Developer Site](https://developer.spotify.com/my-applications/) to obtain an API key.
 
-4. Request a [Songkick API key](https://www.songkick.com/api_key_requests/new). Be prepared to wait at least a week and to be asked to justify your request before a key is granted. The [Songkick API Forum](https://groups.google.com/forum/#!forum/songkick-api) can be helpful if it takes too long. Songkick staff respond to questions in the forum.
+4. Request a [Songkick API key](https://www.songkick.com/api_key_requests/new). Be prepared to wait at least a week and to be asked to justify your request before a key is granted. The [Songkick API Forum](https://groups.google.com/forum/#!forum/songkick-api) can be helpful if it takes too long. Songkick staff respond to questions there.
 
-5. Create a [Twilio](https://www.twilio.com/try-twilio) account and request an [API key](https://www.twilio.com/docs/api/rest/keys)
+5. Create a [Twilio](https://www.twilio.com/try-twilio) account and request an [API key](https://www.twilio.com/docs/api/rest/keys).
 
 ### Installing
 
 Gigify requires a .env file to be created before running it. This file should be placed in the root of your directory and should look like this:
+
 ```
 TWILIOSID=(replace with Twilio ID) // Provided by Twilio
 TWILIOAUTHTOKEN=(replace with Twilio auth token) Provided by Twilio
