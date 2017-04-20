@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const CompressionPlugin = require('compression-webpack-plugin');
 const path = require('path');
 
 const srcPath = path.join(__dirname, 'src');
@@ -25,13 +24,6 @@ const config = {
     }),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new CompressionPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
   ],
   module: {
     rules: [
