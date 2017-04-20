@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const compression = require('compression');
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -13,7 +14,7 @@ const port = process.env.PORT || 8000;
 const app = express();
 
 // MIDDLEWARE===================================================================
-
+app.use(compression());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));
 app.use(session({
