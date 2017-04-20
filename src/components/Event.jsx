@@ -20,6 +20,7 @@ class Event extends Component {
     this.onToggleClick = this.onToggleClick.bind(this);
     this.updateNumber = this.updateNumber.bind(this);
     this.submitquery = this.submitquery.bind(this);
+    this.clickFunction = this.clickFunction.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -108,7 +109,7 @@ class Event extends Component {
                 <a
                   className="btn btn-sm ticket-btn" data-toggle="modal"
                   data-target="#trackEventModal" role="button"
-                  onClick={() => this.clickFunction}
+                  onClick={this.clickFunction}
                 >
                 Track Event
                 </a>
@@ -140,11 +141,11 @@ class Event extends Component {
                         className="form-control"
                         type="tel"
                         placeholder="Enter Phone Number"
-                        onChange={() => this.updateNumber}
+                        onChange={this.updateNumber}
                       />
                       <button
                         type="submit" className="btn btn-primary"
-                        onClick={() => this.submitquery} data-dismiss="modal"
+                        onClick={this.submitquery} data-dismiss="modal"
                       >Submit</button>
                     </div>
                   </form>

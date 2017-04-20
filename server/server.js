@@ -7,6 +7,7 @@ const passport = require('passport');
 const authRouter = require('./authRouter.js');
 const router = require('./router.js');
 const CronJob = require('./cronjob');
+// const sendNotification = require('./sendreminder');
 
 const port = process.env.PORT || 8000;
 
@@ -38,3 +39,4 @@ app.get('*', (request, response) => {
 app.listen(port);
 console.log(`Listening on ${port}`);
 CronJob.job();
+// sendNotification.sendNotification();
