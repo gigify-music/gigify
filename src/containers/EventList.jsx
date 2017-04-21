@@ -235,7 +235,6 @@ EventList.propTypes = {
   renderPlaylist: PropTypes.func.isRequired,
   playlistId: PropTypes.array.isRequired,
   showPlaylist: PropTypes.bool.isRequired,
-  showplaylistStore: PropTypes.bool.isRequired,
   showLoadingPlaylist: PropTypes.func.isRequired,
 };
 
