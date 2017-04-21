@@ -37,7 +37,7 @@ class Carousel extends Component {
           />
         </Slider>
       </div>
-    )
+    );
   }
 }
 
