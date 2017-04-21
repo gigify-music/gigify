@@ -91,7 +91,7 @@
 ////*WARNING==================================================================*/
 
 .selectionWarning {
-  background-color: indianred;
+  background-color: $background-black;
   text-align: center;
   color:  $white;
   font-weight: bold;
@@ -115,7 +115,7 @@
 
 .glyphicon-exclamation-sign {
   font-size: 50px;
-  color: $white;
+  color: indianred;
   margin-top: 10%;
 }
 

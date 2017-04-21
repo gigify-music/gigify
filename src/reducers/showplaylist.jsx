@@ -1,7 +1,9 @@
-const showplaylist = (state = false, action) => {
+const initialState = { showplaylist: false };
+
+const showplaylist = (state = initialState, action) => {
   switch (action.type) {
     case 'SHOW_PLAYLIST':
-      return action.payload;
+      return { ...state, showplaylist: action.payload };
     default:
       return state;
   }
