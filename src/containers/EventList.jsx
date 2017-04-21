@@ -149,7 +149,7 @@ class EventList extends Component {
       <div>
         <div className="top-event-container">
           <img id="gigify-hr" src="./assets/gigifyhr.png" alt="Gigify logo hr" />
-          <div className="event-subheader">Click on events to add them to your playlist</div>
+          <div className="event-subheader">Click on gigs to add them to your playlist</div>
         </div>
         <div id="event-page" className="event-page-container">
           <StickyContainer>
@@ -167,7 +167,7 @@ class EventList extends Component {
                       <h4 className="warning-header">Maximum playlist length reached.</h4>
                       <h5
                         className="warning-sub"
-                      >Please deselect an event or press Create Playlist to generate your playlist.
+                      >Please deselect a gig or press Create Playlist to generate your playlist.
                       </h5>
                     </div>
                   </ToggleDisplay>
