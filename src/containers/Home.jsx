@@ -70,15 +70,13 @@ class Home extends Component {
     this.props.showLoadingPlaylist(true);
     this.props.loadingFeatured(true);
     setTimeout(() => {
-      $('#loadingModal').modal('hide');
       this.props.showLoadingPlaylist(false);
       this.props.showPlaylist(true);
       $('#homePlaylistModal').modal('show');
-    }, 3000)
+    }, 2000);
   }
 
   renderUserPlaylist(playlistId) {
-    this.props.showLoadingPlaylist(true);
     this.setState({
       playlistId: playlistId.data,
       showSelectedPlaylist: false,
@@ -87,10 +85,9 @@ class Home extends Component {
       this.props.showLoadingPlaylist(false);
       this.props.showPlaylist(true);
       this.setState({ loadingFeaturePlaylist: true });
-      $('#loadingModal').modal('hide');
       this.setState({ showSelectedPlaylist: true });
       $('#playlistModal').modal('show');
-    }, 3000);
+    }, 2000);
   }
 
   render() {

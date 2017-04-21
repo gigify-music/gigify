@@ -2,35 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ToggleDisplay from 'react-toggle-display';
 import PropTypes from 'prop-types';
+import Loading from 'react-loading';
 
 class Playlists extends Component {
 
   render() {
     return (
       <div>
-        <ToggleDisplay id="playlist-toggle" show={this.props.loadingplaylist}>
-          <div
-            className="modal fade playlist"
-            id="loadingModal"
-            tabIndex="-1"
-            role="dialog"
-            aria-labelledby="myModalLabel"
-          >
-            <div className="modal-dialog" role="document">
-              <div className="modal-content-loading">
-                <div className="modal-body loading-animation" >
-                  <img
-                    alt="./assets/loadingicon.gif"
-                    className="loading-ring"
-                    src="./assets/ring.svg"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+        <ToggleDisplay
+          className="loadingOverlay"
+          id="playlist-toggle"
+          show={this.props.loadingplaylist}
+        >
+          <Loading type="bubbles" color="#1db954" />
         </ToggleDisplay>
 
-        <ToggleDisplay id="show-playlist" show={this.props.showplaylist}>
+        <ToggleDisplay id="show-playlist" show={this.props.showplaylistStore}>
           <div
             className="modal fade playlist"
             id="homePlaylistModal"

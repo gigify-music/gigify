@@ -5,6 +5,7 @@ import axios from 'axios';
 import SweetScroll from 'sweet-scroll';
 import ToggleDisplay from 'react-toggle-display';
 import { StickyContainer, Sticky } from 'react-sticky';
+import { showLoadingPlaylist } from '../actions/index';
 import Event from '../components/Event';
 
 
@@ -83,6 +84,7 @@ class EventList extends Component {
   }
 
   generatePlaylist() {
+    this.props.showLoadingPlaylist(true);
     const selected = [...new Set([].concat(...(Object.values(this.state.selected))))];
     axios.post('/api/artists', {
       selected,
@@ -91,11 +93,10 @@ class EventList extends Component {
       this.props.renderPlaylist(res);
       setTimeout(() => {
         this.setState({ warningstate: true });
-      }, 3000);
-      this.props.renderPlaylist(res);
-      this.setState({ reset: true });
-      this.setState({ selected: {} });
-      this.setState({ reset: false });
+        this.setState({ reset: true });
+        this.setState({ selected: {} });
+        this.setState({ reset: false });
+      }, 2000);
     })
     .catch(err =>
       console.error(err),
@@ -157,7 +158,6 @@ class EventList extends Component {
                 <div className="scrolling-display animated fadeIn">
                   <button
                     className="btn playlist-btn btn-lg"
-                    data-toggle="modal" data-target="#loadingModal"
                     onClick={this.generatePlaylist}
                   >Create Playlist
                 </button>
@@ -236,6 +236,7 @@ EventList.propTypes = {
   playlistId: PropTypes.array.isRequired,
   showPlaylist: PropTypes.bool.isRequired,
   showplaylistStore: PropTypes.bool.isRequired,
+  showLoadingPlaylist: PropTypes.func.isRequired,
 };
 
 const mapStatetoProps = ({ loading, showplaylist }) => ({
@@ -243,4 +244,4 @@ const mapStatetoProps = ({ loading, showplaylist }) => ({
   showplaylistStore: showplaylist,
 });
 
-export default connect(mapStatetoProps, {})(EventList);
+export default connect(mapStatetoProps, { showLoadingPlaylist })(EventList);
