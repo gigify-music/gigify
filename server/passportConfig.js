@@ -25,7 +25,7 @@ const signIn = new SpotifyStrategy({
 .catch((err) => {
   console.error('Pool Error: ', err);
 });
-  spotifyApi.setAccessToken(accessToken);
+  profile.accessToken = accessToken;
   process.nextTick(() => {
     (done(null, profile));
   });

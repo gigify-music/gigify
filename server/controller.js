@@ -67,6 +67,7 @@ module.exports = {
         Promise.all(tracksArray)
           .then((results) => {
             const merged = Object.assign(...results);
+            spotifyApi.setAccessToken(req.user.accessToken);
             return merged;
           })
           .then((merged) => {
@@ -100,6 +101,7 @@ module.exports = {
     res.redirect('/home');
   },
   checkSession: (req, res) => {
+    spotifyApi.setAccessToken(req.user.accessToken);
     spotifyApi.getMe()
     .then(() => {
       res.send('logged');
