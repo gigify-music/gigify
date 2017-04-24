@@ -48,7 +48,6 @@
 }
 
 .scrolling-display {
-  background-image: url(../assets/gigify-g-background.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -64,7 +63,8 @@
 .playlist-btn {
   background-color: $spotify-green;
   color: $white;
-  width: 100%;
+  width: 95%;
+  margin-left: 5%;
   margin-top: 20%;
 }
 
@@ -91,12 +91,13 @@
 ////*WARNING==================================================================*/
 
 .selectionWarning {
-  background-color: indianred;
+  background-color: $background-black;
   text-align: center;
   color:  $white;
   font-weight: bold;
   border-radius: 5%;
   margin-top: 10%;
+  margin-left: 5%;
 }
 
 .selectionWarning.animated {
@@ -114,7 +115,7 @@
 
 .glyphicon-exclamation-sign {
   font-size: 50px;
-  color: $white;
+  color: indianred;
   margin-top: 10%;
 }
 

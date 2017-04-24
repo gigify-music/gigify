@@ -13,12 +13,17 @@
 .modal-header {
   background-color: #282828;
   border-bottom: none !important;
+  padding-bottom: 0%;
 }
 
 .modalAlign {
   height:40%;
   padding-top: 30%;
   padding-bottom: 30%;
+}
+
+.modal-content {
+  margin-top: 15%;
 }
 
 .twilio {
@@ -31,6 +36,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.loadingOverlay {
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 40%;
+  left: 43%;
+  svg {
+    height: 300%;
+    width: 300%;
+  }
 }
 
 .loading-animation {

@@ -5,7 +5,7 @@ require('dotenv').config();
 
 module.exports = {
   sendNotification: () => {
-    const query = `select * from reminder where status = 0`
+    const query = 'select * from reminder where status = 0';
     pool.connect()
          .then((client) => {
            client.query(query)
@@ -28,7 +28,7 @@ module.exports = {
 const extractDate = (objectArray) => {
   objectArray.forEach((ele) => {
     const date1 = convertDate(new Date()).split('-');
-    const date2 = convertDate(ele['date']).split('-');
+    const date2 = convertDate(ele.date).split('-');
     const difference = getDifferenceInDays(date1, date2);
     // console.log(difference, 'difference of each date');
     if (difference < 2) {
@@ -36,7 +36,7 @@ const extractDate = (objectArray) => {
     }
     // return difference;
   });
-}
+};
 
 const getDifferenceInDays = (date1, date2) => {
   date1 = new Date(date1[0], date1[1], date1[2]);
@@ -47,9 +47,9 @@ const getDifferenceInDays = (date1, date2) => {
 
   const timeDifference = date2Unixtime - date1Unixtime;
   const timeDifferenceInHours = timeDifference / 60 / 60;
-  const timeDifferenceInDays = timeDifferenceInHours  / 24;
+  const timeDifferenceInDays = timeDifferenceInHours / 24;
   return timeDifferenceInDays;
-}
+};
 
 const convertDate = (date) => {
   const yyyy = date.getFullYear().toString();
@@ -60,7 +60,7 @@ const convertDate = (date) => {
   const ddChars = dd.split('');
 
   return yyyy + '-' + (mmChars[1] ? mm:'0' + mmChars[0]) + '-' + (ddChars[1] ? dd:'0' + ddChars[0]);
-}
+};
 
 const sendMessage = (phoneIn, eventName) => {
   const clientTwilio = new twilio.RestClient(process.env.TWILIOSID, process.env.TWILIOAUTHTOKEN);
@@ -75,11 +75,11 @@ const sendMessage = (phoneIn, eventName) => {
       pool.connect()
            .then((client) => {
              client.query(query)
-               .then((resp) => {
+               .then(() => {
                  client.release();
                })
-               .catch((err) => {
-                 console.error('Querey Error deleting reminders: ', err);
+               .catch((error) => {
+                 console.error('Querey Error deleting reminders: ', error);
                });
            })
            .catch((err2) => {

@@ -33,7 +33,7 @@ body:before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 94.45vh;
+  height: 95vh;
   width: 100vw;
   z-index: 1;
 }
@@ -100,14 +100,36 @@ body:before {
   margin-bottom: 8%;
   width: 30vw;
   z-index: 2;
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    width: 90vw;
+    margin-bottom: 30%;
+  }
 }
 
 .panorama {
   background-image: url('../assets/panorama.png');
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    background-image: url('../assets/panoramamobile.png');
+    background-position: top;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }
 
 .govball {
   background-image: url('../assets/govball.png');
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    background-image: url('../assets/govballmobile.png');
+  }
 }
 
 
@@ -116,4 +138,13 @@ body:before {
 .footer-logo {
   height: 25px;
   padding-right: 5px;
+}
+
+.footer {
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    display: none !important;
+  }
 }

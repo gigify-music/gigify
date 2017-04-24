@@ -1,21 +1,22 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const compression = require('compression');
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const authRouter = require('./authRouter.js');
 const router = require('./router.js');
 const CronJob = require('./cronjob');
+// const sendNotification = require('./sendreminder');
 
 const port = process.env.PORT || 8000;
 
 const app = express();
 
 // MIDDLEWARE===================================================================
-
+app.use(compression());
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, '/../client')));
 app.use(express.static(path.join(__dirname, '/../public')));
 app.use(session({
   secret: 'moms spaghetti',
@@ -39,3 +40,4 @@ app.get('*', (request, response) => {
 app.listen(port);
 console.log(`Listening on ${port}`);
 CronJob.job();
+// sendNotification.sendNotification();

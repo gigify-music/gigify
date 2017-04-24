@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-let requests = {
+const requests = {
   sendAuthRequest() {
-    axios(`auth/signin/`)
-    .then((response) => {
+    axios('auth/signin/')
+    .then(() => {
     })
     .catch((error) => {
       console.log(error);
