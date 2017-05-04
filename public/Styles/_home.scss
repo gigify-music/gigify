@@ -79,7 +79,7 @@ body:before {
 }
 
 .home-carousel {
-  background-image: url(../assets/loginbackground.png);
+  background-image: url('http://i.imgur.com/xAtw5qn.jpg');
   background-position: center;
   background-size: cover;
   width: 100vw!important;
@@ -110,12 +110,12 @@ body:before {
 }
 
 .panorama {
-  background-image: url('../assets/panorama.png');
+  background-image: url('http://i.imgur.com/SjIDu5u.jpg');
   @media only screen
   and (min-device-width: 320px)
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
-    background-image: url('../assets/panoramamobile.png');
+    background-image: url('http://i.imgur.com/Q3W9lR0.jpg');
     background-position: top;
     background-size: contain;
     background-repeat: no-repeat;
@@ -123,12 +123,12 @@ body:before {
 }
 
 .govball {
-  background-image: url('../assets/govball.png');
+  background-image: url('http://i.imgur.com/XRCYmFH.png');
   @media only screen
   and (min-device-width: 320px)
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
-    background-image: url('../assets/govballmobile.png');
+    background-image: url('http://i.imgur.com/eH7cGwY.png');
   }
 }
 

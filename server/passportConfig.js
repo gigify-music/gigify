@@ -8,7 +8,7 @@ const pool = require('./database');
 const signIn = new SpotifyStrategy({
   clientID: appKey,
   clientSecret: appSecret,
-  callbackURL: 'http://localhost:8000/auth/callback',
+  callbackURL: 'http://gigify.io/auth/callback',
 }, (accessToken, refreshToken, profile, done) => {
   pool.connect()
   .then((client) => {
@@ -25,7 +25,7 @@ const signIn = new SpotifyStrategy({
 .catch((err) => {
   console.error('Pool Error: ', err);
 });
-  spotifyApi.setAccessToken(accessToken);
+  profile.accessToken = accessToken;
   process.nextTick(() => {
     (done(null, profile));
   });

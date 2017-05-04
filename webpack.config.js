@@ -1,4 +1,6 @@
+const webpack = require('webpack');
 const path = require('path');
+
 const srcPath = path.join(__dirname, 'src');
 const buildPath = path.join(__dirname, 'public');
 const cssPath = path.join(__dirname, 'public/Styles');
@@ -14,28 +16,23 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-//
-//   module: {
-//     loaders: [
-//       {
-//         test: /\.jsx?$/,
-//         exclude: /(node_modules)/,
-//         loader: 'babel-loader',
-//         query: {
-//           presets: ['react', 'es2015']
-//         }
-//       }
-//     ]
-//   }
-// };
+  plugins: [
+    new webpack.DefinePlugin({ // <-- key to reducing React's size
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
+  ],
   module: {
     rules: [
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         loader: 'url-loader',
         options: {
-          limit: 10000000
-        }
+          limit: 10000000,
+        },
       },
       {
         use: [{
